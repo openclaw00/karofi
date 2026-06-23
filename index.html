@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Công nghệ lọc nước Karofi cho cuộc sống khỏe mạnh hơn.">
   <title>Karofi | Chuyên Gia Lọc Nước</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -38,6 +43,57 @@
     .product-card:focus-within .product-actions { transform: translateY(0); opacity: 1; }
     .product-card:hover .product-render { transform: translateY(-6px) scale(1.015); }
     .pulse-ring { animation: pulse-ring 2.2s cubic-bezier(.16, 1, .3, 1) infinite; }
+    .prize-wheel {
+      background: conic-gradient(
+        from -22.5deg,
+        #00adee 0deg 45deg,
+        #f1fafe 45deg 90deg,
+        #0b597a 90deg 135deg,
+        #073d56 135deg 180deg,
+        #00adee 180deg 225deg,
+        #f1fafe 225deg 270deg,
+        #0b597a 270deg 315deg,
+        #073d56 315deg 360deg
+      );
+      box-shadow: inset 0 0 0 10px #f9fcfe, inset 0 0 0 13px rgba(7, 61, 86, .12), 0 28px 60px -34px rgba(7, 61, 86, .55);
+      transition: transform 5.2s cubic-bezier(.12, .72, .08, 1);
+      will-change: transform;
+    }
+    .wheel-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 30%;
+      margin-left: -15%;
+      margin-top: -10px;
+      transform: rotate(var(--angle)) translateY(clamp(-165px, -35vw, -105px)) rotate(calc(-1 * var(--angle)));
+      transform-origin: 50% 10px;
+      color: #073d56;
+      font-size: clamp(.52rem, 1.6vw, .7rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .wheel-label:nth-child(4n),
+    .wheel-label:nth-child(4n + 3) { color: #f1fafe; }
+    .wheel-pointer {
+      filter: drop-shadow(0 5px 5px rgba(7, 61, 86, .2));
+    }
+    .prize-code { letter-spacing: .18em; }
+    .wheel-popup-panel {
+      animation: wheel-popup-in .48s cubic-bezier(.16, 1, .3, 1) both;
+      background: #073d56;
+      box-shadow: 0 32px 90px rgba(4, 30, 48, .45);
+    }
+    .wheel-popup-backdrop { background: rgba(4, 30, 48, .84); }
+    .wheel-spin-button {
+      box-shadow: 0 10px 24px rgba(7, 61, 86, .32), 0 0 0 8px #f9fcfe;
+    }
+    @keyframes wheel-popup-in {
+      from { opacity: 0; transform: translateY(22px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
     @keyframes pulse-ring {
       0% { box-shadow: 0 0 0 0 rgba(0, 173, 238, .52); }
       70%, 100% { box-shadow: 0 0 0 15px rgba(0, 173, 238, 0); }
@@ -47,6 +103,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .prize-wheel { transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -120,6 +177,64 @@
         </a>
       </div>
     </section>
+
+    <div id="wheelPopup" class="fixed inset-0 z-[90] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="wheelTitle" aria-hidden="true">
+      <button id="wheelBackdrop" type="button" class="wheel-popup-backdrop absolute inset-0 cursor-default" aria-label="Đóng vòng quay may mắn"></button>
+      <section id="lucky-wheel" class="wheel-popup-panel relative z-10 max-h-[calc(100vh-1.5rem)] w-full max-w-5xl overflow-y-auto rounded-[2rem] px-6 py-9 text-[#f1fafe] sm:max-h-[calc(100vh-3rem)] sm:px-10 sm:py-11" aria-labelledby="wheelTitle">
+        <button id="closeWheel" type="button" class="absolute right-4 top-4 z-30 grid h-11 w-11 place-items-center rounded-full bg-[#f1fafe] text-ink transition-transform duration-300 hover:rotate-90" aria-label="Đóng vòng quay may mắn">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
+        <div class="order-2 lg:order-1">
+          <p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Quà tặng hôm nay</p>
+          <h2 id="wheelTitle" class="mt-4 max-w-xl text-4xl font-black tracking-[-.04em] sm:text-5xl">Xoay một vòng, nhận quà tinh khiết</h2>
+          <p class="mt-5 max-w-xl text-base leading-7 text-cyan-50/75">Mỗi khách có một lượt quay. Nhận voucher mua hàng hoặc cơ hội sở hữu máy lọc nước Karofi miễn phí.</p>
+
+          <div class="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-y border-white/15 py-6 text-sm">
+            <div><span class="block font-black text-aqua">01</span><span class="mt-1 block text-cyan-50/70">Máy lọc nước</span></div>
+            <div><span class="block font-black text-aqua">02</span><span class="mt-1 block text-cyan-50/70">Voucher 1.000.000₫</span></div>
+            <div><span class="block font-black text-aqua">03</span><span class="mt-1 block text-cyan-50/70">Voucher 500.000₫</span></div>
+            <div><span class="block font-black text-aqua">04</span><span class="mt-1 block text-cyan-50/70">Voucher 200.000₫</span></div>
+          </div>
+
+          <p id="spinNote" class="mt-5 text-xs leading-5 text-cyan-50/55">Nhấn nút giữa vòng quay. Một lượt trên mỗi trình duyệt.</p>
+
+          <div id="prizeResult" class="mt-6 hidden border-t border-white/15 pt-6" role="status" aria-live="polite">
+            <p class="text-xs font-black uppercase tracking-[.18em] text-aqua">Bạn đã trúng</p>
+            <p id="prizeName" class="mt-2 text-2xl font-black text-[#f1fafe]"></p>
+            <div class="mt-4 flex flex-wrap items-center gap-3">
+              <span id="prizeCode" class="prize-code rounded-lg bg-[#f1fafe] px-4 py-3 text-sm font-black text-ink"></span>
+              <button id="copyPrizeCode" type="button" class="rounded-full border border-white/25 px-4 py-3 text-xs font-black text-[#f1fafe] transition-colors hover:bg-white/10">Sao chép mã</button>
+            </div>
+            <p class="mt-3 text-xs leading-5 text-cyan-50/60">Lưu mã này và liên hệ hotline 1900 6418 để xác nhận quà.</p>
+          </div>
+        </div>
+
+        <div class="order-1 flex min-w-0 justify-center lg:order-2">
+          <div class="relative min-w-0 w-full max-w-[460px]">
+            <div class="relative">
+              <div class="wheel-pointer absolute left-1/2 top-[-3px] z-20 h-0 w-0 -translate-x-1/2 border-x-[18px] border-t-[34px] border-x-transparent border-t-aqua" aria-hidden="true"></div>
+              <div id="prizeWheel" class="prize-wheel relative aspect-square w-full rounded-full" aria-hidden="true">
+                <span class="wheel-label" style="--angle: 0deg">Máy lọc</span>
+                <span class="wheel-label" style="--angle: 45deg">1 triệu</span>
+                <span class="wheel-label" style="--angle: 90deg">500K</span>
+                <span class="wheel-label" style="--angle: 135deg">200K</span>
+                <span class="wheel-label" style="--angle: 180deg">500K</span>
+                <span class="wheel-label" style="--angle: 225deg">200K</span>
+                <span class="wheel-label" style="--angle: 270deg">200K</span>
+                <span class="wheel-label" style="--angle: 315deg">200K</span>
+              </div>
+              <button id="spinButton" type="button" class="wheel-spin-button absolute left-1/2 top-1/2 z-30 flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 rounded-full bg-[#f9fcfe] px-3 text-center text-[10px] font-black uppercase tracking-[.08em] text-ink transition-colors duration-300 hover:bg-frost disabled:cursor-not-allowed disabled:opacity-70 sm:text-xs" aria-describedby="spinNote">
+                <img src="assets/karofi-logo.png" alt="" class="w-[78%]" aria-hidden="true">
+                <span id="spinButtonLabel">Xoay</span>
+              </button>
+            </div>
+            <p class="mt-5 text-center text-xs font-bold text-cyan-50/50">Nhấn vào tâm vòng quay để bắt đầu</p>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
 
     <section id="products" class="px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
       <div class="mx-auto max-w-7xl">
@@ -195,6 +310,9 @@
   </footer>
 
   <div class="fixed bottom-5 right-4 z-40 flex flex-col gap-3 sm:bottom-7 sm:right-7" aria-label="Quick contact actions">
+    <button id="openWheel" class="grid h-12 w-12 place-items-center rounded-full bg-navy text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:rotate-6 hover:bg-aqua" aria-label="Mở vòng quay may mắn">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 0-5C10.5 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0 0-5C13.5 2 12 7 12 7Z"/></svg>
+    </button>
     <a href="tel:19006418" class="pulse-ring grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Call Karofi hotline"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.3 1.73.5 2.63.62A2 2 0 0 1 22 16.9Z"/></svg></a>
     <button class="grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open live chat"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></button>
     <button class="grid h-12 w-12 place-items-center rounded-full bg-blue-600 text-[11px] font-black text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open Zalo chat">ZALO</button>
@@ -210,6 +328,28 @@
     const searchPanel = document.getElementById('searchPanel');
     const siteSearch = document.getElementById('siteSearch');
     const toast = document.getElementById('toast');
+    const spinButton = document.getElementById('spinButton');
+    const spinButtonLabel = document.getElementById('spinButtonLabel');
+    const prizeWheel = document.getElementById('prizeWheel');
+    const prizeResult = document.getElementById('prizeResult');
+    const prizeName = document.getElementById('prizeName');
+    const prizeCode = document.getElementById('prizeCode');
+    const copyPrizeCode = document.getElementById('copyPrizeCode');
+    const wheelPopup = document.getElementById('wheelPopup');
+    const wheelBackdrop = document.getElementById('wheelBackdrop');
+    const closeWheel = document.getElementById('closeWheel');
+    const openWheel = document.getElementById('openWheel');
+    const wheelStorageKey = 'karofi-lucky-wheel-2026';
+    const wheelPrizes = [
+      { name: 'Máy lọc nước Karofi miễn phí', codePrefix: 'PURE', segment: 0 },
+      { name: 'Voucher 1.000.000₫', codePrefix: 'KRF1M', segment: 1 },
+      { name: 'Voucher 500.000₫', codePrefix: 'KRF500', segment: 2 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 3 },
+      { name: 'Voucher 500.000₫', codePrefix: 'KRF500', segment: 4 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 5 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 6 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 7 }
+    ];
 
     function setPanel(panel, button, open) {
       panel.classList.toggle('grid-rows-[1fr]', open);
@@ -241,6 +381,75 @@
       clearTimeout(window.cartToastTimer);
       window.cartToastTimer = setTimeout(() => toast.classList.add('translate-y-10', 'opacity-0'), 2200);
     }));
+
+    function showPrize(prize) {
+      prizeName.textContent = prize.name;
+      prizeCode.textContent = prize.code;
+      prizeResult.classList.remove('hidden');
+      spinButton.disabled = true;
+      spinButtonLabel.textContent = 'Đã quay';
+    }
+
+    function setWheelPopup(open) {
+      wheelPopup.classList.toggle('hidden', !open);
+      wheelPopup.classList.toggle('flex', open);
+      wheelPopup.setAttribute('aria-hidden', String(!open));
+      document.body.classList.toggle('overflow-hidden', open);
+      if (open) window.setTimeout(() => closeWheel.focus(), 50);
+      else openWheel.focus();
+    }
+
+    closeWheel.addEventListener('click', () => setWheelPopup(false));
+    wheelBackdrop.addEventListener('click', () => setWheelPopup(false));
+    openWheel.addEventListener('click', () => setWheelPopup(true));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && wheelPopup.getAttribute('aria-hidden') === 'false') setWheelPopup(false);
+    });
+
+    const savedPrize = localStorage.getItem(wheelStorageKey);
+    if (savedPrize) {
+      try { showPrize(JSON.parse(savedPrize)); } catch (_) { localStorage.removeItem(wheelStorageKey); }
+    }
+    setWheelPopup(true);
+
+    spinButton.addEventListener('click', () => {
+      if (spinButton.disabled) return;
+      spinButton.disabled = true;
+      spinButtonLabel.textContent = 'Đang xoay...';
+      prizeResult.classList.add('hidden');
+
+      const prize = wheelPrizes[Math.floor(Math.random() * wheelPrizes.length)];
+      const code = `${prize.codePrefix}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+      const result = { name: prize.name, code, segment: prize.segment };
+      const segmentCenter = prize.segment * 45;
+      const finalRotation = 1800 - segmentCenter;
+      prizeWheel.style.transform = `rotate(${finalRotation}deg)`;
+
+      const finishSpin = () => {
+        localStorage.setItem(wheelStorageKey, JSON.stringify(result));
+        showPrize(result);
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.setTimeout(finishSpin, 50);
+      } else {
+        window.setTimeout(finishSpin, 5300);
+      }
+    });
+
+    copyPrizeCode.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(prizeCode.textContent);
+        copyPrizeCode.textContent = 'Đã sao chép';
+      } catch (_) {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(prizeCode);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyPrizeCode.textContent = 'Mã đã được chọn';
+      }
+    });
   </script>
 </body>
 </html>
