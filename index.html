@@ -113,9 +113,10 @@
       position: fixed;
       z-index: 120;
       width: var(--size);
-      height: calc(var(--size) * .45);
-      border-radius: 2px;
+      height: calc(var(--size) * var(--height-ratio));
+      border-radius: var(--radius);
       background: var(--color);
+      box-shadow: 0 2px 5px rgba(4, 30, 48, .14);
       pointer-events: none;
       transform: translate(-50%, -50%);
       animation: confetti-burst var(--duration) cubic-bezier(.12, .74, .22, 1) var(--delay) forwards;
@@ -529,7 +530,7 @@
       const rect = origin.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const colors = ['#00adee', '#dff5fd', '#f1fafe', '#0b597a', '#073d56'];
+      const colors = ['#ff3d68', '#ff8a1f', '#ffd21c', '#74d62c', '#12c9c3', '#00aef0', '#7656ff', '#e84ad8'];
 
       for (let index = 0; index < count; index += 1) {
         const piece = document.createElement('span');
@@ -543,9 +544,11 @@
         piece.style.setProperty('--y', `${Math.sin(angle) * distance + 48 - lift}px`);
         piece.style.setProperty('--rotation', `${Math.round(Math.random() * 900 - 450)}deg`);
         piece.style.setProperty('--size', `${5 + Math.random() * 7}px`);
+        piece.style.setProperty('--height-ratio', index % 4 === 0 ? '1' : `${.35 + Math.random() * .35}`);
+        piece.style.setProperty('--radius', index % 4 === 0 ? '999px' : `${1 + Math.random() * 2}px`);
         piece.style.setProperty('--duration', `${900 + Math.random() * 550}ms`);
         piece.style.setProperty('--delay', `${Math.random() * 90}ms`);
-        piece.style.setProperty('--color', colors[index % colors.length]);
+        piece.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
         document.body.appendChild(piece);
         window.setTimeout(() => piece.remove(), 1650);
       }
@@ -560,7 +563,10 @@
       if (open) window.setTimeout(() => closeWheel.focus(), 50);
       else {
         openWheel.focus();
-        if (wasOpen) window.requestAnimationFrame(() => burstConfetti(openWheel, 24, 92));
+        if (wasOpen) window.requestAnimationFrame(() => {
+          burstConfetti(openWheel, 36, 112);
+          window.setTimeout(() => burstConfetti(openWheel, 22, 84), 360);
+        });
       }
     }
 
@@ -582,6 +588,7 @@
       spinButton.disabled = true;
       spinButtonLabel.textContent = 'Đang xoay...';
       prizeResult.classList.add('hidden');
+      burstConfetti(spinButton, 48, 150);
 
       const prize = wheelPrizes[Math.floor(Math.random() * wheelPrizes.length)];
       const code = `${prize.codePrefix}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
@@ -593,7 +600,8 @@
       const finishSpin = () => {
         localStorage.setItem(wheelStorageKey, JSON.stringify(result));
         showPrize(result);
-        burstConfetti(prizeWheel, 72, 260);
+        burstConfetti(prizeWheel, 112, 300);
+        window.setTimeout(() => burstConfetti(spinButton, 54, 190), 280);
       };
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
