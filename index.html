@@ -182,11 +182,6 @@
   <main id="main">
     <section id="heroCarousel" class="relative overflow-hidden bg-[#eaf8fe]" aria-label="Karofi campaign banners" aria-roledescription="carousel" tabindex="0">
       <div class="relative aspect-[1672/941] w-full">
-        <figure class="hero-slide absolute inset-0" data-hero-slide aria-hidden="true">
-          <video id="heroIntroVideo" class="h-full w-full object-cover object-center" preload="auto" muted playsinline aria-label="Nhân vật giọt nước Karofi vui mừng nhảy lên">
-            <source src="assets/karofi-character-jolly.mp4" type="video/mp4">
-          </video>
-        </figure>
         <figure class="hero-slide is-active absolute inset-0" data-hero-slide aria-hidden="false">
           <img src="assets/banner-karofi-pure-water.png" alt="Máy lọc nước Karofi mang đến nguồn nước sạch chuẩn tinh khiết" class="h-full w-full object-cover object-center">
         </figure>
@@ -206,10 +201,9 @@
       </button>
 
       <div class="absolute bottom-1.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 sm:bottom-3" role="group" aria-label="Chọn banner">
-        <button type="button" class="hero-dot h-2.5 rounded-full bg-white/80" data-hero-dot aria-label="Hiển thị banner 1" aria-current="false"></button>
-        <button type="button" class="hero-dot is-active h-2.5 rounded-full bg-aqua" data-hero-dot aria-label="Hiển thị banner 2" aria-current="true"></button>
+        <button type="button" class="hero-dot is-active h-2.5 rounded-full bg-aqua" data-hero-dot aria-label="Hiển thị banner 1" aria-current="true"></button>
+        <button type="button" class="hero-dot h-2.5 rounded-full bg-white/80" data-hero-dot aria-label="Hiển thị banner 2" aria-current="false"></button>
         <button type="button" class="hero-dot h-2.5 rounded-full bg-white/80" data-hero-dot aria-label="Hiển thị banner 3" aria-current="false"></button>
-        <button type="button" class="hero-dot h-2.5 rounded-full bg-white/80" data-hero-dot aria-label="Hiển thị banner 4" aria-current="false"></button>
       </div>
     </section>
 
@@ -409,7 +403,6 @@
     const heroDots = Array.from(document.querySelectorAll('[data-hero-dot]'));
     const heroPrevious = document.getElementById('heroPrevious');
     const heroNext = document.getElementById('heroNext');
-    const heroIntroVideo = document.getElementById('heroIntroVideo');
     const spinButton = document.getElementById('spinButton');
     const spinButtonLabel = document.getElementById('spinButtonLabel');
     const prizeWheel = document.getElementById('prizeWheel');
@@ -422,8 +415,9 @@
     const closeWheel = document.getElementById('closeWheel');
     const openWheel = document.getElementById('openWheel');
     const wheelStorageKey = 'karofi-lucky-wheel-2026';
-    let activeHeroSlide = 1;
+    let activeHeroSlide = 0;
     let heroAutoplayTimer;
+    let wheelAudioContext;
     const wheelPrizes = [
       { name: 'Máy lọc nước Karofi miễn phí', codePrefix: 'PURE', segment: 0 },
       { name: 'Voucher 1.000.000₫', codePrefix: 'KRF1M', segment: 1 },
@@ -437,7 +431,6 @@
 
     function showHeroSlide(index) {
       activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
-      if (activeHeroSlide !== 0 && !heroIntroVideo.paused) heroIntroVideo.pause();
       heroSlides.forEach((slide, slideIndex) => {
         const active = slideIndex === activeHeroSlide;
         slide.classList.toggle('is-active', active);
@@ -459,22 +452,6 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       heroAutoplayTimer = window.setInterval(() => showHeroSlide(activeHeroSlide + 1), 6500);
     }
-
-    function playHeroIntroVideo() {
-      stopHeroAutoplay();
-      showHeroSlide(0);
-      heroIntroVideo.currentTime = 0;
-      const playback = heroIntroVideo.play();
-      if (playback) playback.catch(() => {
-        showHeroSlide(1);
-        startHeroAutoplay();
-      });
-    }
-
-    heroIntroVideo.addEventListener('ended', () => {
-      showHeroSlide(1);
-      startHeroAutoplay();
-    });
 
     heroPrevious.addEventListener('click', () => {
       showHeroSlide(activeHeroSlide - 1);
@@ -537,6 +514,53 @@
       menuIcon.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16"/>';
     }));
 
+    function playWheelSpinSound(duration = 5.15) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      if (!wheelAudioContext) wheelAudioContext = new AudioContext();
+
+      const scheduleSound = () => {
+        const context = wheelAudioContext;
+        const startAt = context.currentTime + .02;
+        const output = context.createGain();
+        output.gain.setValueAtTime(.64, startAt);
+        output.gain.setValueAtTime(.64, startAt + duration - .35);
+        output.gain.exponentialRampToValueAtTime(.0001, startAt + duration);
+        output.connect(context.destination);
+
+        const hum = context.createOscillator();
+        const humGain = context.createGain();
+        hum.type = 'triangle';
+        hum.frequency.setValueAtTime(92, startAt);
+        hum.frequency.exponentialRampToValueAtTime(42, startAt + duration);
+        humGain.gain.setValueAtTime(.035, startAt);
+        humGain.gain.exponentialRampToValueAtTime(.0001, startAt + duration);
+        hum.connect(humGain).connect(output);
+        hum.start(startAt);
+        hum.stop(startAt + duration);
+
+        const tickCount = 58;
+        for (let index = 0; index < tickCount; index += 1) {
+          const progress = index / (tickCount - 1);
+          const tickAt = startAt + duration * Math.pow(progress, 1.65);
+          const tick = context.createOscillator();
+          const tickGain = context.createGain();
+          tick.type = index % 3 === 0 ? 'square' : 'triangle';
+          tick.frequency.setValueAtTime(760 - progress * 470 + Math.random() * 55, tickAt);
+          tickGain.gain.setValueAtTime(.09 - progress * .025, tickAt);
+          tickGain.gain.exponentialRampToValueAtTime(.0001, tickAt + .035);
+          tick.connect(tickGain).connect(output);
+          tick.start(tickAt);
+          tick.stop(tickAt + .04);
+        }
+
+        window.setTimeout(() => output.disconnect(), (duration + .2) * 1000);
+      };
+
+      if (wheelAudioContext.state === 'suspended') wheelAudioContext.resume().then(scheduleSound).catch(() => {});
+      else scheduleSound();
+    }
+
     function showPrize(prize) {
       prizeName.textContent = prize.name;
       prizeCode.textContent = prize.code;
@@ -582,7 +606,6 @@
       document.body.classList.toggle('overflow-hidden', open);
       if (open) {
         stopHeroAutoplay();
-        if (!heroIntroVideo.paused) heroIntroVideo.pause();
         window.setTimeout(() => closeWheel.focus(), 50);
       }
       else {
@@ -596,7 +619,7 @@
 
     closeWheel.addEventListener('click', () => {
       setWheelPopup(false);
-      playHeroIntroVideo();
+      startHeroAutoplay();
     });
     wheelBackdrop.addEventListener('click', () => {
       setWheelPopup(false);
@@ -621,6 +644,7 @@
       spinButton.disabled = true;
       spinButtonLabel.textContent = 'Đang xoay...';
       prizeResult.classList.add('hidden');
+      playWheelSpinSound();
       burstConfetti(spinButton, 48, 150);
 
       const prize = wheelPrizes[Math.floor(Math.random() * wheelPrizes.length)];
