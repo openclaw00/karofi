@@ -90,6 +90,22 @@
     .wheel-spin-button {
       box-shadow: 0 10px 24px rgba(7, 61, 86, .32), 0 0 0 8px #f9fcfe;
     }
+    .confetti-piece {
+      position: fixed;
+      z-index: 120;
+      width: var(--size);
+      height: calc(var(--size) * .45);
+      border-radius: 2px;
+      background: var(--color);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: confetti-burst var(--duration) cubic-bezier(.12, .74, .22, 1) var(--delay) forwards;
+    }
+    @keyframes confetti-burst {
+      0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      70% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--rotation)) scale(.65); }
+    }
     @keyframes wheel-popup-in {
       from { opacity: 0; transform: translateY(22px) scale(.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
@@ -390,13 +406,44 @@
       spinButtonLabel.textContent = 'Đã quay';
     }
 
+    function burstConfetti(origin, count, spread = 220) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const rect = origin.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const colors = ['#00adee', '#dff5fd', '#f1fafe', '#0b597a', '#073d56'];
+
+      for (let index = 0; index < count; index += 1) {
+        const piece = document.createElement('span');
+        const angle = Math.random() * Math.PI * 2;
+        const distance = spread * (.45 + Math.random() * .55);
+        const lift = Math.random() * 46;
+        piece.className = 'confetti-piece';
+        piece.style.left = `${centerX}px`;
+        piece.style.top = `${centerY}px`;
+        piece.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+        piece.style.setProperty('--y', `${Math.sin(angle) * distance + 48 - lift}px`);
+        piece.style.setProperty('--rotation', `${Math.round(Math.random() * 900 - 450)}deg`);
+        piece.style.setProperty('--size', `${5 + Math.random() * 7}px`);
+        piece.style.setProperty('--duration', `${900 + Math.random() * 550}ms`);
+        piece.style.setProperty('--delay', `${Math.random() * 90}ms`);
+        piece.style.setProperty('--color', colors[index % colors.length]);
+        document.body.appendChild(piece);
+        window.setTimeout(() => piece.remove(), 1650);
+      }
+    }
+
     function setWheelPopup(open) {
+      const wasOpen = wheelPopup.getAttribute('aria-hidden') === 'false';
       wheelPopup.classList.toggle('hidden', !open);
       wheelPopup.classList.toggle('flex', open);
       wheelPopup.setAttribute('aria-hidden', String(!open));
       document.body.classList.toggle('overflow-hidden', open);
       if (open) window.setTimeout(() => closeWheel.focus(), 50);
-      else openWheel.focus();
+      else {
+        openWheel.focus();
+        if (wasOpen) window.requestAnimationFrame(() => burstConfetti(openWheel, 24, 92));
+      }
     }
 
     closeWheel.addEventListener('click', () => setWheelPopup(false));
@@ -428,6 +475,7 @@
       const finishSpin = () => {
         localStorage.setItem(wheelStorageKey, JSON.stringify(result));
         showPrize(result);
+        burstConfetti(prizeWheel, 72, 260);
       };
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
