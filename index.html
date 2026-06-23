@@ -183,7 +183,9 @@
     <section id="heroCarousel" class="relative overflow-hidden bg-[#eaf8fe]" aria-label="Karofi campaign banners" aria-roledescription="carousel" tabindex="0">
       <div class="relative aspect-[1672/941] w-full">
         <figure class="hero-slide absolute inset-0" data-hero-slide aria-hidden="true">
-          <img src="assets/banner-karofi-expert.jpg" alt="Karofi chuyên gia lọc nước, thấu hiểu chuyên sâu" loading="lazy" class="h-full w-full object-cover object-center">
+          <video id="heroIntroVideo" class="h-full w-full object-cover object-center" preload="auto" muted playsinline aria-label="Nhân vật giọt nước Karofi vui mừng nhảy lên">
+            <source src="assets/karofi-character-jolly.mp4" type="video/mp4">
+          </video>
         </figure>
         <figure class="hero-slide is-active absolute inset-0" data-hero-slide aria-hidden="false">
           <img src="assets/banner-karofi-pure-water.png" alt="Máy lọc nước Karofi mang đến nguồn nước sạch chuẩn tinh khiết" class="h-full w-full object-cover object-center">
@@ -407,6 +409,7 @@
     const heroDots = Array.from(document.querySelectorAll('[data-hero-dot]'));
     const heroPrevious = document.getElementById('heroPrevious');
     const heroNext = document.getElementById('heroNext');
+    const heroIntroVideo = document.getElementById('heroIntroVideo');
     const spinButton = document.getElementById('spinButton');
     const spinButtonLabel = document.getElementById('spinButtonLabel');
     const prizeWheel = document.getElementById('prizeWheel');
@@ -434,6 +437,7 @@
 
     function showHeroSlide(index) {
       activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+      if (activeHeroSlide !== 0 && !heroIntroVideo.paused) heroIntroVideo.pause();
       heroSlides.forEach((slide, slideIndex) => {
         const active = slideIndex === activeHeroSlide;
         slide.classList.toggle('is-active', active);
@@ -455,6 +459,22 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       heroAutoplayTimer = window.setInterval(() => showHeroSlide(activeHeroSlide + 1), 6500);
     }
+
+    function playHeroIntroVideo() {
+      stopHeroAutoplay();
+      showHeroSlide(0);
+      heroIntroVideo.currentTime = 0;
+      const playback = heroIntroVideo.play();
+      if (playback) playback.catch(() => {
+        showHeroSlide(1);
+        startHeroAutoplay();
+      });
+    }
+
+    heroIntroVideo.addEventListener('ended', () => {
+      showHeroSlide(1);
+      startHeroAutoplay();
+    });
 
     heroPrevious.addEventListener('click', () => {
       showHeroSlide(activeHeroSlide - 1);
@@ -560,7 +580,11 @@
       wheelPopup.classList.toggle('flex', open);
       wheelPopup.setAttribute('aria-hidden', String(!open));
       document.body.classList.toggle('overflow-hidden', open);
-      if (open) window.setTimeout(() => closeWheel.focus(), 50);
+      if (open) {
+        stopHeroAutoplay();
+        if (!heroIntroVideo.paused) heroIntroVideo.pause();
+        window.setTimeout(() => closeWheel.focus(), 50);
+      }
       else {
         openWheel.focus();
         if (wasOpen) window.requestAnimationFrame(() => {
@@ -570,11 +594,20 @@
       }
     }
 
-    closeWheel.addEventListener('click', () => setWheelPopup(false));
-    wheelBackdrop.addEventListener('click', () => setWheelPopup(false));
+    closeWheel.addEventListener('click', () => {
+      setWheelPopup(false);
+      playHeroIntroVideo();
+    });
+    wheelBackdrop.addEventListener('click', () => {
+      setWheelPopup(false);
+      startHeroAutoplay();
+    });
     openWheel.addEventListener('click', () => setWheelPopup(true));
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && wheelPopup.getAttribute('aria-hidden') === 'false') setWheelPopup(false);
+      if (event.key === 'Escape' && wheelPopup.getAttribute('aria-hidden') === 'false') {
+        setWheelPopup(false);
+        startHeroAutoplay();
+      }
     });
 
     const savedPrize = localStorage.getItem(wheelStorageKey);
