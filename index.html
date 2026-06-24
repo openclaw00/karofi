@@ -437,12 +437,32 @@
     </div>
   </footer>
 
+  <section id="aiAssistantPanel" class="fixed bottom-5 right-20 z-50 hidden max-h-[calc(100dvh-2.5rem)] w-[min(22rem,calc(100vw-6.5rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] text-ink shadow-lift sm:bottom-7 sm:right-24" role="dialog" aria-labelledby="aiAssistantTitle" aria-hidden="true">
+    <header class="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+      <div>
+        <p class="text-[10px] font-black uppercase tracking-[.18em] text-aqua">Hỗ trợ khách hàng</p>
+        <h2 id="aiAssistantTitle" class="mt-1 text-base font-black">KaroKaro</h2>
+      </div>
+      <button id="closeAiAssistant" type="button" class="grid h-9 w-9 place-items-center rounded-full text-ink transition-colors hover:bg-frost" aria-label="Đóng trợ lý KaroKaro">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+    <div id="elevenLabsMount" class="hidden min-h-[28rem] flex-1"></div>
+    <div id="aiAssistantSetupState" class="px-5 py-8 text-center">
+      <span class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-frost text-aqua" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+      </span>
+      <p id="aiAssistantStatusTitle" class="mt-4 text-sm font-black">Trợ lý đang được kết nối</p>
+      <p class="mt-2 text-xs leading-5 text-slate-500">Trong lúc chờ, gọi <a href="tel:19006418" class="font-black text-navy">1900 6418</a> để được tư vấn.</p>
+    </div>
+  </section>
+
   <div class="fixed bottom-5 right-4 z-40 flex flex-col gap-3 sm:bottom-7 sm:right-7" aria-label="Quick contact actions">
     <button id="openWheel" class="grid h-12 w-12 place-items-center rounded-full bg-navy text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:rotate-6 hover:bg-aqua" aria-label="Mở vòng quay may mắn">
       <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 0-5C10.5 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0 0-5C13.5 2 12 7 12 7Z"/></svg>
     </button>
     <a href="tel:19006418" class="pulse-ring grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Call Karofi hotline"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.3 1.73.5 2.63.62A2 2 0 0 1 22 16.9Z"/></svg></a>
-    <button class="grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open live chat"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></button>
+    <button id="openAiAssistant" class="grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Mở trợ lý khách hàng KaroKaro" aria-controls="aiAssistantPanel" aria-expanded="false"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></button>
     <button class="grid h-12 w-12 place-items-center rounded-full bg-blue-600 text-[11px] font-black text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open Zalo chat">ZALO</button>
   </div>
 
@@ -473,6 +493,15 @@
     const wheelBackdrop = document.getElementById('wheelBackdrop');
     const closeWheel = document.getElementById('closeWheel');
     const openWheel = document.getElementById('openWheel');
+    const openAiAssistant = document.getElementById('openAiAssistant');
+    const closeAiAssistant = document.getElementById('closeAiAssistant');
+    const aiAssistantPanel = document.getElementById('aiAssistantPanel');
+    const aiAssistantSetupState = document.getElementById('aiAssistantSetupState');
+    const elevenLabsMount = document.getElementById('elevenLabsMount');
+    const elevenLabsConfig = {
+      agentId: '', // Paste the public ElevenLabs agent ID here when it is ready.
+      widgetScript: 'https://unpkg.com/@elevenlabs/convai-widget-embed'
+    };
     const wheelStorageKey = 'karofi-lucky-wheel-2026';
     let activeHeroSlide = 0;
     let heroAutoplayTimer;
@@ -572,6 +601,64 @@
       setPanel(mobileMenu, menuToggle, false);
       menuIcon.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16"/>';
     }));
+
+    function loadElevenLabsWidget() {
+      if (customElements.get('elevenlabs-convai')) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        let script = document.querySelector('script[data-elevenlabs-widget]');
+        if (!script) {
+          script = document.createElement('script');
+          script.src = elevenLabsConfig.widgetScript;
+          script.async = true;
+          script.type = 'text/javascript';
+          script.dataset.elevenlabsWidget = 'true';
+          document.body.appendChild(script);
+        }
+        script.addEventListener('load', () => customElements.whenDefined('elevenlabs-convai').then(resolve), { once: true });
+        script.addEventListener('error', reject, { once: true });
+      });
+    }
+
+    async function mountElevenLabsAssistant() {
+      if (!elevenLabsConfig.agentId || elevenLabsMount.firstElementChild) return;
+      aiAssistantSetupState.classList.add('hidden');
+      elevenLabsMount.classList.remove('hidden');
+      const widget = document.createElement('elevenlabs-convai');
+      widget.setAttribute('agent-id', elevenLabsConfig.agentId);
+      widget.setAttribute('variant', 'expanded');
+      widget.setAttribute('dismissible', 'false');
+      widget.setAttribute('action-text', 'Trò chuyện với KaroKaro');
+      widget.setAttribute('start-call-text', 'Bắt đầu trò chuyện');
+      widget.setAttribute('end-call-text', 'Kết thúc');
+      widget.setAttribute('expand-text', 'Mở trợ lý');
+      elevenLabsMount.appendChild(widget);
+      try {
+        await loadElevenLabsWidget();
+      } catch (_) {
+        widget.remove();
+        elevenLabsMount.classList.add('hidden');
+        aiAssistantSetupState.classList.remove('hidden');
+        document.getElementById('aiAssistantStatusTitle').textContent = 'Không thể kết nối trợ lý';
+      }
+    }
+
+    function setAiAssistant(open) {
+      aiAssistantPanel.classList.toggle('hidden', !open);
+      aiAssistantPanel.classList.toggle('flex', open);
+      aiAssistantPanel.setAttribute('aria-hidden', String(!open));
+      openAiAssistant.setAttribute('aria-expanded', String(open));
+      if (open) {
+        mountElevenLabsAssistant();
+        window.setTimeout(() => closeAiAssistant.focus(), 50);
+      } else {
+        openAiAssistant.focus();
+      }
+    }
+
+    openAiAssistant.addEventListener('click', () => {
+      setAiAssistant(aiAssistantPanel.getAttribute('aria-hidden') === 'true');
+    });
+    closeAiAssistant.addEventListener('click', () => setAiAssistant(false));
 
     function playWheelSpinSound(duration = 5.15) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -707,6 +794,10 @@
     prizeBackdrop.addEventListener('click', () => setPrizePopup(false));
     reopenPrize.addEventListener('click', () => setPrizePopup(true, false));
     document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && aiAssistantPanel.getAttribute('aria-hidden') === 'false') {
+        setAiAssistant(false);
+        return;
+      }
       if (event.key === 'Escape' && prizePopup.getAttribute('aria-hidden') === 'false') {
         setPrizePopup(false);
         return;
