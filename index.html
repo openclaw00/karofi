@@ -437,13 +437,16 @@
     </div>
   </footer>
 
-  <div class="fixed bottom-5 right-4 z-40 flex flex-col gap-3 sm:bottom-7 sm:right-7" aria-label="Quick contact actions">
+  <div class="fixed bottom-5 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7" aria-label="Quick contact actions">
     <button id="openWheel" class="grid h-12 w-12 place-items-center rounded-full bg-navy text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:rotate-6 hover:bg-aqua" aria-label="Mở vòng quay may mắn">
       <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 0-5C10.5 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0 0-5C13.5 2 12 7 12 7Z"/></svg>
     </button>
     <a href="tel:19006418" class="pulse-ring grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Call Karofi hotline"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.3 1.73.5 2.63.62A2 2 0 0 1 22 16.9Z"/></svg></a>
-    <button id="openAiAssistant" class="grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1 disabled:cursor-wait disabled:opacity-70" aria-label="Mở trợ lý khách hàng KaroKaro"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></button>
     <button class="grid h-12 w-12 place-items-center rounded-full bg-blue-600 text-[11px] font-black text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open Zalo chat">ZALO</button>
+    <button id="openAiAssistant" class="group flex h-14 items-center overflow-hidden rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1 disabled:cursor-wait disabled:opacity-70" aria-label="Mở trợ lý khách hàng KaroKaro">
+      <span class="pl-5 pr-2 text-sm font-black tracking-[.01em]">AI Chatbot</span>
+      <span class="grid h-14 w-14 shrink-0 place-items-center" aria-hidden="true"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></span>
+    </button>
   </div>
 
   <script>
@@ -597,22 +600,48 @@
 
     let elevenLabsWidgetPromise;
 
-    function hideElevenLabsLauncher(widget) {
-      const hideLauncher = () => {
+    function customizeElevenLabsWidget(widget) {
+      const minimizeChat = () => {
+        document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
+          detail: { action: 'collapse' }
+        }));
+      };
+
+      const customizeWidget = () => {
         const messageButton = widget.shadowRoot?.querySelector('button[aria-label="Message"]');
         const launcher = messageButton?.closest('.rounded-compact-sheet');
-        launcher?.style.setProperty('display', 'none', 'important');
+        if (launcher && launcher.style.display !== 'none') {
+          launcher.style.setProperty('display', 'none', 'important');
+        }
+
+        const expandButton = widget.shadowRoot?.querySelector('button[aria-label="Expand widget"], button[aria-label="Collapse widget"]');
+        if (!expandButton || expandButton.dataset.karofiMinimize === 'true') return;
+
+        expandButton.dataset.karofiMinimize = 'true';
+        expandButton.setAttribute('aria-label', 'Đóng cửa sổ trò chuyện');
+        expandButton.setAttribute('title', 'Đóng');
+        expandButton.style.setProperty('width', '44px');
+        expandButton.style.setProperty('height', '44px');
+        expandButton.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+        expandButton.addEventListener('click', event => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          minimizeChat();
+        }, true);
       };
-      const observeLauncher = () => {
+
+      const observeWidget = () => {
         if (!widget.shadowRoot) {
-          window.setTimeout(observeLauncher, 50);
+          window.setTimeout(observeWidget, 50);
           return;
         }
-        hideLauncher();
-        const observer = new MutationObserver(hideLauncher);
+
+        customizeWidget();
+        const observer = new MutationObserver(customizeWidget);
         observer.observe(widget.shadowRoot, { childList: true, subtree: true });
       };
-      observeLauncher();
+
+      observeWidget();
     }
 
     function waitForElevenLabsMessageButton(widget) {
@@ -652,7 +681,7 @@
         widget.setAttribute('expand-text', 'Mở trợ lý');
         document.body.appendChild(widget);
         await waitForElevenLabsMessageButton(widget);
-        hideElevenLabsLauncher(widget);
+        customizeElevenLabsWidget(widget);
         return widget;
       })();
       return elevenLabsWidgetPromise;
