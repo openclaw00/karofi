@@ -61,9 +61,6 @@
       background: #f9fcfe;
       box-shadow: 0 0 0 4px rgba(249, 252, 254, .2), 0 2px 8px rgba(4, 30, 48, .2);
     }
-    .product-actions { transform: translateY(12px); opacity: 0; }
-    .product-card:hover .product-actions,
-    .product-card:focus-within .product-actions { transform: translateY(0); opacity: 1; }
     .product-card:hover .product-render { transform: translateY(-6px) scale(1.015); }
     .pulse-ring { animation: pulse-ring 2.2s cubic-bezier(.16, 1, .3, 1) infinite; }
     .prize-wheel {
@@ -151,7 +148,6 @@
       70%, 100% { box-shadow: 0 0 0 15px rgba(0, 173, 238, 0); }
     }
     @media (max-width: 767px) {
-      .product-actions { transform: none; opacity: 1; }
       .wheel-popup-panel {
         max-height: calc(100dvh - 1rem);
         overflow: hidden;
@@ -326,30 +322,49 @@
     <section id="products" class="px-4 py-12 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
       <div class="mx-auto max-w-7xl">
         <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div><p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Sản phẩm nổi bật</p><h2 class="mt-3 text-4xl font-black tracking-[-.04em] text-ink sm:text-5xl">Chọn máy lọc nước phù hợp</h2><p class="mt-4 max-w-xl text-base leading-7 text-slate-600">So sánh chế độ nước, công suất lọc và các tính năng thông minh của những dòng máy Karofi nổi bật.</p></div>
+          <div><p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Sản phẩm nổi bật</p><h2 class="mt-3 text-4xl font-black tracking-[-.04em] text-ink sm:text-5xl">Công nghệ mới nhất</h2><p class="mt-4 max-w-xl text-base leading-7 text-slate-600">Khám phá năm dòng máy Hydro-ion kiềm mới với chế độ nóng, lạnh và công nghệ điện phân tiên tiến.</p></div>
           <a href="https://karofi.com" class="inline-flex items-center gap-2 border-b-2 border-ink pb-1 text-sm font-black text-ink transition-colors duration-300 hover:border-aqua hover:text-aqua">Xem tất cả sản phẩm <span aria-hidden="true">→</span></a>
         </div>
 
-        <div class="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          <article class="product-card group overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-            <div class="flex min-h-7 flex-wrap gap-2"><span class="rounded-full bg-cyan-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-aqua">11-Stage SMAX</span><span class="rounded-full bg-yellow-300 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-ink">Best Seller</span></div>
-            <div class="product-render mt-4 flex aspect-square items-center justify-center rounded-xl bg-gradient-to-br from-slate-50 to-cyan-50 p-5 transition-transform duration-300"><img src="assets/karofi-kae-s65.png" alt="Karofi KAE-S65 water purifier" class="h-full w-full object-contain mix-blend-multiply"></div>
-            <div class="px-1 pt-5"><h3 class="text-lg font-black text-ink">Karofi KAE-S65</h3><p class="mt-1 text-xs font-medium text-slate-500">Hydro-ion alkaline · AioTec</p><div class="mt-4 flex items-baseline gap-2"><span class="text-xl font-black text-aqua">29.450.000₫</span><del class="text-sm text-slate-400">32.900.000₫</del></div><div class="product-actions mt-5 flex items-center justify-end transition-all duration-300"><a href="https://karofi.com/may-loc-nuoc-hydro-ion-kae-s65.html" class="rounded-full bg-ink px-4 py-2.5 text-xs font-black text-white transition-colors duration-300 hover:bg-aqua">Tìm hiểu thêm</a></div></div>
+        <div class="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)_minmax(0,1fr)] lg:grid-rows-2">
+          <article class="product-card group overflow-hidden rounded-2xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift lg:col-start-1 lg:row-start-1">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-sa9-premium.html" class="flex h-full flex-col p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#fffafd]">Mới nhất</span></div>
+              <div class="product-render flex aspect-[4/3] items-center justify-center p-2 transition-transform duration-300"><img src="assets/karofi-sa9-premium.png" alt="Máy lọc nước Karofi SA9 Premium" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-xl font-black text-ink">SA9 PREMIUM</h3><p class="mx-auto mt-2 max-w-xs text-sm leading-5 text-slate-600">11 chế độ nước · 9 điện cực Titan phủ Bạch Kim</p></div>
+            </a>
           </article>
-          <article class="product-card group overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-            <div class="flex min-h-7 flex-wrap gap-2"><span class="rounded-full bg-cyan-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-aqua">IoT Smart App</span></div>
-            <div class="product-render mt-4 flex aspect-square items-center justify-center rounded-xl bg-gradient-to-br from-slate-50 to-cyan-50 p-5 transition-transform duration-300"><img src="assets/karofi-kaq-u99.png" alt="Karofi KAQ-U99 water purifier" class="h-full w-full object-contain mix-blend-multiply"></div>
-            <div class="px-1 pt-5"><h3 class="text-lg font-black text-ink">Karofi KAQ-U99</h3><p class="mt-1 text-xs font-medium text-slate-500">Smart RO · 85 liters/hour</p><div class="mt-4 flex items-baseline gap-2"><span class="text-xl font-black text-aqua">13.820.000₫</span><del class="text-sm text-slate-400">15.200.000₫</del></div><div class="product-actions mt-5 flex items-center justify-end transition-all duration-300"><a href="https://karofi.com/may-loc-nuoc-karofi-kaq-u99.html" class="rounded-full bg-ink px-4 py-2.5 text-xs font-black text-white transition-colors duration-300 hover:bg-aqua">Tìm hiểu thêm</a></div></div>
+
+          <article class="product-card group overflow-hidden rounded-2xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <a href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" class="flex h-full flex-col p-5 sm:p-7">
+              <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-[.18em] text-aqua">Diamond Series</span><span class="rounded-full bg-ink px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#f9fcfe]">Sản phẩm độc quyền</span></div>
+              <div class="product-render flex aspect-square items-center justify-center py-5 transition-transform duration-300"><img src="assets/karofi-diamond-sa66.png" alt="Máy lọc nước Karofi Diamond SA66" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-2xl font-black text-ink sm:text-3xl">DIAMOND SA66</h3><p class="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 sm:text-base">11 tấm điện cực · AioTec · One Touch Filter</p></div>
+            </a>
           </article>
-          <article class="product-card group overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-            <div class="flex min-h-7 flex-wrap gap-2"><span class="rounded-full bg-cyan-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-navy">9-Stage Filter</span><span class="rounded-full bg-yellow-300 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-ink">Popular</span></div>
-            <div class="product-render mt-4 flex aspect-square items-center justify-center rounded-xl bg-gradient-to-br from-slate-50 to-cyan-50 p-5 transition-transform duration-300"><img src="assets/karofi-n-e239.png" alt="Karofi N-e239 water purifier" class="h-full w-full object-contain mix-blend-multiply"></div>
-            <div class="px-1 pt-5"><h3 class="text-lg font-black text-ink">Karofi N-e239</h3><p class="mt-1 text-xs font-medium text-slate-500">RO cabinet · 9-stage filter</p><div class="mt-4 flex items-baseline gap-2"><span class="text-xl font-black text-aqua">7.660.000₫</span><del class="text-sm text-slate-400">8.500.000₫</del></div><div class="product-actions mt-5 flex items-center justify-end transition-all duration-300"><a href="https://karofi.com/may-loc-nuoc-karofi-n-e239.html" class="rounded-full bg-ink px-4 py-2.5 text-xs font-black text-white transition-colors duration-300 hover:bg-aqua">Tìm hiểu thêm</a></div></div>
+
+          <article class="product-card group overflow-hidden rounded-2xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift lg:col-start-3 lg:row-start-1">
+            <a href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-kae-s688.html" class="flex h-full flex-col p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#fffafd]">Mới nhất</span></div>
+              <div class="product-render flex aspect-[4/3] items-center justify-center p-2 transition-transform duration-300"><img src="assets/karofi-kae-s688.png" alt="Máy lọc nước Karofi KAE-S688" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-xl font-black text-ink">KAE-S688</h3><p class="mx-auto mt-2 max-w-xs text-sm leading-5 text-slate-600">Nóng · lạnh · nguội Hydro-ion kiềm, pH tới 9.0</p></div>
+            </a>
           </article>
-          <article class="product-card group overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-            <div class="flex min-h-7 flex-wrap gap-2"><span class="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-blue-700">Slim Design</span></div>
-            <div class="product-render mt-4 flex aspect-square items-center justify-center rounded-xl bg-gradient-to-br from-slate-50 to-cyan-50 p-5 transition-transform duration-300"><img src="assets/karofi-s-s038.png" alt="Karofi Slim S-s038 water purifier" class="h-full w-full object-contain mix-blend-multiply"></div>
-            <div class="px-1 pt-5"><h3 class="text-lg font-black text-ink">Karofi Slim S-s038</h3><p class="mt-1 text-xs font-medium text-slate-500">Slim RO · 8-stage filter</p><div class="mt-4 flex items-baseline gap-2"><span class="text-xl font-black text-aqua">5.920.000₫</span><del class="text-sm text-slate-400">6.800.000₫</del></div><div class="product-actions mt-5 flex items-center justify-end transition-all duration-300"><a href="https://karofi.com/may-loc-nuoc-karofi-slim-s-s038.html" class="rounded-full bg-ink px-4 py-2.5 text-xs font-black text-white transition-colors duration-300 hover:bg-aqua">Tìm hiểu thêm</a></div></div>
+
+          <article class="product-card group overflow-hidden rounded-2xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift lg:col-start-1 lg:row-start-2">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s695.html" class="flex h-full flex-col p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#fffafd]">Mới nhất</span></div>
+              <div class="product-render flex aspect-[4/3] items-center justify-center p-2 transition-transform duration-300"><img src="assets/karofi-kae-s695.png" alt="Máy lọc nước Karofi KAE-S695" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-xl font-black text-ink">KAE-S695</h3><p class="mx-auto mt-2 max-w-xs text-sm leading-5 text-slate-600">Hydro-ion kiềm gấp 3 · nóng, lạnh và nguội</p></div>
+            </a>
+          </article>
+
+          <article class="product-card group overflow-hidden rounded-2xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift lg:col-start-3 lg:row-start-2">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s88-pro-max.html" class="flex h-full flex-col p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-3 py-1 text-[10px] font-black tracking-wider text-[#fffafd]">Bán chạy nhất</span></div>
+              <div class="product-render flex aspect-[4/3] items-center justify-center p-2 transition-transform duration-300"><img src="assets/karofi-kae-s88-promax.png" alt="Máy lọc nước Karofi KAE-S88 Promax" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-xl font-black text-ink">KAE-S88 PROMAX</h3><p class="mx-auto mt-2 max-w-xs text-sm leading-5 text-slate-600">7 điện cực Titan phủ Bạch Kim · AioTec</p></div>
+            </a>
           </article>
         </div>
       </div>
