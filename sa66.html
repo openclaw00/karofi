@@ -415,7 +415,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-    .tabs a,
     .tabs button {
       appearance: none;
       border: 0;
@@ -425,19 +424,18 @@
       padding: 24px 0 16px;
       font-size: 18px;
       font-weight: 900;
-      text-align: left;
+      text-align: center;
       cursor: pointer;
     }
-    .tabs a:first-child { color: var(--blue); }
+    .tabs button.is-active { color: var(--blue); }
+    .tab-page { display: none; }
+    .tab-page.is-active { display: block; }
     .details-panel {
-      display: none;
       max-width: 1580px;
       margin: 0 auto;
-      padding: 30px 34px 46px;
+      padding: 52px 34px 70px;
       background: #fdfefe;
-      border-bottom: 1px solid #d7d7d7;
     }
-    .details-panel.is-open { display: block; }
     .details-panel h2 {
       margin: 0 0 18px;
       color: var(--deep);
@@ -664,8 +662,8 @@
       .menu-toggle { display: grid; }
       .product-hero { grid-template-columns: 1fr; gap: 44px; }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(3, max-content); }
-      .tabs a, .tabs button { min-width: 190px; }
+      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(3, minmax(190px, 1fr)); }
+      .tabs button { min-width: 190px; }
     }
 
     @media (max-width: 700px) {
@@ -815,11 +813,13 @@
 
     <nav class="tabs" aria-label="Thông tin sản phẩm">
       <div class="tabs-inner">
-        <a href="#highlights">Đặc Điểm Nổi Bật⌄</a>
-        <button id="detailsToggle" type="button" aria-expanded="false" aria-controls="detailsPanel">Chi Tiết Sản Phẩm⌄</button>
-        <button id="specsToggle" type="button" aria-expanded="false" aria-controls="specsPanel">Thông Số⌄</button>
+        <button class="is-active" type="button" data-tab-target="highlights" aria-controls="highlights">Đặc Điểm Nổi Bật⌄</button>
+        <button type="button" data-tab-target="detailsPanel" aria-controls="detailsPanel">Chi Tiết Sản Phẩm⌄</button>
+        <button type="button" data-tab-target="specsPanel" aria-controls="specsPanel">Thông Số⌄</button>
       </div>
-      <section id="detailsPanel" class="details-panel" aria-labelledby="detailsToggle">
+    </nav>
+
+      <section id="detailsPanel" class="details-panel tab-page" aria-label="Chi Tiết Sản Phẩm">
         <h2>Tác dụng của các lõi lọc trong máy Karofi Diamond SA66</h2>
         <h3>1.1. Hệ thống lọc RO được cấu tạo bởi 3 bộ phận chính</h3>
         <ul>
@@ -855,7 +855,7 @@
         <p>Đối với hệ lõi Xmax HP 6.2 &amp; lõi Xmax Alkaline, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
         <p>Đối với lõi Xmax Bi-Mineral, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
       </section>
-      <section id="specsPanel" class="details-panel" aria-labelledby="specsToggle">
+      <section id="specsPanel" class="details-panel tab-page" aria-label="Thông Số">
         <div class="spec-grid">
           <div class="spec-column">
             <section class="spec-group">
@@ -913,9 +913,7 @@
           </div>
         </div>
       </section>
-    </nav>
-
-    <article id="highlights" class="content">
+    <article id="highlights" class="content tab-page is-active">
       <h2 class="intro-heading">MÁY LỌC NƯỚC NÓNG LẠNH HYDRO-ION KIỀM KAROFI DIAMOND SA66<br>Khởi tạo kỷ nguyên - khơi nguồn sống khỏe<br>Đỉnh cao công nghệ 11 tấm điện cực Titan mạ Bạch Kim quý hiếm - Trọn vẹn tiện ích với 6 chế độ nước</h2>
       <p class="copy hero-copy">Một kỷ nguyên nước khỏe mới chính thức được mở ra cùng Karofi Diamond SA66 - nơi công nghệ đỉnh cao hội tụ cùng chuẩn mực sống thượng lưu. Không chỉ tạo ra nguồn nước sạch tinh khiết, Diamond SA66 còn mang đến nguồn nước Hydro-ion kiềm giàu khoáng vượt trội, góp phần nuôi dưỡng sức khỏe bền bỉ từ bên trong. Sở hữu thiết kế sang trọng mang tính biểu tượng, tích hợp nóng nhanh lạnh sâu tức thì, Karofi Diamond SA66 vượt xa khái niệm một chiếc máy lọc nước thông thường, trở thành tuyên ngôn công nghệ và phong cách sống hiện đại, khẳng định đẳng cấp khác biệt trong mọi không gian.</p>
       <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div></figure>
@@ -1089,10 +1087,9 @@
     const carouselDots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
-    const detailsToggle = document.getElementById('detailsToggle');
-    const detailsPanel = document.getElementById('detailsPanel');
-    const specsToggle = document.getElementById('specsToggle');
-    const specsPanel = document.getElementById('specsPanel');
+    const tabButtons = Array.from(document.querySelectorAll('[data-tab-target]'));
+    const tabPages = Array.from(document.querySelectorAll('.tab-page'));
+    const tabs = document.querySelector('.tabs');
     let activeCarouselSlide = 0;
 
     searchToggle.addEventListener('click', () => {
@@ -1122,18 +1119,19 @@
       dot.addEventListener('click', () => showCarouselSlide(index));
     });
 
-    function toggleInfoPanel(toggle, panel) {
-      const open = toggle.getAttribute('aria-expanded') !== 'true';
-      [detailsToggle, specsToggle].forEach((button) => button.setAttribute('aria-expanded', 'false'));
-      [detailsPanel, specsPanel].forEach((section) => section.classList.remove('is-open'));
-      if (open) {
-        toggle.setAttribute('aria-expanded', 'true');
-        panel.classList.add('is-open');
-      }
+    function showTabPage(targetId) {
+      tabPages.forEach((page) => {
+        page.classList.toggle('is-active', page.id === targetId);
+      });
+      tabButtons.forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.tabTarget === targetId);
+      });
+      tabs.scrollIntoView({ block: 'start' });
     }
 
-    detailsToggle.addEventListener('click', () => toggleInfoPanel(detailsToggle, detailsPanel));
-    specsToggle.addEventListener('click', () => toggleInfoPanel(specsToggle, specsPanel));
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => showTabPage(button.dataset.tabTarget));
+    });
   </script>
 </body>
 </html>
