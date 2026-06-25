@@ -41,48 +41,49 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      height: 82px;
+      height: 76px;
       border-bottom: 1px solid #cfcfcf;
       background: rgba(253, 254, 254, .97);
     }
     .header-inner {
-      max-width: 1740px;
+      max-width: 1440px;
       height: 100%;
       margin: 0 auto;
-      padding: 0 42px;
+      padding: 0 24px;
       display: flex;
       align-items: center;
-      gap: 34px;
+      justify-content: space-between;
+      gap: 28px;
     }
     .logo {
-      width: 170px;
+      width: 158px;
       flex: 0 0 auto;
     }
     .primary-nav {
-      margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 26px;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
+      color: #111315;
     }
     .support-pill {
-      padding: 5px 10px;
-      border-radius: 18px;
+      padding: 5px 11px;
+      border-radius: 999px;
       background: var(--blue);
       color: #fff;
     }
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 13px;
-      margin-left: 2px;
+      gap: 12px;
+      flex: 0 0 auto;
     }
     .icon-button {
       position: relative;
-      width: 31px;
-      height: 31px;
+      width: 34px;
+      height: 34px;
       border: 0;
       background: transparent;
       color: #0d0d0d;
@@ -104,8 +105,8 @@
       text-align: center;
     }
     .flag {
-      width: 40px;
-      height: 27px;
+      width: 39px;
+      height: 26px;
       display: grid;
       place-items: center;
       background: #e82020;
@@ -333,7 +334,7 @@
 
     .tabs {
       position: sticky;
-      top: 82px;
+      top: 76px;
       z-index: 45;
       background: rgba(253,254,254,.97);
       border-bottom: 2px solid #8c8c8c;
@@ -562,14 +563,14 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a href="#" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
+      <a href="https://karofi.com" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
       <nav class="primary-nav" aria-label="Danh mục chính">
-        <a href="#">Máy lọc nước</a>
-        <a href="#">Lọc nước nóng lạnh</a>
-        <a href="#">Hydro-ion Kiềm</a>
-        <a href="#">Lọc tổng cao cấp</a>
-        <a href="#">Lọc tổng - Đầu nguồn</a>
-        <a class="support-pill" href="#">Dịch vụ và hỗ trợ</a>
+        <a href="https://karofi.com/may-loc-nuoc-28">Máy lọc nước</a>
+        <a href="https://karofi.com/cay-nuoc-nong-lanh-13">Lọc nước nóng lạnh</a>
+        <a href="https://karofi.com/hydro-ion-kiem">Hydro-ion Kiềm</a>
+        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap">Lọc tổng cao cấp</a>
+        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep">Lọc tổng - Đầu nguồn</a>
+        <a class="support-pill" href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep">Dịch vụ và hỗ trợ</a>
       </nav>
       <div class="header-actions" aria-label="Thao tác nhanh">
         <button class="icon-button" type="button" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></button>
