@@ -418,13 +418,54 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 20px;
     }
-    .tabs a {
+    .tabs a,
+    .tabs button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-family: inherit;
       padding: 24px 0 16px;
       font-size: 18px;
       font-weight: 900;
       text-align: left;
+      cursor: pointer;
     }
     .tabs a:first-child { color: var(--blue); }
+    .details-panel {
+      display: none;
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 30px 34px 46px;
+      background: #fdfefe;
+      border-bottom: 1px solid #d7d7d7;
+    }
+    .details-panel.is-open { display: block; }
+    .details-panel h2 {
+      margin: 0 0 18px;
+      color: var(--deep);
+      font-size: 28px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+    .details-panel h3 {
+      margin: 24px 0 10px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+    .details-panel p,
+    .details-panel li {
+      color: #111;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .details-panel ul,
+    .details-panel ol {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
 
     .content {
       max-width: 1580px;
@@ -748,11 +789,47 @@
     <nav class="tabs" aria-label="Thông tin sản phẩm">
       <div class="tabs-inner">
         <a href="#highlights">Đặc Điểm Nổi Bật⌄</a>
-        <a href="#details">Chi Tiết Sản Phẩm⌄</a>
+        <button id="detailsToggle" type="button" aria-expanded="false" aria-controls="detailsPanel">Chi Tiết Sản Phẩm⌄</button>
         <a href="#specs">Thông Số⌄</a>
         <a href="#reviews">Đánh Giá (0/5)⌄</a>
         <a href="#related">Sản Phẩm Yêu Thích⌄</a>
       </div>
+      <section id="detailsPanel" class="details-panel" aria-labelledby="detailsToggle">
+        <h2>Tác dụng của các lõi lọc trong máy Karofi Diamond SA66</h2>
+        <h3>1.1. Hệ thống lọc RO được cấu tạo bởi 3 bộ phận chính</h3>
+        <ul>
+          <li>Nhóm lọc thô: Công nghệ lọc Xmax F1-2-3</li>
+          <li>Màng RO: Công nghệ lọc Xmax RO</li>
+          <li>Nhóm lọc chức năng: Công nghệ lọc Xmax hiệu suất cao</li>
+          <li>Công nghệ Hydro-ion: Lõi điện phân Hydro-ion 2 tấm điện cực Titanium mạ Bạch Kim quý hiếm</li>
+          <li>Công nghệ Alkaline Direk: Bộ điện phân 9 tấm điện cực Titanium mạ Bạch Kim quý hiếm</li>
+        </ul>
+        <h3>1.2. Công nghệ lọc Xmax F1-2-3 bao gồm:</h3>
+        <p>Lõi Xmax F1 - Ứng dụng thiết kế cấu trúc rẻ quạt ưu việt giúp tăng diện tích tiếp xúc với nước, kết hợp cùng vật liệu PP an toàn. Loại bỏ các chất cặn bã, chất bẩn, cát, sạn, bùn, rong rêu, chất rắn... có kích thước lớn hơn 5 micron</p>
+        <p>Lõi Xmax F2 - Cấu tạo từ hạt than hoạt tính, được ép nén ở nhiệt độ và áp suất cao, bao ngoài là lớp sợi PP giúp tăng hiệu quả lọc thô. Lõi Xmax F2 loại bỏ Clo, Clorine, chất hữu cơ dư thừa và các khí gây mùi trong nước</p>
+        <p>Lõi Xmax F3 - Cấu tạo từ lõi xếp giấy cấu trúc rẻ quạt thông minh, vật liệu vải y tế kháng khuẩn chuẩn dùng trong y tế. Lõi Xmax F3 loại bỏ các chất như rong rêu, cặn bẩn, bụi cát, chất rắn ... có kích thước lớn hơn 1 micron</p>
+        <h3>1.3. Công nghệ lọc RO: lõi Xmax RO là trái tim của máy lọc nước, giúp loại bỏ tối đa clo, dầu, virus, vi khuẩn, amip, asen, các ion kim loại và các chất độc hại trong nước.</h3>
+        <h3>1.4. Công nghệ Hydro-ion: 2 tấm điện cực Titanium mạ Bạch Kim quý hiếm, chịu nhiệt tốt, chống ăn mòn hiệu quả</h3>
+        <h3>1.5. Công nghệ Alkaline Direk: sử dụng bộ điện phân 9 tấm điện cực Titanium mạ Bạch Kim quý hiếm, chịu nhiệt tốt, chống ăn mòn hiệu quả, có tuổi thọ cao &amp; bền bỉ</h3>
+        <h3>1.6. Công nghệ lọc Xmax hiệu suất cao bao gồm:</h3>
+        <p>- Hệ lõi Xmax HP 6.2:</p>
+        <ul>
+          <li>Lõi Mineral: bổ sung khoáng chất, chất điện giải cần thiết cho cơ thể.</li>
+          <li>Lõi ORP Alkaline: giảm ORP của nước và nâng cao pH nước, hỗ trợ trung hòa axit dư thừa trong cơ thể.</li>
+          <li>Lõi Hydrogen Plus: bổ sung Hydrogen hoạt hóa và các khoáng chất cần thiết tốt cho sức khỏe.</li>
+          <li>Lõi Tourmaline: tạo ion âm có lợi và hoạt hóa nước giúp cơ thể dễ hấp thu.</li>
+          <li>Lõi T33-GAC: xử lý mùi khó chịu, các chất hữu cơ… vượt trội và ổn định vị ngọt tự nhiên cho nước.</li>
+          <li>Lõi Nano Silver Plus: tiêu diệt vi khuẩn, chống tái nhiễm khuẩn nước đầu ra.</li>
+        </ul>
+        <p>- Bổ sung 1 lõi Xmax Alkaline: nâng cao pH, tăng cường Hydrogen hoạt hóa. Hỗ trợ trung hòa axit dư thừa trong cơ thể.</p>
+        <p>- Bổ sung thêm 1 lõi Xmax Bi-Mineral: bổ sung khoáng chất, hỗ trợ tăng cường sức mạnh bộ điện phân Alkaline Direk.</p>
+        <h2>Bao lâu thì bạn nên thay lõi lọc?</h2>
+        <p>Thời hạn sử dụng lõi lọc phụ thuộc vào chất lượng nguồn nước mỗi khu vực và công suất sử dụng:</p>
+        <p>Đối với bộ lõi Xmax F1-2-3, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
+        <p>Đối với lõi Xmax RO, thời gian sử dụng khuyến cáo từ 24 - 36 tháng.</p>
+        <p>Đối với hệ lõi Xmax HP 6.2 &amp; lõi Xmax Alkaline, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
+        <p>Đối với lõi Xmax Bi-Mineral, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
+      </section>
     </nav>
 
     <article id="highlights" class="content">
@@ -929,6 +1006,8 @@
     const carouselDots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
     const carouselPrev = document.querySelector('[data-carousel-prev]');
     const carouselNext = document.querySelector('[data-carousel-next]');
+    const detailsToggle = document.getElementById('detailsToggle');
+    const detailsPanel = document.getElementById('detailsPanel');
     let activeCarouselSlide = 0;
 
     searchToggle.addEventListener('click', () => {
@@ -956,6 +1035,12 @@
     carouselNext.addEventListener('click', () => showCarouselSlide(activeCarouselSlide + 1));
     carouselDots.forEach((dot, index) => {
       dot.addEventListener('click', () => showCarouselSlide(index));
+    });
+
+    detailsToggle.addEventListener('click', () => {
+      const open = detailsToggle.getAttribute('aria-expanded') !== 'true';
+      detailsToggle.setAttribute('aria-expanded', String(open));
+      detailsPanel.classList.toggle('is-open', open);
     });
   </script>
 </body>
