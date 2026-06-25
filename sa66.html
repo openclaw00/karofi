@@ -271,23 +271,6 @@
       background: var(--blue);
       transform: scale(1.08);
     }
-    .gallery-tools {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 62px;
-    }
-    .tool-tile {
-      width: 124px;
-      height: 124px;
-      border: 0;
-      border-radius: 10px;
-      background: #f1f1f1;
-      display: grid;
-      place-items: center;
-      color: #111;
-    }
-    .tool-tile svg { width: 44px; height: 44px; stroke-width: 1.5; }
     .benefit-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -631,8 +614,6 @@
       .page, .content, .tabs-inner { padding-left: 16px; padding-right: 16px; }
       .breadcrumb { font-size: 17px; padding: 24px 0 28px; }
       .gallery-main { min-height: 420px; padding: 14px; }
-      .gallery-tools { margin-top: 34px; gap: 12px; }
-      .tool-tile { width: 92px; height: 92px; }
       .benefit-row { gap: 18px; font-size: 15px; }
       .product-title { font-size: 31px; }
       .share { font-size: 18px; flex-wrap: wrap; }
@@ -715,11 +696,6 @@
             <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 3" aria-current="false"></button>
             <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 4" aria-current="false"></button>
             <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 5" aria-current="false"></button>
-          </div>
-          <div class="gallery-tools" aria-label="Công cụ hình ảnh">
-            <button class="tool-tile" type="button" aria-label="Xem ảnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></button>
-            <button class="tool-tile" type="button" aria-label="Điều chỉnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16"></path><circle cx="12" cy="12" r="2"></circle></svg></button>
-            <button class="tool-tile" type="button" aria-label="Địa điểm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s7-6.1 7-13A7 7 0 0 0 5 9c0 6.9 7 13 7 13Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></button>
           </div>
           <div class="benefit-row">
             <div><div class="benefit-icon">🚚</div>Miễn phí vận chuyển toàn quốc</div>
