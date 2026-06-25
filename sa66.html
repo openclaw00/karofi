@@ -177,14 +177,14 @@
       overflow: hidden;
       background: #f3f3f3;
       padding: 22px;
-      min-height: 710px;
-      display: flex;
-      align-items: stretch;
+      aspect-ratio: 1 / 1;
+      display: block;
     }
     .product-carousel {
       position: relative;
       width: 100%;
-      min-height: 0;
+      height: 100%;
+      aspect-ratio: 1 / 1;
       border-radius: 10px;
       overflow: hidden;
       background: #f8fbfc;
@@ -204,9 +204,6 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-    }
-    .carousel-slide:first-child img {
-      object-fit: cover;
     }
     .carousel-button {
       position: absolute;
@@ -415,7 +412,7 @@
       margin: 0 auto;
       padding: 0 34px;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
     .tabs a,
@@ -465,6 +462,34 @@
     .details-panel ol {
       margin: 0 0 18px;
       padding-left: 24px;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px 42px;
+    }
+    .spec-group h3 {
+      margin: 0 0 20px;
+      color: #999;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: minmax(190px, .95fr) minmax(0, 1fr);
+      gap: 28px;
+      padding: 14px 16px;
+      align-items: center;
+    }
+    .spec-row:nth-child(even) { background: #eaf9fd; }
+    .spec-row strong {
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .spec-row span {
+      color: #666;
+      font-size: 18px;
+      line-height: 1.35;
     }
 
     .content {
@@ -639,8 +664,8 @@
       .menu-toggle { display: grid; }
       .product-hero { grid-template-columns: 1fr; gap: 44px; }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(5, max-content); }
-      .tabs a { min-width: 190px; }
+      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(3, max-content); }
+      .tabs a, .tabs button { min-width: 190px; }
     }
 
     @media (max-width: 700px) {
@@ -654,7 +679,7 @@
       .search-form { padding: 12px 16px; }
       .page, .content, .tabs-inner { padding-left: 16px; padding-right: 16px; }
       .breadcrumb { font-size: 17px; padding: 24px 0 28px; }
-      .gallery-main { min-height: 420px; padding: 14px; }
+      .gallery-main { padding: 14px; }
       .benefit-row { gap: 18px; font-size: 15px; }
       .product-title { font-size: 31px; }
       .share { font-size: 18px; flex-wrap: wrap; }
@@ -662,6 +687,8 @@
       .actions { grid-template-columns: 1fr; }
       .btn, .btn-outline { font-size: 20px; }
       .tabs { top: 68px; }
+      .spec-grid { grid-template-columns: 1fr; }
+      .spec-row { grid-template-columns: 1fr; gap: 6px; }
       .content { padding-top: 52px; }
       .copy, .water-bullets { font-size: 17px; }
       .intro-heading, .section-title { font-size: 22px; }
@@ -790,9 +817,7 @@
       <div class="tabs-inner">
         <a href="#highlights">Đặc Điểm Nổi Bật⌄</a>
         <button id="detailsToggle" type="button" aria-expanded="false" aria-controls="detailsPanel">Chi Tiết Sản Phẩm⌄</button>
-        <a href="#specs">Thông Số⌄</a>
-        <a href="#reviews">Đánh Giá (0/5)⌄</a>
-        <a href="#related">Sản Phẩm Yêu Thích⌄</a>
+        <button id="specsToggle" type="button" aria-expanded="false" aria-controls="specsPanel">Thông Số⌄</button>
       </div>
       <section id="detailsPanel" class="details-panel" aria-labelledby="detailsToggle">
         <h2>Tác dụng của các lõi lọc trong máy Karofi Diamond SA66</h2>
@@ -829,6 +854,64 @@
         <p>Đối với lõi Xmax RO, thời gian sử dụng khuyến cáo từ 24 - 36 tháng.</p>
         <p>Đối với hệ lõi Xmax HP 6.2 &amp; lõi Xmax Alkaline, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
         <p>Đối với lõi Xmax Bi-Mineral, thời gian sử dụng khuyến cáo tối đa 12 tháng.</p>
+      </section>
+      <section id="specsPanel" class="details-panel" aria-labelledby="specsToggle">
+        <div class="spec-grid">
+          <div class="spec-column">
+            <section class="spec-group">
+              <h3>LOẠI</h3>
+              <div class="spec-row"><strong>Loại:</strong><span>Lọc nước nóng lạnh Hydro-ion kiềm tủ đứng</span></div>
+            </section>
+            <section class="spec-group">
+              <h3>CÔNG NGHỆ LÀM LẠNH</h3>
+              <div class="spec-row"><strong>Công nghệ làm lạnh:</strong><span>Block</span></div>
+            </section>
+            <section class="spec-group">
+              <h3>THÔNG SỐ KỸ THUẬT</h3>
+              <div class="spec-row"><strong>Bình chứa</strong><span>11 lít (nước nguội + nước lạnh)</span></div>
+              <div class="spec-row"><strong>(Lưu ý: Một số linh kiện của máy có thể được thay đổi theo thực tế mà vẫn đảm bảo chất lượng của sản phẩm)</strong><span>*</span></div>
+              <div class="spec-row"><strong>Công suất lọc</strong><span>20L/h</span></div>
+              <div class="spec-row"><strong>Hệ thống lọc</strong><span>Hệ thống lọc 12+1 lõi tích hợp Xmax: Xmax F1-2-3, Xmax RO 100 GPD, Xmax HP 6.2, Xmax Alkaline, Xmax Bi-Mineral và lõi điện phân Hydro-ion</span></div>
+              <div class="spec-row"><strong>Các lõi chức năng</strong><span>Xmax HP 6.2: Mineral, ORP Alkaline, Hydrogen Plus, Tourmaline, T33-GAC, Nano Silver Plus. Bổ sung thêm 2 lõi chức năng Xmax Alkaline &amp; Xmax Bi-Mineral</span></div>
+              <div class="spec-row"><strong>Tỷ lệ thu hồi nước tinh khiết</strong><span>Lên đến 60% (Trong điều kiện phòng lab, sử dụng linh kiện/ thiết bị đo lường tiêu chuẩn)</span></div>
+              <div class="spec-row"><strong>Số lượng vòi</strong><span>1 vòi thông minh đa nhiệm</span></div>
+              <div class="spec-row"><strong>Cụm lọc thô</strong><span>3 lõi lọc thô Xmax F1-2-3</span></div>
+              <div class="spec-row"><strong>Bộ điện phân công nghệ Alkaline Direk</strong><span>Tùy chọn 3 mức pH ~ 8.5 - 9.0 - 9.5. Sử dụng bộ Alkaline Direk 9 tấm điện cực Titanium mạ Bạch Kim quý hiếm, chịu nhiệt tốt, chống ăn mòn hiệu quả, có tuổi thọ cao &amp; bền bỉ</span></div>
+              <div class="spec-row"><strong>Khuyến cáo điều kiện nước đầu vào</strong><span>Nên sử dụng nguồn nước đầu vào đạt tiêu chuẩn nước sạch sử dụng cho mục đích sinh hoạt QCVN 01-1:2018 để chất lượng nước đầu ra đạt QCVN 6-1:2010/BYT và đảm bảo tuổi thọ máy. Không dùng trực tiếp nguồn nước giếng khoan, nhiễm mặn, hoặc có độ cứng cao,...</span></div>
+              <div class="spec-row"><strong>Lõi điện phân công nghệ Hydro-ion</strong><span>2 tấm điện cực Titanium mạ Bạch Kim quý hiếm, chịu nhiệt tốt, chống ăn mòn hiệu quả</span></div>
+              <div class="spec-row"><strong>Điện áp:</strong><span>220V/50Hz</span></div>
+              <div class="spec-row"><strong>Công suất làm nóng:</strong><span>430W</span></div>
+              <div class="spec-row"><strong>Công suất làm lạnh:</strong><span>90W</span></div>
+              <div class="spec-row"><strong>Nhiệt độ nước Nóng (Nhiệt độ nước thực tế sẽ phụ thuộc vào nhiệt độ môi trường và thể tích nước lấy ra):</strong><span>85 - 95 °C</span></div>
+              <div class="spec-row"><strong>Nhiệt độ nước lạnh (Nhiệt độ nước thực tế sẽ phụ thuộc vào nhiệt độ môi trường và thể tích nước lấy ra):</strong><span>8-10°C</span></div>
+              <div class="spec-row"><strong>Dung tích bình nóng:</strong><span>2 Lít</span></div>
+              <div class="spec-row"><strong>Dung tích bình lạnh:</strong><span>3 Lít (tích hợp trong bình chứa)</span></div>
+              <div class="spec-row"><strong>Màng lọc</strong><span>Màng lọc RO 100 GPD thay nhanh sản xuất tại Mỹ</span></div>
+            </section>
+          </div>
+          <div class="spec-column">
+            <section class="spec-group">
+              <h3>TRỌNG LƯỢNG &amp; KÍCH THƯỚC</h3>
+              <div class="spec-row"><strong>Kích thước:</strong><span>320 x 415 x 990 (mm)</span></div>
+              <div class="spec-row"><strong>Khối lượng:</strong><span>37 kg</span></div>
+            </section>
+            <section class="spec-group">
+              <h3>TÍNH NĂNG KHÁC</h3>
+              <div class="spec-row"><strong>QCVN 4:2009/BKHCN và sửa đổi 1:2016 QCVN 4:2009/BKHCN</strong><span>Có</span></div>
+              <div class="spec-row"><strong>QCVN6-1:2010/BYT</strong><span>Có</span></div>
+              <div class="spec-row"><strong>Hiển thị độ sạch của nước</strong><span>Có</span></div>
+              <div class="spec-row"><strong>Tự động báo thay lõi</strong><span>Có</span></div>
+            </section>
+            <section class="spec-group">
+              <h3>DỊCH VỤ</h3>
+              <div class="spec-row"><strong>Bảo hành:</strong><span>Bảo hành 36 tháng với linh kiện điện thuộc hệ thống lọc nước (adapter, bơm, van áp cao, van áp thấp, van điện từ,...)</span></div>
+            </section>
+            <section class="spec-group">
+              <h3>XUẤT XỨ</h3>
+              <div class="spec-row"><strong>Xuất xứ</strong><span>Việt Nam</span></div>
+            </section>
+          </div>
+        </div>
       </section>
     </nav>
 
@@ -1008,6 +1091,8 @@
     const carouselNext = document.querySelector('[data-carousel-next]');
     const detailsToggle = document.getElementById('detailsToggle');
     const detailsPanel = document.getElementById('detailsPanel');
+    const specsToggle = document.getElementById('specsToggle');
+    const specsPanel = document.getElementById('specsPanel');
     let activeCarouselSlide = 0;
 
     searchToggle.addEventListener('click', () => {
@@ -1037,11 +1122,18 @@
       dot.addEventListener('click', () => showCarouselSlide(index));
     });
 
-    detailsToggle.addEventListener('click', () => {
-      const open = detailsToggle.getAttribute('aria-expanded') !== 'true';
-      detailsToggle.setAttribute('aria-expanded', String(open));
-      detailsPanel.classList.toggle('is-open', open);
-    });
+    function toggleInfoPanel(toggle, panel) {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      [detailsToggle, specsToggle].forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      [detailsPanel, specsPanel].forEach((section) => section.classList.remove('is-open'));
+      if (open) {
+        toggle.setAttribute('aria-expanded', 'true');
+        panel.classList.add('is-open');
+      }
+    }
+
+    detailsToggle.addEventListener('click', () => toggleInfoPanel(detailsToggle, detailsPanel));
+    specsToggle.addEventListener('click', () => toggleInfoPanel(specsToggle, specsPanel));
   </script>
 </body>
 </html>
