@@ -287,6 +287,12 @@
       font-size: 48px;
       font-weight: 900;
     }
+    .benefit-icon svg {
+      width: 54px;
+      height: 54px;
+      display: block;
+      fill: currentColor;
+    }
 
     .product-title {
       margin: 3px 0 22px;
@@ -375,6 +381,13 @@
       font-size: 25px;
       font-weight: 900;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1.15;
+      padding: 0 18px;
     }
     .btn-red { background: var(--red); }
     .btn-blue { background: var(--blue); }
@@ -387,6 +400,13 @@
       color: var(--blue);
       font-size: 25px;
       font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1.15;
+      padding: 0 18px;
     }
     .summary {
       margin-top: 26px;
@@ -767,7 +787,7 @@
             <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 5" aria-current="false"></button>
           </div>
           <div class="benefit-row">
-            <div><div class="benefit-icon">🚚</div>Miễn phí vận chuyển toàn quốc</div>
+            <div><div class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 16h31v29H8V16Zm4 4v21h23V20H12Zm30 7h8l8 9v9H42V27Zm4 4v10h8v-4.5L48.2 31H46ZM17 48a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm34 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM23 40h23v4H23v-4Z"/></svg></div>Miễn phí vận chuyển toàn quốc</div>
             <div><div class="benefit-icon">⚙</div>Miễn phí lắp đặt toàn quốc</div>
           </div>
         </div>
