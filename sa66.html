@@ -172,6 +172,7 @@
       padding-bottom: 74px;
     }
     .gallery-main {
+      position: relative;
       border-radius: 20px;
       overflow: hidden;
       background: #f3f3f3;
@@ -180,6 +181,57 @@
       display: flex;
       align-items: stretch;
     }
+    .product-carousel {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f8fbfc;
+    }
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .carousel-slide.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .carousel-slide:first-child img {
+      object-fit: cover;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(7,90,121,.16);
+      border-radius: 50%;
+      background: rgba(253,254,254,.92);
+      color: var(--deep);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transform: translateY(-50%);
+      box-shadow: 0 10px 24px rgba(7,90,121,.16);
+    }
+    .carousel-button:hover { background: #fdfefe; }
+    .carousel-button svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2.4;
+    }
+    .carousel-button.prev { left: 18px; }
+    .carousel-button.next { right: 18px; }
     .placeholder {
       width: 100%;
       min-height: 260px;
@@ -199,18 +251,26 @@
     .gallery-dots {
       display: flex;
       justify-content: center;
-      gap: 28px;
-      margin-top: -36px;
+      align-items: center;
+      gap: 18px;
+      margin-top: -42px;
       position: relative;
       z-index: 2;
     }
-    .gallery-dots span {
-      width: 12px;
-      height: 12px;
+    .gallery-dots button {
+      width: 11px;
+      height: 11px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
-      background: #8a8a8a;
+      background: rgba(17,19,21,.36);
+      cursor: pointer;
+      transition: background-color .2s ease, transform .2s ease;
     }
-    .gallery-dots span:first-child { background: var(--blue); }
+    .gallery-dots button.is-active {
+      background: var(--blue);
+      transform: scale(1.08);
+    }
     .gallery-tools {
       display: flex;
       justify-content: center;
@@ -629,9 +689,33 @@
       <section class="product-hero" aria-labelledby="product-title">
         <div>
           <div class="gallery-main">
-            <div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div>
+            <div class="product-carousel" id="productCarousel" aria-label="Hình ảnh Máy lọc nước Karofi DIAMOND SA66">
+              <figure class="carousel-slide is-active" data-carousel-slide aria-hidden="false">
+                <img src="assets/sa66-carousel-1.png" alt="Máy lọc nước Karofi DIAMOND SA66 trong không gian nội thất sang trọng">
+              </figure>
+              <figure class="carousel-slide" data-carousel-slide aria-hidden="true">
+                <img src="assets/sa66-carousel-2.png" alt="Mặt trước máy lọc nước Karofi DIAMOND SA66">
+              </figure>
+              <figure class="carousel-slide" data-carousel-slide aria-hidden="true">
+                <img src="assets/sa66-carousel-3.png" alt="Máy lọc nước Karofi DIAMOND SA66 mở cửa khoang chứa">
+              </figure>
+              <figure class="carousel-slide" data-carousel-slide aria-hidden="true">
+                <img src="assets/sa66-carousel-4.png" alt="Máy lọc nước Karofi DIAMOND SA66 nhìn chính diện">
+              </figure>
+              <figure class="carousel-slide" data-carousel-slide aria-hidden="true">
+                <img src="assets/sa66-carousel-5.png" alt="Chi tiết vòi thông minh của Karofi DIAMOND SA66">
+              </figure>
+              <button class="carousel-button prev" type="button" data-carousel-prev aria-label="Ảnh trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"></path></svg></button>
+              <button class="carousel-button next" type="button" data-carousel-next aria-label="Ảnh tiếp theo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 18 6-6-6-6"></path></svg></button>
+            </div>
           </div>
-          <div class="gallery-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gallery-dots" aria-label="Chọn ảnh sản phẩm">
+            <button class="is-active" type="button" data-carousel-dot aria-label="Hiển thị ảnh 1" aria-current="true"></button>
+            <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 2" aria-current="false"></button>
+            <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 3" aria-current="false"></button>
+            <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 4" aria-current="false"></button>
+            <button type="button" data-carousel-dot aria-label="Hiển thị ảnh 5" aria-current="false"></button>
+          </div>
           <div class="gallery-tools" aria-label="Công cụ hình ảnh">
             <button class="tool-tile" type="button" aria-label="Xem ảnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></button>
             <button class="tool-tile" type="button" aria-label="Điều chỉnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16"></path><circle cx="12" cy="12" r="2"></circle></svg></button>
@@ -865,12 +949,37 @@
     const searchToggle = document.getElementById('searchToggle');
     const searchPanel = document.getElementById('searchPanel');
     const siteSearch = document.getElementById('siteSearch');
+    const carouselSlides = Array.from(document.querySelectorAll('[data-carousel-slide]'));
+    const carouselDots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
+    const carouselPrev = document.querySelector('[data-carousel-prev]');
+    const carouselNext = document.querySelector('[data-carousel-next]');
+    let activeCarouselSlide = 0;
 
     searchToggle.addEventListener('click', () => {
       const open = searchToggle.getAttribute('aria-expanded') !== 'true';
       searchToggle.setAttribute('aria-expanded', String(open));
       searchPanel.classList.toggle('is-open', open);
       if (open) setTimeout(() => siteSearch.focus(), 120);
+    });
+
+    function showCarouselSlide(index) {
+      activeCarouselSlide = (index + carouselSlides.length) % carouselSlides.length;
+      carouselSlides.forEach((slide, slideIndex) => {
+        const active = slideIndex === activeCarouselSlide;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      carouselDots.forEach((dot, dotIndex) => {
+        const active = dotIndex === activeCarouselSlide;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-current', String(active));
+      });
+    }
+
+    carouselPrev.addEventListener('click', () => showCarouselSlide(activeCarouselSlide - 1));
+    carouselNext.addEventListener('click', () => showCarouselSlide(activeCarouselSlide + 1));
+    carouselDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showCarouselSlide(index));
     });
   </script>
 </body>
