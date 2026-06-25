@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66.">
+  <title>Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <style>
+    :root {
+      --blue: #0bb1eb;
+      --deep: #075a79;
+      --ink: #111315;
+      --muted: #666b70;
+      --line: #d7d7d7;
+      --soft: #f2f2f2;
+      --red: #ed1000;
+      --page: #fdfefe;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      line-height: 1.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input { font: inherit; }
+    :focus-visible { outline: 3px solid rgba(11, 177, 235, .45); outline-offset: 3px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 82px;
+      border-bottom: 1px solid #cfcfcf;
+      background: rgba(253, 254, 254, .97);
+    }
+    .header-inner {
+      max-width: 1740px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 42px;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+    .logo {
+      width: 170px;
+      flex: 0 0 auto;
+    }
+    .primary-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      white-space: nowrap;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .support-pill {
+      padding: 5px 10px;
+      border-radius: 18px;
+      background: var(--blue);
+      color: #fff;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-left: 2px;
+    }
+    .icon-button {
+      position: relative;
+      width: 31px;
+      height: 31px;
+      border: 0;
+      background: transparent;
+      color: #0d0d0d;
+      padding: 0;
+    }
+    .icon-button svg { width: 100%; height: 100%; stroke-width: 2.1; }
+    .cart-badge {
+      position: absolute;
+      right: -5px;
+      top: -10px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5f5f5;
+      border: 1px solid #cfcfcf;
+      color: #888;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+    }
+    .flag {
+      width: 40px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      background: #e82020;
+      color: #ffea00;
+      font-size: 18px;
+    }
+    .menu-toggle { display: none; }
+
+    .page {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 0 34px;
+    }
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 38px 0 45px;
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .breadcrumb a:last-child {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .product-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(460px, .98fr);
+      gap: 72px;
+      align-items: start;
+      padding-bottom: 74px;
+    }
+    .gallery-main {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f3f3f3;
+      padding: 22px;
+      min-height: 710px;
+      display: flex;
+      align-items: stretch;
+    }
+    .placeholder {
+      width: 100%;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(11,177,235,.18), rgba(255,255,255,.55) 42%, rgba(7,90,121,.12)),
+        repeating-linear-gradient(45deg, rgba(7,90,121,.08) 0 12px, transparent 12px 24px);
+      border: 2px dashed rgba(7,90,121,.35);
+      color: var(--deep);
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: .02em;
+      padding: 30px;
+    }
+    .gallery-main .placeholder { border-radius: 10px; font-size: 22px; }
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: -36px;
+      position: relative;
+      z-index: 2;
+    }
+    .gallery-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #8a8a8a;
+    }
+    .gallery-dots span:first-child { background: var(--blue); }
+    .gallery-tools {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 62px;
+    }
+    .tool-tile {
+      width: 124px;
+      height: 124px;
+      border: 0;
+      border-radius: 10px;
+      background: #f1f1f1;
+      display: grid;
+      place-items: center;
+      color: #111;
+    }
+    .tool-tile svg { width: 44px; height: 44px; stroke-width: 1.5; }
+    .benefit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 26px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+    .benefit-icon {
+      margin: 0 auto 4px;
+      width: 112px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 48px;
+      font-weight: 900;
+    }
+
+    .product-title {
+      margin: 3px 0 22px;
+      color: var(--blue);
+      font-size: 42px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+    .share {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 34px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .social {
+      width: 36px;
+      height: 36px;
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .feature-line {
+      display: flex;
+      gap: 17px;
+      align-items: flex-start;
+      color: #777;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 12px;
+    }
+    .feature-line img, .feature-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      flex: 0 0 auto;
+      font-size: 24px;
+    }
+    .water-title {
+      margin: 5px 0 12px;
+      font-size: 25px;
+      font-weight: 900;
+    }
+    .water-list {
+      display: grid;
+      gap: 13px;
+      color: #777;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .water-row {
+      display: flex;
+      gap: 17px;
+      align-items: center;
+    }
+    .price {
+      margin: 35px 0 20px;
+      text-align: center;
+      color: var(--red);
+      font-size: 55px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 6px;
+      min-height: 48px;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .btn-red { background: var(--red); }
+    .btn-blue { background: var(--blue); }
+    .btn-outline {
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid var(--blue);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--blue);
+      font-size: 25px;
+      font-weight: 900;
+    }
+    .summary {
+      margin-top: 26px;
+      padding: 22px 26px;
+      border-radius: 10px;
+      background: #f1f1f1;
+      color: #1f1f1f;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .summary ul { margin: 0; padding-left: 22px; }
+    .summary li { margin: 0 0 7px; }
+    .summary li::marker { color: var(--blue); }
+    .summary a { color: var(--blue); font-style: italic; }
+
+    .tabs {
+      position: sticky;
+      top: 82px;
+      z-index: 45;
+      background: rgba(253,254,254,.97);
+      border-bottom: 2px solid #8c8c8c;
+    }
+    .tabs-inner {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 0 34px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .tabs a {
+      padding: 24px 0 16px;
+      font-size: 18px;
+      font-weight: 900;
+      text-align: left;
+    }
+    .tabs a:first-child { color: var(--blue); }
+
+    .content {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 88px 34px 70px;
+    }
+    .intro-heading {
+      text-align: center;
+      color: var(--deep);
+      font-size: 27px;
+      line-height: 1.18;
+      font-weight: 900;
+      margin: 0 0 24px;
+    }
+    .section-title {
+      color: var(--deep);
+      text-align: center;
+      font-size: 26px;
+      line-height: 1.25;
+      font-weight: 900;
+      margin: 28px 0 22px;
+      text-transform: uppercase;
+    }
+    .copy {
+      color: #111;
+      font-size: 21px;
+      line-height: 1.75;
+      margin: 0 0 28px;
+    }
+    .copy a { color: #001eff; }
+    .hero-copy { margin-bottom: 35px; }
+    .image-block {
+      margin: 28px 0 25px;
+    }
+    .image-block .placeholder {
+      aspect-ratio: 16 / 9;
+      min-height: 420px;
+      font-size: 28px;
+    }
+    .image-block.tall .placeholder { aspect-ratio: 16 / 8.2; }
+    .image-block.short .placeholder { aspect-ratio: 16 / 6.2; min-height: 280px; }
+    .water-bullets {
+      margin: 16px 0 36px;
+      padding-left: 22px;
+      font-size: 21px;
+      line-height: 1.8;
+    }
+    .water-bullets li { margin-bottom: 5px; }
+    .water-bullets li::marker { color: #ed0010; }
+    .notes {
+      margin: 22px 0 86px;
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    .comparison {
+      padding: 12px 0 86px;
+    }
+    .comparison h2 {
+      color: var(--blue);
+      font-size: 34px;
+      line-height: 1.2;
+      text-align: center;
+      font-weight: 900;
+      margin: 0 0 42px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 32px;
+    }
+    .card {
+      min-height: 820px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      background: #f1f1f1;
+      padding: 18px 34px 30px;
+      text-align: center;
+    }
+    .card-image {
+      position: relative;
+      height: 240px;
+      margin-bottom: 12px;
+    }
+    .card-image .placeholder {
+      height: 100%;
+      min-height: 0;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 6px;
+    }
+    .label-new {
+      position: absolute;
+      right: -10px;
+      top: 0;
+      background: #ffd92d;
+      padding: 4px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
+    }
+    .card h3 {
+      min-height: 72px;
+      margin: 0;
+      color: #000;
+      font-size: 21px;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+    .card-price {
+      margin: 16px 0 8px;
+      color: var(--blue);
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .stars {
+      color: var(--blue);
+      font-size: 30px;
+      letter-spacing: 3px;
+      line-height: 1;
+      padding-bottom: 26px;
+      border-bottom: 1px solid #111;
+    }
+    .card ul {
+      flex: 1;
+      text-align: left;
+      margin: 18px 0 22px;
+      padding-left: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #000;
+      border-bottom: 1px solid #111;
+      padding-bottom: 22px;
+    }
+    .compare-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: 31px;
+      border: 1px solid var(--blue);
+      border-radius: 16px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    footer {
+      background: #f3f7f9;
+      border-top: 1px solid #d7e2e7;
+      padding: 46px 34px;
+      color: #263238;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .footer-inner {
+      max-width: 1580px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
+      gap: 35px;
+    }
+    footer h3 { margin: 0 0 12px; font-size: 17px; }
+    footer ul { margin: 0; padding: 0; list-style: none; }
+
+    @media (max-width: 1350px) {
+      body { font-size: 16px; }
+      .primary-nav { display: none; }
+      .menu-toggle { display: grid; }
+      .product-hero { grid-template-columns: 1fr; gap: 44px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(5, max-content); }
+      .tabs a { min-width: 190px; }
+    }
+
+    @media (max-width: 700px) {
+      .site-header { height: 68px; }
+      .header-inner { padding: 0 16px; gap: 14px; }
+      .logo { width: 120px; }
+      .header-actions { gap: 8px; margin-left: auto; }
+      .icon-button { width: 27px; height: 27px; }
+      .flag { width: 34px; height: 23px; }
+      .page, .content, .tabs-inner { padding-left: 16px; padding-right: 16px; }
+      .breadcrumb { font-size: 17px; padding: 24px 0 28px; }
+      .gallery-main { min-height: 420px; padding: 14px; }
+      .gallery-tools { margin-top: 34px; gap: 12px; }
+      .tool-tile { width: 92px; height: 92px; }
+      .benefit-row { gap: 18px; font-size: 15px; }
+      .product-title { font-size: 31px; }
+      .share { font-size: 18px; flex-wrap: wrap; }
+      .price { font-size: 39px; }
+      .actions { grid-template-columns: 1fr; }
+      .btn, .btn-outline { font-size: 20px; }
+      .tabs { top: 68px; }
+      .content { padding-top: 52px; }
+      .copy, .water-bullets { font-size: 17px; }
+      .intro-heading, .section-title { font-size: 22px; }
+      .image-block .placeholder { min-height: 250px; font-size: 20px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
+      <nav class="primary-nav" aria-label="Danh mục chính">
+        <a href="#">Máy lọc nước</a>
+        <a href="#">Lọc nước nóng lạnh</a>
+        <a href="#">Hydro-ion Kiềm</a>
+        <a href="#">Lọc tổng cao cấp</a>
+        <a href="#">Lọc tổng - Đầu nguồn</a>
+        <a class="support-pill" href="#">Dịch vụ và hỗ trợ</a>
+      </nav>
+      <div class="header-actions" aria-label="Thao tác nhanh">
+        <button class="icon-button" type="button" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></button>
+        <button class="icon-button" type="button" aria-label="Giỏ hàng"><span class="cart-badge">0</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h2l2.2 12.2a2 2 0 0 0 2 1.8h8.8a2 2 0 0 0 2-1.6L22 7H6"></path><circle cx="10" cy="21" r="1.5"></circle><circle cx="18" cy="21" r="1.5"></circle></svg></button>
+        <button class="icon-button" type="button" aria-label="Tài khoản"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4"></circle><path d="M4 22a8 8 0 0 1 16 0"></path></svg></button>
+        <span class="flag" aria-label="Tiếng Việt">★</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="#">Trang chủ</a><span>»</span>
+        <a href="#">Máy lọc nước Nóng Lạnh</a><span>»</span>
+        <a href="#">Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</a>
+      </nav>
+
+      <section class="product-hero" aria-labelledby="product-title">
+        <div>
+          <div class="gallery-main">
+            <div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div>
+          </div>
+          <div class="gallery-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="gallery-tools" aria-label="Công cụ hình ảnh">
+            <button class="tool-tile" type="button" aria-label="Xem ảnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></button>
+            <button class="tool-tile" type="button" aria-label="Điều chỉnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16"></path><circle cx="12" cy="12" r="2"></circle></svg></button>
+            <button class="tool-tile" type="button" aria-label="Địa điểm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s7-6.1 7-13A7 7 0 0 0 5 9c0 6.9 7 13 7 13Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></button>
+          </div>
+          <div class="benefit-row">
+            <div><div class="benefit-icon">🚚</div>Miễn phí vận chuyển toàn quốc</div>
+            <div><div class="benefit-icon">⚙</div>Miễn phí lắp đặt toàn quốc</div>
+          </div>
+        </div>
+
+        <div>
+          <h1 id="product-title" class="product-title">Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</h1>
+          <div class="share">
+            <span>Chia sẻ sản phẩm:</span>
+            <span class="social">f</span><span class="social">in</span><span class="social">◎</span><span class="social">☎</span><span class="social">♪</span>
+          </div>
+          <p class="feature-line"><span class="feature-icon">▱</span><span>Công nghệ AioTec: Kiểm soát chất lượng nước hàng ngày trên điện thoại di động</span></p>
+          <h2 class="water-title">Chế độ nước</h2>
+          <div class="water-list">
+            <div class="water-row"><span class="feature-icon">♨</span><span>Nước nóng pha sữa, pha trà, pha mì,..</span></div>
+            <div class="water-row"><span class="feature-icon">♧</span><span>Nước nguội uống trực tiếp, nấu ăn hàng ngày</span></div>
+            <div class="water-row"><span class="feature-icon">❄</span><span>Nước lạnh sâu, sảng khoái</span></div>
+            <div class="water-row"><span class="feature-icon">OH-</span><span>Hydro-ion kiềm</span></div>
+          </div>
+          <div class="price">59.000.000 VNĐ</div>
+          <div class="actions">
+            <button class="btn btn-red" type="button">Mua ngay</button>
+            <button class="btn btn-blue" type="button">Thêm vào giỏ hàng</button>
+          </div>
+          <button class="btn-outline" type="button">Tư vấn ngay</button>
+          <div class="summary">
+            <ul>
+              <li>Hệ 12 lõi Xmax tích hợp hiệu suất cao - đúc nguyên khối: gấp 3 diện tích tiếp xúc, gấp 2 hiệu quả lọc</li>
+              <li>6 chế độ nước - Sẵn sàng đáp ứng nhu cầu cho mọi thành viên trong gia đình - thể tích bình nóng/ lạnh: 2 lít/ 3 lít</li>
+              <li>Công nghệ điện phân Hydro-ion: trải nghiệm trực tiếp quá trình điện phân nước</li>
+              <li>Công nghệ điện phân Alkaline Direk: tùy chọn 3 mức pH ~8.5-9.0-9.5</li>
+              <li>11 tấm điện cực Titanium mạ Bạch Kim - tuổi thọ lên đến 10 năm, bảo hành bảo dưỡng miễn phí máy hàng năm trong vòng 5 năm, bảo hành điện cực 5 năm</li>
+              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
+              <li>3 lõi lọc thô Xmax F 1-2-3: gấp 3 diện tích tiếp xúc, gấp 2 hiệu quả lọc</li>
+              <li>Hệ lõi Xmax HP 6.2 cùng 2 lõi chức năng Xmax Alkaline & Xmax Bi-Mineral: bổ sung dồi dào Hydrogen, ion kiềm cùng khoáng chất có lợi cho cơ thể</li>
+              <li>Nước sau lọc tại vòi đạt quy chuẩn QCVN 6-1:2010/BYT</li>
+              <li>Bảo hành: 36 tháng <a href="#">(Chi tiết bảo hành)</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabs" aria-label="Thông tin sản phẩm">
+      <div class="tabs-inner">
+        <a href="#highlights">Đặc Điểm Nổi Bật⌄</a>
+        <a href="#details">Chi Tiết Sản Phẩm⌄</a>
+        <a href="#specs">Thông Số⌄</a>
+        <a href="#reviews">Đánh Giá (0/5)⌄</a>
+        <a href="#related">Sản Phẩm Yêu Thích⌄</a>
+      </div>
+    </nav>
+
+    <article id="highlights" class="content">
+      <h2 class="intro-heading">MÁY LỌC NƯỚC NÓNG LẠNH HYDRO-ION KIỀM KAROFI DIAMOND SA66<br>Khởi tạo kỷ nguyên - khơi nguồn sống khỏe<br>Đỉnh cao công nghệ 11 tấm điện cực Titan mạ Bạch Kim quý hiếm - Trọn vẹn tiện ích với 6 chế độ nước</h2>
+      <p class="copy hero-copy">Một kỷ nguyên nước khỏe mới chính thức được mở ra cùng Karofi Diamond SA66 - nơi công nghệ đỉnh cao hội tụ cùng chuẩn mực sống thượng lưu. Không chỉ tạo ra nguồn nước sạch tinh khiết, Diamond SA66 còn mang đến nguồn nước Hydro-ion kiềm giàu khoáng vượt trội, góp phần nuôi dưỡng sức khỏe bền bỉ từ bên trong. Sở hữu thiết kế sang trọng mang tính biểu tượng, tích hợp nóng nhanh lạnh sâu tức thì, Karofi Diamond SA66 vượt xa khái niệm một chiếc máy lọc nước thông thường, trở thành tuyên ngôn công nghệ và phong cách sống hiện đại, khẳng định đẳng cấp khác biệt trong mọi không gian.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div></figure>
+
+      <h2 class="section-title">CÔNG NGHỆ ĐIỆN PHÂN HYDRO-ION - TRỰC QUAN HÓA CÔNG NGHỆ ĐIỆN PHÂN TẠO HYDROGEN</h2>
+      <p class="copy">Karofi Diamond SA66 được trang bị công nghệ điện phân Hydro-ion tiên tiến với 2 tấm điện cực Titan phủ Bạch Kim - vật liệu cao cấp, an toàn cho sức khỏe, chịu nhiệt vượt trội và chống ăn mòn hiệu quả, mang đến độ bền lên tới 10 năm. Kết hợp cùng màng ngăn thế hệ mới, thiết bị tối ưu hiệu quả điện phân, gia tăng hàm lượng Hydrogen trong nước.</p>
+      <p class="copy">Độc quyền tại Karofi, công nghệ Hydro-ion được thiết kế dưới dạng lõi trong suốt, cho phép người dùng trực tiếp quan sát quá trình điện phân tạo ra Hydrogen một cách chân thực và rõ ràng.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-2</div></figure>
+
+      <h2 class="section-title">CÔNG NGHỆ ĐIỆN PHÂN ALKALINE DIREK - KIỂM SOÁT CHỦ ĐỘNG CHỌN MỨC KIỀM</h2>
+      <p class="copy">Công nghệ điện phân Alkaline Direk ứng dụng 9 tấm điện cực Titan phủ Bạch Kim quý hiếm, cho độ bền lên tới 10 năm, bảo hành 5 năm và miễn phí bảo dưỡng định kỳ dành cho khách hàng đăng ký.</p>
+      <p class="copy">Điểm nổi bật là sự kết hợp cùng màng ngăn chọn lọc, giúp tăng cường hiệu quả điện phân, tạo hàm lượng Hydrogen đạt tới 600 ppb. Cấu trúc điện cực dạng mắt lưới giúp tăng diện tích tiếp xúc với nước, từ đó nâng cao hiệu suất điện phân, tối đa hóa hàm lượng Hydrogen và mở rộng dải pH. Bởi vậy, sản phẩm tạo ra nguồn nước giàu Hydrogen và ion kiềm, đồng hành chăm sóc sức khỏe toàn diện cho cả gia đình mỗi ngày.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-3</div></figure>
+
+      <h2 class="section-title">6 CHẾ ĐỘ NƯỚC - 1 VÒI THÔNG MINH ĐA NHIỆM</h2>
+      <p class="copy">Một trong những tâm điểm của Karofi Diamond SA66 chính là chiếc vòi thông minh cao cấp, mở ra kỷ nguyên tiện nghi với khả năng cung cấp 6 chế độ nước chỉ trong một vòi duy nhất. Sở hữu kiểu dáng trụ đứng thanh mảnh cùng lớp mạ Crom sáng bóng, dải LED tinh tế chạy dọc thân vòi giúp người dùng dễ dàng lấy nước ngay cả trong không gian tối. Giao diện tương tác nằm ở đỉnh vòi với với bảng điều khiển cảm ứng tích hợp cùng màn hình LCD màu sắc sống động, cho phép theo dõi tình trạng máy một cách trực quan, lựa chọn và hiển thị rõ ràng từng chế độ nước vô cùng thuận tiện:</p>
+      <ul class="water-bullets">
+        <li>Nước kiềm nhẹ: pH ~ 8.5</li>
+        <li>Nước kiềm vừa: pH ~ 9.0</li>
+        <li>Nước kiềm mạnh: pH ~ 9.5</li>
+        <li>Nước nóng: Nhiệt độ 85 - 95℃, làm nóng nhanh, bình nóng dung tích tới 2 lít</li>
+        <li>Nước lạnh: Nhiệt độ 8 - 10℃, mát sâu sảng khoái, bình lạnh tích hợp bình chứa nước nguội có dung tích đến 3 lít</li>
+        <li>Nước nguội: Tăng cường Hydrogen, ion kiềm cùng khoáng chất có lợi cho cơ thể.</li>
+      </ul>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-4</div></figure>
+
+      <h2 class="section-title">HỆ THỐNG 12+1 LÕI LỌC TÍCH HỢP XMAX HIỆU SUẤT CAO - GẤP 2 HIỆU SUẤT - GẤP 2 KHOÁNG CHẤT</h2>
+      <p class="copy">Karofi Diamond SA66 được tích hợp hệ thống 12+1 lõi lọc XMAX công suất cao, tạo nên khả năng vận hành ấn tượng: tăng gấp 2 hiệu quả lọc và bổ sung gấp 2 khoáng chất.</p>
+      <p class="copy">Toàn bộ lõi lọc được ép nguyên khối từ nhựa PP nguyên sinh, bảo đảm độ an toàn cho người dùng cùng độ bền bỉ lâu dài. Đây là bước nâng cấp vượt trội về tiêu chuẩn an toàn và tính thông minh, tạo sự khác biệt rõ rệt so với các dòng lõi lọc truyền thống.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-6</div></figure>
+
+      <h2 class="section-title">KAROFI TÁI ĐỊNH NGHĨA VIỆC THAY LÕI THÀNH TRẢI NGHIỆM 1 CHẠM</h2>
+      <p class="copy">Với công nghệ One Touch Filter, Karofi thiết lập chuẩn mực mới cho trải nghiệm thay lõi: gọn gàng, chuẩn xác và thuận tiện. Chỉ một thao tác nhấn, cơ chế trợ lực chủ động kích hoạt để lõi lọc tự bật ra nhẹ nhàng, không cần thao tác kỹ thuật phức tạp. Thời gian thay lõi được tối ưu xuống chỉ vài giây, loại bỏ hoàn toàn công đoạn lắp dây hay cút nối như trước đây. Kết hợp cùng Auto Valve chống rò rỉ tự động, Karofi mang đến trải nghiệm chăm sóc máy lọc nước nhanh gọn hơn, sạch hơn và an tâm hơn mỗi lần thay lõi.</p>
+      <p class="copy">Điểm nhấn nổi bật nằm ở tay nắm lõi bo tròn tinh tế được phủ Crom sáng bóng; kết hợp cùng phần đáy lõi thiết kế chuyên biệt. Sự cải tiến này đánh dấu bước tiến mới về tiêu chuẩn an toàn và tính thông minh, tạo nên khác biệt rõ ràng so với các dòng lõi lọc truyền thống trên thị trường.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-7</div></figure>
+      <figure class="image-block short"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-5</div></figure>
+
+      <h2 class="section-title">HỆ LÕI LỌC THÔ XMAX F1-2-3 - GẤP 2 HIỆU QUẢ LỌC - GẤP 3 DIỆN TÍCH TIẾP XÚC</h2>
+      <p class="copy">Thiết kế lõi dạng rẻ quạt giúp mở rộng diện tích tiếp xúc với nước lên gấp 3 lần, từ đó tăng gấp 2 hiệu suất lọc. Nhờ vậy, cặn bẩn, tạp chất hữu cơ, màu, mùi lạ và clo dư… được kiểm soát hiệu quả, góp phần bảo vệ và duy trì sự vận hành bền bỉ của màng RO.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-8</div></figure>
+
+      <h2 class="section-title">MÀNG LỌC XMAX RO 100 GPD SẢN XUẤT TẠI MỸ</h2>
+      <p class="copy">Màng RO 100 GPD nhập khẩu từ Mỹ giữ vai trò trung tâm trong hệ thống lọc của Karofi, có khả năng loại bỏ đến 99,99% tạp chất gây hại, đem lại nguồn nước tinh khiết.</p>
+      <p class="copy">Với công suất lọc 20 lít/giờ cùng tỷ lệ thu hồi nước tinh khiết lên tới 60%, thiết bị vận hành bền bỉ, đảm bảo chất lượng nước đầu ra ổn định trong suốt vòng đời màng lọc.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-9</div></figure>
+
+      <h2 class="section-title">HỆ LÕI CHỨC NĂNG XMAX HP 6.2 - THIẾT KẾ ĐÚC NGUYÊN KHỐI</h2>
+      <p class="copy">Hệ lõi chức năng XMAX HP 6.2 được phát triển với cấu trúc thế hệ mới, đúc liền khối từ nhựa nguyên sinh PP cao cấp, tích hợp trọn vẹn 6 lõi chức năng trong một thiết kế đồng bộ. Toàn bộ dây dẫn, cút nối và kẹp lõi truyền thống được loại bỏ, thay bằng hệ thống dẫn nước ngầm khép kín, góp phần hạn chế rò rỉ và giảm thiểu nguy cơ tái nhiễm khuẩn.</p>
+      <p class="copy">Nhờ thiết kế tối ưu này, lưu lượng nước đầu ra được cải thiện đáng kể, đạt mức cao hơn 1,68 lần so với hệ lõi rời thông thường, mang lại nguồn nước tinh khiết, an toàn và tăng cường khoáng chất, Hydro-ion kiềm trong nước cho sức khỏe cả gia đình.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-10</div></figure>
+
+      <h2 class="section-title">BỔ SUNG 2 LÕI CHỨC NĂNG XMAX ALKALINE & XMAX BI-MINERAL</h2>
+      <p class="copy">Bên cạnh hệ lõi XMAX HP 6.2 nguyên khối, Karofi Diamond SA66 còn được trang bị thêm 2 lõi Xmax Alkaline & Xmax Bi-Mineral:<br>- Xmax Alkaline: Nâng cao pH, tăng cường Hydrogen hoạt hóa và dễ dàng lắp đặt, thay thế định kỳ.<br>- Xmax Bi-Mineral: Bổ sung khoáng chất, hỗ trợ tăng cường sức mạnh bộ điện phân Alkaline Direk</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-11</div></figure>
+
+      <h2 class="section-title">CÔNG NGHỆ AIOTEC - GIÁM SÁT CHẤT LƯỢNG NƯỚC TỪ XA QUA ĐIỆN THOẠI</h2>
+      <p class="copy">Karofi Diamond SA66 được trang bị công nghệ AioTec thông minh giúp người dùng có thể dễ dàng theo dõi chất lượng nước sau lọc, nhận cảnh báo thay lõi và kích hoạt bảo hành... an tâm từ xa mọi lúc, mọi nơi.<br>Đặc biệt, người dùng có thể quan sát phần hiển thị AioTec trên vòi thông minh của sản phẩm.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-12</div></figure>
+
+      <h2 class="section-title">TỦ ĐỰNG ĐỒ TIỆN LỢI - TAY NẮM MỞ TỦ LINH HOẠT</h2>
+      <p class="copy">Karofi Diamond SA66 được trang bị khoang chứa đồ đa năng, giúp bạn thuận tiện sắp xếp ly, trà, cafe hay rượu quý ngay bên trong thân máy. Thiết kế tinh gọn góp phần tiết kiệm không gian, đồng thời gia tăng sự tiện ích khi mọi vật dụng cần thiết luôn sẵn sàng trong tầm với cho từng phút giây thưởng thức.</p>
+      <p class="copy">Nổi bật hơn, tay nắm cửa tủ được chăm chút tỉ mỉ, cầm chắc tay và thao tác linh hoạt, hỗ trợ đóng - mở êm ái, dễ dàng trong quá trình sử dụng hằng ngày, đồng thời hoàn thiện vẻ sang trọng cho tổng thể một thiết bị lọc nước cao cấp.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-13</div></figure>
+
+      <h2 class="section-title">KAROFI ĐẠT CHỨNG NHẬN NSF/ANSI 58 CAO CẤP CỦA MỸ</h2>
+      <p class="copy">Chứng nhận NSF/ANSI 58 mang đến sự yên tâm cho người dùng khi nguồn nước uống được xử lý chặt chẽ, đáp ứng những tiêu chuẩn khắt khe của Hoa Kỳ.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-14</div></figure>
+
+      <h2 class="section-title">Nước sau lọc đạt Quy chuẩn Kỹ thuật Quốc gia đối với nước khoáng thiên nhiên và nước uống đóng chai QCVN 6-1:2010/BYT</h2>
+      <p class="copy">Khơi nguồn sống khỏe từ chuẩn mực nguồn nước tinh khiết giàu khoáng chất, Hydro-ion kiềm. Karofi Diamond SA66 đem lại sự an tâm và sức khỏe bền vững cho mỗi gia đình với chất lượng nước sau lọc tại vòi được xác thực theo Quy chuẩn kỹ thuật Quốc gia đối với nước khoáng thiên nhiên và nước uống đóng chai QCVN 6-1:2010/BYT.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-15</div></figure>
+
+      <h2 class="section-title">THIẾT KẾ SANG TRỌNG - ĐIỂM NHẤN KHÔNG GIAN</h2>
+      <p class="copy"><a href="#">Karofi Diamond SA66</a> thu hút mọi ánh nhìn nhờ sự giao thoa giữa đường nét tinh tế của công nghệ hiện đại và mặt kính cường lực cao cấp. Đặc biệt, họa tiết phân tử nước (H₂O) được cách điệu tinh xảo, kết hợp cùng tay nắm lõi lọc mạ Crom sáng bóng. Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi Diamond SA66 xứng đáng là tâm điểm tỏa sáng giữa ngôi nhà của bạn.</p>
+      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-17</div></figure>
+
+      <h2 class="section-title">BẢO HÀNH 5 SAO - SẴN SÀNG LINH HOẠT - DẪN ĐẦU THỊ TRƯỜNG</h2>
+      <p class="copy">Karofi áp dụng chính sách bảo hành lên tới 36 tháng, linh hoạt tiên phong theo thị trường, đồng thời cam kết đem đến trải nghiệm trọn vẹn cho khách hàng, giúp bạn an tâm tận hưởng cuộc sống khỏe mạnh mỗi ngày.</p>
+      <figure class="image-block short"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-16 / 19 / 18</div></figure>
+      <p class="notes">*Khuyến cáo: Nước Hydro-ion kiềm không phải là thuốc, chỉ giúp ngăn ngừa và hỗ trợ điều trị một số tình trạng sức khỏe nhất định.<br>** Theo báo cáo của Viện trưởng Viện Nước Nhật Bản - tiến sĩ Hayashi Hidemitsu và Nghiên cứu của các giáo sư trường đại học Kyushu - Nhật Bản về công dụng của nước uống kiềm</p>
+
+      <section id="related" class="comparison">
+        <h2>So Sánh Với Các Sản Phẩm Tương Tự</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">thumb-kah-gb35</div></div>
+            <h3>Máy lọc nước nóng nguội Karofi KAH-GB35</h3>
+            <div class="card-price">14.300.000 VNĐ</div>
+            <div class="stars">★★★★★</div>
+            <ul>
+              <li>Ứng dụng Karofi 365 cùng công nghệ AioTec mang đến giải pháp giám sát nước thông minh</li>
+              <li>Tận hưởng cuộc sống tiện nghi với 2 chế độ nước Nóng - Nguội linh hoạt, kết hợp cùng bình nóng 2 lít</li>
+              <li>Hệ thống lõi Smax: Bước tiến mới giúp tăng cường khả năng lọc sạch và kéo dài thời gian sử dụng.</li>
+              <li>Tối ưu hóa quy trình lọc thô với công nghệ Smax Pro V</li>
+            </ul>
+            <a class="compare-btn" href="#">⊜ So sánh</a>
+          </article>
+          <article class="card">
+            <div class="card-image"><div class="placeholder">thumb-kad-gb65</div></div>
+            <h3>Máy lọc nước nóng lạnh Karofi KAD-GB65</h3>
+            <div class="card-price">18.300.000 VNĐ</div>
+            <div class="stars">★★★★★</div>
+            <ul>
+              <li>Quản lý chất lượng nước với công nghệ AioTec thông qua ứng dụng Karofi 365</li>
+              <li>Hệ thống 2 vòi 3 chế độ (Nóng/Lạnh/Nguội)</li>
+              <li>Tiết kiệm chi phí thay lõi với công nghệ Smax 11 lõi thế hệ mới</li>
+              <li>Bộ 3 lõi lọc thô Smax Pro V: Mở rộng diện tích tiếp xúc với nước, tối ưu hóa hiệu quả lọc.</li>
+              <li>Màng RO 100 GPD thay nhanh sản xuất tại Hàn Quốc.</li>
+            </ul>
+            <a class="compare-btn" href="#">⊜ So sánh</a>
+          </article>
+          <article class="card">
+            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">may-loc-nuoc-nong-nguoi-karofi-kah-gz36-1</div></div>
+            <h3>Máy lọc nước nóng nguội Karofi KAH-GZ36</h3>
+            <div class="card-price">15.600.000 VNĐ</div>
+            <div class="stars">★★★★★</div>
+            <ul>
+              <li>Công nghệ AioTec: An tâm với khả năng giám sát chất lượng nước qua ứng dụng Karofi 365</li>
+              <li>Hệ thống 2 vòi 2 chế độ Nóng - Nguội</li>
+              <li>12 lõi lọc công nghệ Smax: Đột phá hiệu suất lọc, gấp 2 tuổi thọ lõi</li>
+              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
+              <li>Hệ lõi chức năng HP 6.2 Alkaline kết hợp cùng Mineral Plus & Nano Hydro-ion kiềm</li>
+            </ul>
+            <a class="compare-btn" href="#">⊜ So sánh</a>
+          </article>
+          <article class="card">
+            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">may-loc-nuoc-nong-lanh-karofi-kad-gz68-1-1</div></div>
+            <h3>Máy lọc nước nóng lạnh Karofi KAD-GZ68</h3>
+            <div class="card-price">25.000.000 VNĐ</div>
+            <div class="stars">★★★★★</div>
+            <ul>
+              <li>Công nghệ AioTec: Chủ động kiểm soát chất lượng nước mọi nơi ngay trên ứng dụng Karofi 365.</li>
+              <li>Hệ thống 2 vòi - 3 chế độ Nóng - Lạnh - Nguội</li>
+              <li>12 lõi lọc Smax thế hệ mới</li>
+              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
+              <li>Hệ lõi chức năng HP 6.2 Alkaline cao cấp tích hợp cùng bộ đôi Mineral Plus & Nano Hydro-ion kiềm</li>
+            </ul>
+            <a class="compare-btn" href="#">⊜ So sánh</a>
+          </article>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img class="logo" src="assets/karofi-logo.png" alt="KAROFI">
+        <p>CÔNG TY CỔ PHẦN TẬP ĐOÀN KAROFI</p>
+        <p>Trụ sở chính: Tầng 8, Tòa nhà HUDLAND, Số 6 Nguyễn Hữu Thọ, Phường Định Công, Thành phố Hà Nội, Việt Nam</p>
+      </div>
+      <div>
+        <h3>Giới thiệu về Karofi</h3>
+        <ul><li>Về KAROFI</li><li>Trách nhiệm xã hội (CSR)</li><li>Thư viện Video</li></ul>
+      </div>
+      <div>
+        <h3>Chính sách mua hàng</h3>
+        <ul><li>Chính sách giao hàng</li><li>Chính sách thanh toán</li><li>Chính sách đổi trả</li><li>Chính sách điều kiện giao dịch chung</li></ul>
+      </div>
+      <div>
+        <h3>CN Miền Nam</h3>
+        <p>Tầng 14, Tòa nhà Lim 2, Số 62A Cách Mạng Tháng Tám, Phường Xuân Hòa, Thành phố Hồ Chí Minh, Việt Nam</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

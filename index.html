@@ -1,823 +1,904 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66.">
-  <title>Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</title>
+  <meta name="description" content="Công nghệ lọc nước Karofi cho cuộc sống khỏe mạnh hơn.">
+  <title>Karofi | Chuyên Gia Lọc Nước</title>
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" href="favicon.ico">
   <link rel="manifest" href="site.webmanifest">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#073D56',
+            navy: '#0B597A',
+            aqua: '#00ADEE',
+            ember: '#FFDE18',
+            frost: '#F1FAFE'
+          },
+          fontFamily: {
+            sans: ['Manrope', 'Arial', 'sans-serif']
+          },
+          boxShadow: {
+            lift: '0 24px 55px -32px rgba(11, 89, 122, .42)',
+            soft: '0 10px 35px -18px rgba(11, 89, 122, .28)'
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --blue: #0bb1eb;
-      --deep: #075a79;
-      --ink: #111315;
-      --muted: #666b70;
-      --line: #d7d7d7;
-      --soft: #f2f2f2;
-      --red: #ed1000;
-      --page: #fdfefe;
+    :root { color-scheme: light; }
+    body { background: #f9fcfe; color: #073d56; }
+    *:focus-visible { outline: 3px solid rgba(0, 173, 238, .45); outline-offset: 3px; }
+    .hero-grid { background: linear-gradient(120deg, #f8fcfe 0%, #edf9fe 62%, #dff5fd 100%); }
+    .hero-slide {
+      opacity: 0;
+      transform: scale(1.015);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform 1.1s cubic-bezier(.16, 1, .3, 1);
+      pointer-events: none;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--page);
-      color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 18px;
-      line-height: 1.72;
+    .hero-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    button, input { font: inherit; }
-    :focus-visible { outline: 3px solid rgba(11, 177, 235, .45); outline-offset: 3px; }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      height: 82px;
-      border-bottom: 1px solid #cfcfcf;
-      background: rgba(253, 254, 254, .97);
+    .hero-dot {
+      width: .65rem;
+      height: .65rem;
+      border-radius: 999px;
+      background: rgba(249, 252, 254, .42);
+      box-shadow: 0 0 0 1px rgba(7, 61, 86, .08);
+      transition: background-color .3s ease, box-shadow .3s ease, opacity .3s ease;
     }
-    .header-inner {
-      max-width: 1740px;
-      height: 100%;
-      margin: 0 auto;
-      padding: 0 42px;
-      display: flex;
-      align-items: center;
-      gap: 34px;
+    .hero-dot.is-active {
+      background: #f9fcfe;
+      box-shadow: 0 0 0 4px rgba(249, 252, 254, .2), 0 2px 8px rgba(4, 30, 48, .2);
     }
-    .logo {
-      width: 170px;
-      flex: 0 0 auto;
+    .product-card:hover .product-render { transform: translateY(-6px) scale(1.015); }
+    .poster-gallery { scrollbar-width: none; }
+    .poster-gallery::-webkit-scrollbar { display: none; }
+    .pulse-ring { animation: pulse-ring 2.2s cubic-bezier(.16, 1, .3, 1) infinite; }
+    .prize-wheel {
+      background: conic-gradient(
+        from -22.5deg,
+        #00adee 0deg 45deg,
+        #f1fafe 45deg 90deg,
+        #0b597a 90deg 135deg,
+        #073d56 135deg 180deg,
+        #00adee 180deg 225deg,
+        #f1fafe 225deg 270deg,
+        #0b597a 270deg 315deg,
+        #073d56 315deg 360deg
+      );
+      box-shadow: inset 0 0 0 10px #f9fcfe, inset 0 0 0 13px rgba(7, 61, 86, .12), 0 28px 60px -34px rgba(7, 61, 86, .55);
+      transition: transform 5.2s cubic-bezier(.12, .72, .08, 1);
+      will-change: transform;
     }
-    .primary-nav {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 25px;
-      white-space: nowrap;
-      font-size: 16px;
-      font-weight: 800;
-    }
-    .support-pill {
-      padding: 5px 10px;
-      border-radius: 18px;
-      background: var(--blue);
-      color: #fff;
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-left: 2px;
-    }
-    .icon-button {
-      position: relative;
-      width: 31px;
-      height: 31px;
-      border: 0;
-      background: transparent;
-      color: #0d0d0d;
-      padding: 0;
-    }
-    .icon-button svg { width: 100%; height: 100%; stroke-width: 2.1; }
-    .cart-badge {
+    .wheel-label {
       position: absolute;
-      right: -5px;
-      top: -10px;
-      min-width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #f5f5f5;
-      border: 1px solid #cfcfcf;
-      color: #888;
-      font-size: 12px;
-      line-height: 18px;
+      left: 50%;
+      top: 50%;
+      width: 30%;
+      margin-left: -15%;
+      margin-top: -10px;
+      transform: rotate(var(--angle)) translateY(clamp(-165px, -35vw, -105px)) rotate(calc(-1 * var(--angle)));
+      transform-origin: 50% 10px;
+      color: #073d56;
+      font-size: clamp(.52rem, 1.6vw, .7rem);
+      font-weight: 900;
+      line-height: 1.1;
       text-align: center;
-    }
-    .flag {
-      width: 40px;
-      height: 27px;
-      display: grid;
-      place-items: center;
-      background: #e82020;
-      color: #ffea00;
-      font-size: 18px;
-    }
-    .menu-toggle { display: none; }
-
-    .page {
-      max-width: 1580px;
-      margin: 0 auto;
-      padding: 0 34px;
-    }
-    .breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      padding: 38px 0 45px;
-      font-size: 25px;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-    .breadcrumb a:last-child {
-      color: var(--blue);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .product-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(460px, .98fr);
-      gap: 72px;
-      align-items: start;
-      padding-bottom: 74px;
-    }
-    .gallery-main {
-      border-radius: 20px;
-      overflow: hidden;
-      background: #f3f3f3;
-      padding: 22px;
-      min-height: 710px;
-      display: flex;
-      align-items: stretch;
-    }
-    .placeholder {
-      width: 100%;
-      min-height: 260px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg, rgba(11,177,235,.18), rgba(255,255,255,.55) 42%, rgba(7,90,121,.12)),
-        repeating-linear-gradient(45deg, rgba(7,90,121,.08) 0 12px, transparent 12px 24px);
-      border: 2px dashed rgba(7,90,121,.35);
-      color: var(--deep);
-      text-align: center;
-      font-weight: 900;
-      letter-spacing: .02em;
-      padding: 30px;
-    }
-    .gallery-main .placeholder { border-radius: 10px; font-size: 22px; }
-    .gallery-dots {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      margin-top: -36px;
-      position: relative;
-      z-index: 2;
-    }
-    .gallery-dots span {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #8a8a8a;
-    }
-    .gallery-dots span:first-child { background: var(--blue); }
-    .gallery-tools {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 62px;
-    }
-    .tool-tile {
-      width: 124px;
-      height: 124px;
-      border: 0;
-      border-radius: 10px;
-      background: #f1f1f1;
-      display: grid;
-      place-items: center;
-      color: #111;
-    }
-    .tool-tile svg { width: 44px; height: 44px; stroke-width: 1.5; }
-    .benefit-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-top: 26px;
-      text-align: center;
-      font-weight: 800;
-      font-size: 20px;
-    }
-    .benefit-icon {
-      margin: 0 auto 4px;
-      width: 112px;
-      height: 74px;
-      display: grid;
-      place-items: center;
-      color: var(--blue);
-      font-size: 48px;
-      font-weight: 900;
-    }
-
-    .product-title {
-      margin: 3px 0 22px;
-      color: var(--blue);
-      font-size: 42px;
-      line-height: 1.25;
-      font-weight: 900;
-    }
-    .share {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 34px;
-      font-size: 24px;
-      font-weight: 500;
-    }
-    .social {
-      width: 36px;
-      height: 36px;
-      border-radius: 5px;
-      display: grid;
-      place-items: center;
-      background: var(--blue);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 900;
-    }
-    .feature-line {
-      display: flex;
-      gap: 17px;
-      align-items: flex-start;
-      color: #777;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.35;
-      margin: 0 0 12px;
-    }
-    .feature-line img, .feature-icon {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      color: var(--blue);
-      flex: 0 0 auto;
-      font-size: 24px;
-    }
-    .water-title {
-      margin: 5px 0 12px;
-      font-size: 25px;
-      font-weight: 900;
-    }
-    .water-list {
-      display: grid;
-      gap: 13px;
-      color: #777;
-      font-size: 18px;
-      font-weight: 700;
-    }
-    .water-row {
-      display: flex;
-      gap: 17px;
-      align-items: center;
-    }
-    .price {
-      margin: 35px 0 20px;
-      text-align: center;
-      color: var(--red);
-      font-size: 55px;
-      line-height: 1;
-      font-weight: 900;
-    }
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .btn {
-      border: 0;
-      border-radius: 6px;
-      min-height: 48px;
-      color: #fff;
-      font-size: 25px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-    .btn-red { background: var(--red); }
-    .btn-blue { background: var(--blue); }
-    .btn-outline {
-      width: 100%;
-      min-height: 50px;
-      border: 1px solid var(--blue);
-      border-radius: 5px;
-      background: transparent;
-      color: var(--blue);
-      font-size: 25px;
-      font-weight: 900;
-    }
-    .summary {
-      margin-top: 26px;
-      padding: 22px 26px;
-      border-radius: 10px;
-      background: #f1f1f1;
-      color: #1f1f1f;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.45;
-    }
-    .summary ul { margin: 0; padding-left: 22px; }
-    .summary li { margin: 0 0 7px; }
-    .summary li::marker { color: var(--blue); }
-    .summary a { color: var(--blue); font-style: italic; }
-
-    .tabs {
-      position: sticky;
-      top: 82px;
-      z-index: 45;
-      background: rgba(253,254,254,.97);
-      border-bottom: 2px solid #8c8c8c;
-    }
-    .tabs-inner {
-      max-width: 1580px;
-      margin: 0 auto;
-      padding: 0 34px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-    }
-    .tabs a {
-      padding: 24px 0 16px;
-      font-size: 18px;
-      font-weight: 900;
-      text-align: left;
-    }
-    .tabs a:first-child { color: var(--blue); }
-
-    .content {
-      max-width: 1580px;
-      margin: 0 auto;
-      padding: 88px 34px 70px;
-    }
-    .intro-heading {
-      text-align: center;
-      color: var(--deep);
-      font-size: 27px;
-      line-height: 1.18;
-      font-weight: 900;
-      margin: 0 0 24px;
-    }
-    .section-title {
-      color: var(--deep);
-      text-align: center;
-      font-size: 26px;
-      line-height: 1.25;
-      font-weight: 900;
-      margin: 28px 0 22px;
       text-transform: uppercase;
     }
-    .copy {
-      color: #111;
-      font-size: 21px;
-      line-height: 1.75;
-      margin: 0 0 28px;
+    .wheel-label:nth-child(4n),
+    .wheel-label:nth-child(4n + 3) { color: #f1fafe; }
+    .wheel-pointer {
+      filter: drop-shadow(0 5px 5px rgba(7, 61, 86, .2));
     }
-    .copy a { color: #001eff; }
-    .hero-copy { margin-bottom: 35px; }
-    .image-block {
-      margin: 28px 0 25px;
+    .prize-code { letter-spacing: .18em; }
+    .wheel-popup-panel {
+      animation: wheel-popup-in .48s cubic-bezier(.16, 1, .3, 1) both;
+      background: rgba(249, 252, 254, .84);
+      border: 1px solid rgba(241, 250, 254, .72);
+      box-shadow: 0 32px 90px rgba(4, 30, 48, .32);
+      -webkit-backdrop-filter: blur(24px) saturate(145%);
+      backdrop-filter: blur(24px) saturate(145%);
     }
-    .image-block .placeholder {
-      aspect-ratio: 16 / 9;
-      min-height: 420px;
-      font-size: 28px;
+    .wheel-popup-backdrop { background: rgba(4, 30, 48, .34); }
+    .prize-popup-backdrop { background: rgba(4, 30, 48, .52); }
+    .prize-popup-panel {
+      animation: prize-popup-in .42s cubic-bezier(.16, 1, .3, 1) both;
+      box-shadow: 0 30px 80px rgba(4, 30, 48, .36);
     }
-    .image-block.tall .placeholder { aspect-ratio: 16 / 8.2; }
-    .image-block.short .placeholder { aspect-ratio: 16 / 6.2; min-height: 280px; }
-    .water-bullets {
-      margin: 16px 0 36px;
-      padding-left: 22px;
-      font-size: 21px;
-      line-height: 1.8;
+    .wheel-spin-button {
+      box-shadow: 0 10px 24px rgba(7, 61, 86, .32), 0 0 0 8px #f9fcfe;
     }
-    .water-bullets li { margin-bottom: 5px; }
-    .water-bullets li::marker { color: #ed0010; }
-    .notes {
-      margin: 22px 0 86px;
-      font-size: 17px;
-      font-style: italic;
-      line-height: 1.8;
+    .confetti-piece {
+      position: fixed;
+      z-index: 120;
+      width: var(--size);
+      height: calc(var(--size) * var(--height-ratio));
+      border-radius: var(--radius);
+      background: var(--color);
+      box-shadow: 0 2px 5px rgba(4, 30, 48, .14);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: confetti-burst var(--duration) cubic-bezier(.12, .74, .22, 1) var(--delay) forwards;
     }
-
-    .comparison {
-      padding: 12px 0 86px;
+    @keyframes confetti-burst {
+      0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      70% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--rotation)) scale(.65); }
     }
-    .comparison h2 {
-      color: var(--blue);
-      font-size: 34px;
-      line-height: 1.2;
-      text-align: center;
-      font-weight: 900;
-      margin: 0 0 42px;
+    @keyframes wheel-popup-in {
+      from { opacity: 0; transform: translateY(22px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 32px;
+    @keyframes prize-popup-in {
+      from { opacity: 0; transform: translateY(18px) scale(.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .card {
-      min-height: 820px;
-      display: flex;
-      flex-direction: column;
-      border-radius: 10px;
-      background: #f1f1f1;
-      padding: 18px 34px 30px;
-      text-align: center;
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(0, 173, 238, .52); }
+      70%, 100% { box-shadow: 0 0 0 15px rgba(0, 173, 238, 0); }
     }
-    .card-image {
-      position: relative;
-      height: 240px;
-      margin-bottom: 12px;
+    @media (max-width: 767px) {
+      .wheel-popup-panel {
+        max-height: calc(100dvh - 1rem);
+        overflow: hidden;
+        border-radius: 1.25rem;
+      }
+      .wheel-stage { width: min(72vw, 42dvh, 19rem) !important; }
+      .wheel-label {
+        font-size: clamp(.48rem, 2.3vw, .62rem);
+        transform: rotate(var(--angle)) translateY(clamp(-126px, -29vw, -92px)) rotate(calc(-1 * var(--angle)));
+      }
+      .prize-wheel {
+        box-shadow: inset 0 0 0 7px #f9fcfe, inset 0 0 0 9px rgba(7, 61, 86, .12), 0 22px 45px -30px rgba(7, 61, 86, .5);
+      }
+      .wheel-spin-button { box-shadow: 0 8px 18px rgba(7, 61, 86, .28), 0 0 0 6px #f9fcfe; }
     }
-    .card-image .placeholder {
-      height: 100%;
-      min-height: 0;
-      padding: 10px;
-      font-size: 15px;
-      border-radius: 6px;
-    }
-    .label-new {
-      position: absolute;
-      right: -10px;
-      top: 0;
-      background: #ffd92d;
-      padding: 4px 13px;
-      font-size: 13px;
-      font-weight: 900;
-      clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
-    }
-    .card h3 {
-      min-height: 72px;
-      margin: 0;
-      color: #000;
-      font-size: 21px;
-      line-height: 1.18;
-      font-weight: 900;
-    }
-    .card-price {
-      margin: 16px 0 8px;
-      color: var(--blue);
-      font-size: 22px;
-      font-weight: 900;
-    }
-    .stars {
-      color: var(--blue);
-      font-size: 30px;
-      letter-spacing: 3px;
-      line-height: 1;
-      padding-bottom: 26px;
-      border-bottom: 1px solid #111;
-    }
-    .card ul {
-      flex: 1;
-      text-align: left;
-      margin: 18px 0 22px;
-      padding-left: 16px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: #000;
-      border-bottom: 1px solid #111;
-      padding-bottom: 22px;
-    }
-    .compare-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      height: 31px;
-      border: 1px solid var(--blue);
-      border-radius: 16px;
-      color: var(--blue);
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    footer {
-      background: #f3f7f9;
-      border-top: 1px solid #d7e2e7;
-      padding: 46px 34px;
-      color: #263238;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .footer-inner {
-      max-width: 1580px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
-      gap: 35px;
-    }
-    footer h3 { margin: 0 0 12px; font-size: 17px; }
-    footer ul { margin: 0; padding: 0; list-style: none; }
-
-    @media (max-width: 1350px) {
-      body { font-size: 16px; }
-      .primary-nav { display: none; }
-      .menu-toggle { display: grid; }
-      .product-hero { grid-template-columns: 1fr; gap: 44px; }
-      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .tabs-inner { overflow-x: auto; grid-template-columns: repeat(5, max-content); }
-      .tabs a { min-width: 190px; }
-    }
-
-    @media (max-width: 700px) {
-      .site-header { height: 68px; }
-      .header-inner { padding: 0 16px; gap: 14px; }
-      .logo { width: 120px; }
-      .header-actions { gap: 8px; margin-left: auto; }
-      .icon-button { width: 27px; height: 27px; }
-      .flag { width: 34px; height: 23px; }
-      .page, .content, .tabs-inner { padding-left: 16px; padding-right: 16px; }
-      .breadcrumb { font-size: 17px; padding: 24px 0 28px; }
-      .gallery-main { min-height: 420px; padding: 14px; }
-      .gallery-tools { margin-top: 34px; gap: 12px; }
-      .tool-tile { width: 92px; height: 92px; }
-      .benefit-row { gap: 18px; font-size: 15px; }
-      .product-title { font-size: 31px; }
-      .share { font-size: 18px; flex-wrap: wrap; }
-      .price { font-size: 39px; }
-      .actions { grid-template-columns: 1fr; }
-      .btn, .btn-outline { font-size: 20px; }
-      .tabs { top: 68px; }
-      .content { padding-top: 52px; }
-      .copy, .water-bullets { font-size: 17px; }
-      .intro-heading, .section-title { font-size: 22px; }
-      .image-block .placeholder { min-height: 250px; font-size: 20px; }
-      .cards { grid-template-columns: 1fr; }
-      .card { min-height: auto; }
-      .footer-inner { grid-template-columns: 1fr; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .prize-wheel { transition-duration: .01ms !important; }
     }
   </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
-      <nav class="primary-nav" aria-label="Danh mục chính">
-        <a href="#">Máy lọc nước</a>
-        <a href="#">Lọc nước nóng lạnh</a>
-        <a href="#">Hydro-ion Kiềm</a>
-        <a href="#">Lọc tổng cao cấp</a>
-        <a href="#">Lọc tổng - Đầu nguồn</a>
-        <a class="support-pill" href="#">Dịch vụ và hỗ trợ</a>
+<body class="font-sans antialiased selection:bg-aqua/20 selection:text-ink">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-3 focus:text-white">Skip to content</a>
+
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-[#fbfdfe]/95 shadow-sm backdrop-blur">
+    <div class="mx-auto flex h-[82px] max-w-[1440px] items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+      <a href="#" class="flex shrink-0 items-center" aria-label="Karofi home">
+        <img src="assets/karofi-logo.png" alt="Karofi" class="h-auto w-[142px] sm:w-[158px]">
+      </a>
+
+      <nav class="hidden h-full items-center gap-8 text-sm font-bold text-slate-700 lg:flex" aria-label="Primary navigation">
+        <a href="https://karofi.com/may-loc-nuoc-28" class="flex h-full items-center transition-colors duration-300 hover:text-aqua">Máy lọc nước</a>
+        <a href="https://karofi.com/cay-nuoc-nong-lanh-13" class="transition-colors duration-300 hover:text-aqua">Lọc nước nóng lạnh</a>
+        <a href="https://karofi.com/hydro-ion-kiem" class="transition-colors duration-300 hover:text-aqua">Hydro-ion Kiềm</a>
+        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap" class="transition-colors duration-300 hover:text-aqua">Lọc tổng cao cấp</a>
+        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="transition-colors duration-300 hover:text-aqua">Lọc tổng - Đầu nguồn</a>
+        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="transition-colors duration-300 hover:text-aqua">Dịch vụ và hỗ trợ</a>
       </nav>
-      <div class="header-actions" aria-label="Thao tác nhanh">
-        <button class="icon-button" type="button" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></button>
-        <button class="icon-button" type="button" aria-label="Giỏ hàng"><span class="cart-badge">0</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3h2l2.2 12.2a2 2 0 0 0 2 1.8h8.8a2 2 0 0 0 2-1.6L22 7H6"></path><circle cx="10" cy="21" r="1.5"></circle><circle cx="18" cy="21" r="1.5"></circle></svg></button>
-        <button class="icon-button" type="button" aria-label="Tài khoản"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4"></circle><path d="M4 22a8 8 0 0 1 16 0"></path></svg></button>
-        <span class="flag" aria-label="Tiếng Việt">★</span>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="searchToggle" class="grid h-11 w-11 place-items-center rounded-full text-ink transition-colors duration-300 hover:bg-slate-100" aria-label="Open search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+        <a href="tel:19006418" class="hidden text-sm font-black text-navy transition-colors duration-300 hover:text-aqua xl:inline-flex">1900 6418</a>
+        <button id="menuToggle" class="grid h-11 w-11 place-items-center rounded-full border border-slate-200 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg id="menuIcon" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
     </div>
+    <div id="searchPanel" class="grid grid-rows-[0fr] border-t border-transparent bg-[#fbfdfe] transition-all duration-300">
+      <div class="overflow-hidden"><form class="mx-auto flex max-w-3xl gap-3 px-4 py-4" role="search"><label for="siteSearch" class="sr-only">Search products and services</label><input id="siteSearch" type="search" placeholder="Search products, filters, technology..." class="min-w-0 flex-1 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm outline-none focus:border-aqua"><button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">Search</button></form></div>
+    </div>
+    <nav id="mobileMenu" class="grid grid-rows-[0fr] border-t border-transparent bg-[#fbfdfe] transition-all duration-300 lg:hidden" aria-label="Mobile navigation">
+      <div class="overflow-hidden"><div class="space-y-1 px-4 py-4 text-base font-bold"><a href="https://karofi.com/may-loc-nuoc-28" class="block rounded-lg px-4 py-3 hover:bg-frost">Máy lọc nước</a><a href="https://karofi.com/cay-nuoc-nong-lanh-13" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc nước nóng lạnh</a><a href="https://karofi.com/hydro-ion-kiem" class="block rounded-lg px-4 py-3 hover:bg-frost">Hydro-ion Kiềm</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc tổng cao cấp</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc tổng - Đầu nguồn</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="block rounded-lg px-4 py-3 hover:bg-frost">Dịch vụ và hỗ trợ</a><a href="tel:19006418" class="mt-3 block rounded-lg bg-aqua px-4 py-3 text-center text-white">Hotline 1900 6418</a></div></div>
+    </nav>
   </header>
 
-  <main>
-    <div class="page">
-      <nav class="breadcrumb" aria-label="Đường dẫn">
-        <a href="#">Trang chủ</a><span>»</span>
-        <a href="#">Máy lọc nước Nóng Lạnh</a><span>»</span>
-        <a href="#">Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</a>
-      </nav>
+  <main id="main">
+    <section id="heroCarousel" class="relative overflow-hidden bg-[#eaf8fe]" aria-label="Karofi campaign banners" aria-roledescription="carousel" tabindex="0">
+      <div class="relative aspect-[1672/941] w-full">
+        <figure class="hero-slide is-active absolute inset-0" data-hero-slide aria-hidden="false">
+          <img src="assets/banner-karofi-next-gen.png" alt="Máy lọc nước Karofi thế hệ mới với màng RO, Hydro-ion Alkaline và giám sát thông minh" class="h-full w-full object-cover object-center">
+        </figure>
+        <figure class="hero-slide absolute inset-0" data-hero-slide aria-hidden="true">
+          <img src="assets/banner-karofi-pure-water.png" alt="Máy lọc nước Karofi mang đến nguồn nước sạch chuẩn tinh khiết cho gia đình Việt" loading="lazy" class="h-full w-full object-cover object-center">
+        </figure>
+        <figure class="hero-slide absolute inset-0" data-hero-slide aria-hidden="true">
+          <img src="assets/banner-karofi-vi-sao.png" alt="Máy lọc nước Karofi Hydro-ion Alkaline giữa không gian băng tuyết tinh khiết" loading="lazy" class="h-full w-full object-cover object-center">
+        </figure>
+      </div>
 
-      <section class="product-hero" aria-labelledby="product-title">
-        <div>
-          <div class="gallery-main">
-            <div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div>
+      <button id="heroPrevious" type="button" class="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#fbfdfe]/90 text-ink shadow-soft transition-all duration-300 hover:-translate-x-1 hover:bg-[#fbfdfe] sm:left-6 sm:h-12 sm:w-12" aria-label="Banner trước">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button id="heroNext" type="button" class="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#fbfdfe]/90 text-ink shadow-soft transition-all duration-300 hover:translate-x-1 hover:bg-[#fbfdfe] sm:right-6 sm:h-12 sm:w-12" aria-label="Banner tiếp theo">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      <div class="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 sm:bottom-8 lg:bottom-14" role="group" aria-label="Chọn banner">
+        <button type="button" class="hero-dot is-active" data-hero-dot aria-label="Hiển thị banner 1" aria-current="true"></button>
+        <button type="button" class="hero-dot" data-hero-dot aria-label="Hiển thị banner 2" aria-current="false"></button>
+        <button type="button" class="hero-dot" data-hero-dot aria-label="Hiển thị banner 3" aria-current="false"></button>
+      </div>
+    </section>
+
+    <section class="relative z-10 mx-auto -mt-1 max-w-7xl px-4 sm:px-6 lg:-mt-8 lg:px-8" aria-label="Product categories">
+      <div class="grid grid-cols-2 overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfdfe] shadow-lift sm:grid-cols-4">
+        <a href="#products" class="group flex min-h-[104px] flex-col items-center justify-center gap-2 border-b border-r border-slate-200 p-3 text-center transition-colors duration-300 hover:bg-frost sm:min-h-0 sm:gap-4 sm:border-b-0 sm:p-6">
+          <span class="grid h-10 w-10 place-items-center text-aqua transition-transform duration-300 group-hover:-translate-y-1 sm:h-16 sm:w-16"><svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-10 sm:w-10" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3v7M4 7h6M17 14v7M14 17h6"/><rect x="3" y="11" width="18" height="3" rx="1.5"/></svg></span><span class="text-xs font-black leading-4 text-ink sm:text-sm">Máy lọc nóng lạnh</span>
+        </a>
+        <a href="#products" class="group flex min-h-[104px] flex-col items-center justify-center gap-2 border-b border-slate-200 p-3 text-center transition-colors duration-300 hover:bg-frost sm:min-h-0 sm:gap-4 sm:border-b-0 sm:border-r sm:p-6">
+          <span class="grid h-10 w-10 place-items-center text-aqua transition-transform duration-300 group-hover:-translate-y-1 sm:h-16 sm:w-16"><svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-10 sm:w-10" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2.5S6 9 6 14a6 6 0 0 0 12 0c0-5-6-11.5-6-11.5Z"/><path d="M9 14h6M12 11v6"/></svg></span><span class="text-xs font-black leading-4 text-ink sm:text-sm">Hydro-ion Kiềm</span>
+        </a>
+        <a href="#products" class="group flex min-h-[104px] flex-col items-center justify-center gap-2 border-r border-slate-200 p-3 text-center transition-colors duration-300 hover:bg-frost sm:min-h-0 sm:gap-4 sm:p-6">
+          <span class="grid h-10 w-10 place-items-center text-aqua transition-transform duration-300 group-hover:-translate-y-1 sm:h-16 sm:w-16"><svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-10 sm:w-10" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg></span><span class="text-xs font-black leading-4 text-ink sm:text-sm">Lọc tổng đầu nguồn</span>
+        </a>
+        <a href="#products" class="group flex min-h-[104px] flex-col items-center justify-center gap-2 p-3 text-center transition-colors duration-300 hover:bg-frost sm:min-h-0 sm:gap-4 sm:p-6">
+          <span class="grid h-10 w-10 place-items-center text-aqua transition-transform duration-300 group-hover:-translate-y-1 sm:h-16 sm:w-16"><svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-10 sm:w-10" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3h8l1 4H7l1-4ZM7 7v14h10V7M10 11h4M10 15h4"/></svg></span><span class="text-xs font-black leading-4 text-ink sm:text-sm">Lõi lọc thay thế</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="wheelPopup" class="fixed inset-0 z-[90] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="wheelTitle" aria-hidden="true">
+      <button id="wheelBackdrop" type="button" class="wheel-popup-backdrop absolute inset-0 cursor-default" aria-label="Đóng vòng quay may mắn"></button>
+      <section id="lucky-wheel" class="wheel-popup-panel relative z-10 max-h-[calc(100vh-1.5rem)] w-full max-w-5xl overflow-y-auto rounded-[2rem] px-4 py-5 text-ink sm:max-h-[calc(100vh-3rem)] sm:px-10 sm:py-11" aria-labelledby="wheelTitle">
+        <button id="closeWheel" type="button" class="absolute right-4 top-4 z-30 grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-[#f9fcfe] text-ink shadow-soft transition-transform duration-300 hover:rotate-90" aria-label="Đóng vòng quay may mắn">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="grid items-center gap-4 sm:gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
+        <div class="order-1 pr-12 sm:pr-0">
+          <p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Quà tặng hôm nay</p>
+          <h2 id="wheelTitle" class="mt-2 max-w-xl text-2xl font-black leading-tight sm:mt-4 sm:text-5xl">Xoay một vòng, nhận quà tinh khiết</h2>
+          <p class="mt-5 hidden max-w-xl text-base leading-7 text-slate-600 sm:block">Mỗi khách có một lượt quay. Nhận voucher mua hàng hoặc cơ hội sở hữu máy lọc nước Karofi miễn phí.</p>
+
+          <div class="mt-8 hidden grid-cols-2 gap-x-6 gap-y-4 border-y border-slate-200 py-6 text-sm sm:grid">
+            <div><span class="block font-black text-aqua">01</span><span class="mt-1 block text-slate-600">Máy lọc nước</span></div>
+            <div><span class="block font-black text-aqua">02</span><span class="mt-1 block text-slate-600">Voucher 1.000.000₫</span></div>
+            <div><span class="block font-black text-aqua">03</span><span class="mt-1 block text-slate-600">Voucher 500.000₫</span></div>
+            <div><span class="block font-black text-aqua">04</span><span class="mt-1 block text-slate-600">Voucher 200.000₫</span></div>
           </div>
-          <div class="gallery-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="gallery-tools" aria-label="Công cụ hình ảnh">
-            <button class="tool-tile" type="button" aria-label="Xem ảnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></button>
-            <button class="tool-tile" type="button" aria-label="Điều chỉnh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16"></path><circle cx="12" cy="12" r="2"></circle></svg></button>
-            <button class="tool-tile" type="button" aria-label="Địa điểm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s7-6.1 7-13A7 7 0 0 0 5 9c0 6.9 7 13 7 13Z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></button>
-          </div>
-          <div class="benefit-row">
-            <div><div class="benefit-icon">🚚</div>Miễn phí vận chuyển toàn quốc</div>
-            <div><div class="benefit-icon">⚙</div>Miễn phí lắp đặt toàn quốc</div>
-          </div>
+
+          <p id="spinNote" class="mt-3 text-xs leading-5 text-slate-500 sm:mt-5">Nhấn nút giữa vòng quay. Một lượt trên mỗi trình duyệt.</p>
+          <button id="reopenPrize" type="button" class="mt-3 hidden rounded-full border border-aqua px-4 py-2 text-xs font-black text-ink transition-colors hover:bg-frost">Xem lại quà của bạn</button>
         </div>
 
-        <div>
-          <h1 id="product-title" class="product-title">Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</h1>
-          <div class="share">
-            <span>Chia sẻ sản phẩm:</span>
-            <span class="social">f</span><span class="social">in</span><span class="social">◎</span><span class="social">☎</span><span class="social">♪</span>
+        <div class="order-2 flex min-w-0 justify-center">
+          <div class="wheel-stage relative min-w-0 w-full max-w-[460px]">
+            <div class="relative">
+              <div class="wheel-pointer absolute left-1/2 top-[-3px] z-20 h-0 w-0 -translate-x-1/2 border-x-[18px] border-t-[34px] border-x-transparent border-t-aqua" aria-hidden="true"></div>
+              <div id="prizeWheel" class="prize-wheel relative aspect-square w-full rounded-full" aria-hidden="true">
+                <span class="wheel-label" style="--angle: 0deg">Máy lọc</span>
+                <span class="wheel-label" style="--angle: 45deg">1 triệu</span>
+                <span class="wheel-label" style="--angle: 90deg">500K</span>
+                <span class="wheel-label" style="--angle: 135deg">200K</span>
+                <span class="wheel-label" style="--angle: 180deg">500K</span>
+                <span class="wheel-label" style="--angle: 225deg">200K</span>
+                <span class="wheel-label" style="--angle: 270deg">200K</span>
+                <span class="wheel-label" style="--angle: 315deg">200K</span>
+              </div>
+              <button id="spinButton" type="button" class="wheel-spin-button absolute left-1/2 top-1/2 z-30 flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 rounded-full bg-[#f9fcfe] px-3 text-center text-[10px] font-black uppercase tracking-[.08em] text-ink transition-colors duration-300 hover:bg-frost disabled:cursor-not-allowed disabled:opacity-70 sm:text-xs" aria-describedby="spinNote">
+                <img src="assets/karofi-logo.png" alt="" class="w-[78%]" aria-hidden="true">
+                <span id="spinButtonLabel">Xoay</span>
+              </button>
+            </div>
+            <p class="mt-3 text-center text-[11px] font-bold text-slate-500 sm:mt-5 sm:text-xs">Nhấn vào tâm vòng quay để bắt đầu</p>
           </div>
-          <p class="feature-line"><span class="feature-icon">▱</span><span>Công nghệ AioTec: Kiểm soát chất lượng nước hàng ngày trên điện thoại di động</span></p>
-          <h2 class="water-title">Chế độ nước</h2>
-          <div class="water-list">
-            <div class="water-row"><span class="feature-icon">♨</span><span>Nước nóng pha sữa, pha trà, pha mì,..</span></div>
-            <div class="water-row"><span class="feature-icon">♧</span><span>Nước nguội uống trực tiếp, nấu ăn hàng ngày</span></div>
-            <div class="water-row"><span class="feature-icon">❄</span><span>Nước lạnh sâu, sảng khoái</span></div>
-            <div class="water-row"><span class="feature-icon">OH-</span><span>Hydro-ion kiềm</span></div>
-          </div>
-          <div class="price">59.000.000 VNĐ</div>
-          <div class="actions">
-            <button class="btn btn-red" type="button">Mua ngay</button>
-            <button class="btn btn-blue" type="button">Thêm vào giỏ hàng</button>
-          </div>
-          <button class="btn-outline" type="button">Tư vấn ngay</button>
-          <div class="summary">
-            <ul>
-              <li>Hệ 12 lõi Xmax tích hợp hiệu suất cao - đúc nguyên khối: gấp 3 diện tích tiếp xúc, gấp 2 hiệu quả lọc</li>
-              <li>6 chế độ nước - Sẵn sàng đáp ứng nhu cầu cho mọi thành viên trong gia đình - thể tích bình nóng/ lạnh: 2 lít/ 3 lít</li>
-              <li>Công nghệ điện phân Hydro-ion: trải nghiệm trực tiếp quá trình điện phân nước</li>
-              <li>Công nghệ điện phân Alkaline Direk: tùy chọn 3 mức pH ~8.5-9.0-9.5</li>
-              <li>11 tấm điện cực Titanium mạ Bạch Kim - tuổi thọ lên đến 10 năm, bảo hành bảo dưỡng miễn phí máy hàng năm trong vòng 5 năm, bảo hành điện cực 5 năm</li>
-              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
-              <li>3 lõi lọc thô Xmax F 1-2-3: gấp 3 diện tích tiếp xúc, gấp 2 hiệu quả lọc</li>
-              <li>Hệ lõi Xmax HP 6.2 cùng 2 lõi chức năng Xmax Alkaline & Xmax Bi-Mineral: bổ sung dồi dào Hydrogen, ion kiềm cùng khoáng chất có lợi cho cơ thể</li>
-              <li>Nước sau lọc tại vòi đạt quy chuẩn QCVN 6-1:2010/BYT</li>
-              <li>Bảo hành: 36 tháng <a href="#">(Chi tiết bảo hành)</a></li>
-            </ul>
-          </div>
+        </div>
         </div>
       </section>
     </div>
 
-    <nav class="tabs" aria-label="Thông tin sản phẩm">
-      <div class="tabs-inner">
-        <a href="#highlights">Đặc Điểm Nổi Bật⌄</a>
-        <a href="#details">Chi Tiết Sản Phẩm⌄</a>
-        <a href="#specs">Thông Số⌄</a>
-        <a href="#reviews">Đánh Giá (0/5)⌄</a>
-        <a href="#related">Sản Phẩm Yêu Thích⌄</a>
-      </div>
-    </nav>
+    <div id="prizePopup" class="fixed inset-0 z-[110] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="prizeTitle" aria-hidden="true">
+      <button id="prizeBackdrop" type="button" class="prize-popup-backdrop absolute inset-0 cursor-default" aria-label="Đóng thông báo quà tặng"></button>
+      <section class="prize-popup-panel relative z-10 w-full max-w-sm overflow-hidden rounded-2xl bg-[#fbfdfe] px-5 pb-6 pt-5 text-center text-ink sm:px-7 sm:pb-8 sm:pt-7">
+        <button id="closePrize" type="button" class="absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full text-ink transition-colors hover:bg-frost" aria-label="Đóng thông báo quà tặng">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div id="prizeConfettiOrigin" class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-ember text-ink" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10h16v10H4zM3 6h18v4H3zM12 6v14M7.5 6C5 6 4 4.8 4 3.5S5.1 1 6.5 1C9 1 12 6 12 6M16.5 6C19 6 20 4.8 20 3.5S18.9 1 17.5 1C15 1 12 6 12 6"/></svg>
+        </div>
+        <p class="mt-4 text-xs font-black uppercase tracking-[.18em] text-aqua">Chúc mừng, bạn đã trúng</p>
+        <h3 id="prizeTitle" class="mt-2 text-2xl font-black leading-tight"></h3>
+        <p class="mt-4 text-xs text-slate-500">Mã quà tặng của bạn</p>
+        <div class="mt-2 rounded-xl bg-frost px-4 py-3">
+          <span id="prizeCode" class="prize-code block text-sm font-black text-ink"></span>
+        </div>
+        <button id="copyPrizeCode" type="button" class="mt-4 w-full rounded-full bg-ink px-5 py-3 text-sm font-black text-[#f9fcfe] transition-colors hover:bg-navy">Sao chép mã</button>
+        <p class="mt-3 text-xs leading-5 text-slate-500">Lưu mã và gọi <a href="tel:19006418" class="font-black text-navy">1900 6418</a> để xác nhận quà.</p>
+      </section>
+    </div>
 
-    <article id="highlights" class="content">
-      <h2 class="intro-heading">MÁY LỌC NƯỚC NÓNG LẠNH HYDRO-ION KIỀM KAROFI DIAMOND SA66<br>Khởi tạo kỷ nguyên - khơi nguồn sống khỏe<br>Đỉnh cao công nghệ 11 tấm điện cực Titan mạ Bạch Kim quý hiếm - Trọn vẹn tiện ích với 6 chế độ nước</h2>
-      <p class="copy hero-copy">Một kỷ nguyên nước khỏe mới chính thức được mở ra cùng Karofi Diamond SA66 - nơi công nghệ đỉnh cao hội tụ cùng chuẩn mực sống thượng lưu. Không chỉ tạo ra nguồn nước sạch tinh khiết, Diamond SA66 còn mang đến nguồn nước Hydro-ion kiềm giàu khoáng vượt trội, góp phần nuôi dưỡng sức khỏe bền bỉ từ bên trong. Sở hữu thiết kế sang trọng mang tính biểu tượng, tích hợp nóng nhanh lạnh sâu tức thì, Karofi Diamond SA66 vượt xa khái niệm một chiếc máy lọc nước thông thường, trở thành tuyên ngôn công nghệ và phong cách sống hiện đại, khẳng định đẳng cấp khác biệt trong mọi không gian.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-1</div></figure>
+    <section id="products" class="px-4 py-12 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div><p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Sản phẩm nổi bật</p><h2 class="mt-3 text-4xl font-black tracking-[-.04em] text-ink sm:text-5xl">Công nghệ mới nhất</h2><p class="mt-4 max-w-xl text-base leading-7 text-slate-600">Khám phá năm dòng máy Hydro-ion kiềm mới với chế độ nóng, lạnh và công nghệ điện phân tiên tiến.</p></div>
+          <a href="https://karofi.com" class="inline-flex items-center gap-2 border-b-2 border-ink pb-1 text-sm font-black text-ink transition-colors duration-300 hover:border-aqua hover:text-aqua">Xem tất cả sản phẩm <span aria-hidden="true">→</span></a>
+        </div>
 
-      <h2 class="section-title">CÔNG NGHỆ ĐIỆN PHÂN HYDRO-ION - TRỰC QUAN HÓA CÔNG NGHỆ ĐIỆN PHÂN TẠO HYDROGEN</h2>
-      <p class="copy">Karofi Diamond SA66 được trang bị công nghệ điện phân Hydro-ion tiên tiến với 2 tấm điện cực Titan phủ Bạch Kim - vật liệu cao cấp, an toàn cho sức khỏe, chịu nhiệt vượt trội và chống ăn mòn hiệu quả, mang đến độ bền lên tới 10 năm. Kết hợp cùng màng ngăn thế hệ mới, thiết bị tối ưu hiệu quả điện phân, gia tăng hàm lượng Hydrogen trong nước.</p>
-      <p class="copy">Độc quyền tại Karofi, công nghệ Hydro-ion được thiết kế dưới dạng lõi trong suốt, cho phép người dùng trực tiếp quan sát quá trình điện phân tạo ra Hydrogen một cách chân thực và rõ ràng.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-2</div></figure>
-
-      <h2 class="section-title">CÔNG NGHỆ ĐIỆN PHÂN ALKALINE DIREK - KIỂM SOÁT CHỦ ĐỘNG CHỌN MỨC KIỀM</h2>
-      <p class="copy">Công nghệ điện phân Alkaline Direk ứng dụng 9 tấm điện cực Titan phủ Bạch Kim quý hiếm, cho độ bền lên tới 10 năm, bảo hành 5 năm và miễn phí bảo dưỡng định kỳ dành cho khách hàng đăng ký.</p>
-      <p class="copy">Điểm nổi bật là sự kết hợp cùng màng ngăn chọn lọc, giúp tăng cường hiệu quả điện phân, tạo hàm lượng Hydrogen đạt tới 600 ppb. Cấu trúc điện cực dạng mắt lưới giúp tăng diện tích tiếp xúc với nước, từ đó nâng cao hiệu suất điện phân, tối đa hóa hàm lượng Hydrogen và mở rộng dải pH. Bởi vậy, sản phẩm tạo ra nguồn nước giàu Hydrogen và ion kiềm, đồng hành chăm sóc sức khỏe toàn diện cho cả gia đình mỗi ngày.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-3</div></figure>
-
-      <h2 class="section-title">6 CHẾ ĐỘ NƯỚC - 1 VÒI THÔNG MINH ĐA NHIỆM</h2>
-      <p class="copy">Một trong những tâm điểm của Karofi Diamond SA66 chính là chiếc vòi thông minh cao cấp, mở ra kỷ nguyên tiện nghi với khả năng cung cấp 6 chế độ nước chỉ trong một vòi duy nhất. Sở hữu kiểu dáng trụ đứng thanh mảnh cùng lớp mạ Crom sáng bóng, dải LED tinh tế chạy dọc thân vòi giúp người dùng dễ dàng lấy nước ngay cả trong không gian tối. Giao diện tương tác nằm ở đỉnh vòi với với bảng điều khiển cảm ứng tích hợp cùng màn hình LCD màu sắc sống động, cho phép theo dõi tình trạng máy một cách trực quan, lựa chọn và hiển thị rõ ràng từng chế độ nước vô cùng thuận tiện:</p>
-      <ul class="water-bullets">
-        <li>Nước kiềm nhẹ: pH ~ 8.5</li>
-        <li>Nước kiềm vừa: pH ~ 9.0</li>
-        <li>Nước kiềm mạnh: pH ~ 9.5</li>
-        <li>Nước nóng: Nhiệt độ 85 - 95℃, làm nóng nhanh, bình nóng dung tích tới 2 lít</li>
-        <li>Nước lạnh: Nhiệt độ 8 - 10℃, mát sâu sảng khoái, bình lạnh tích hợp bình chứa nước nguội có dung tích đến 3 lít</li>
-        <li>Nước nguội: Tăng cường Hydrogen, ion kiềm cùng khoáng chất có lợi cho cơ thể.</li>
-      </ul>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-4</div></figure>
-
-      <h2 class="section-title">HỆ THỐNG 12+1 LÕI LỌC TÍCH HỢP XMAX HIỆU SUẤT CAO - GẤP 2 HIỆU SUẤT - GẤP 2 KHOÁNG CHẤT</h2>
-      <p class="copy">Karofi Diamond SA66 được tích hợp hệ thống 12+1 lõi lọc XMAX công suất cao, tạo nên khả năng vận hành ấn tượng: tăng gấp 2 hiệu quả lọc và bổ sung gấp 2 khoáng chất.</p>
-      <p class="copy">Toàn bộ lõi lọc được ép nguyên khối từ nhựa PP nguyên sinh, bảo đảm độ an toàn cho người dùng cùng độ bền bỉ lâu dài. Đây là bước nâng cấp vượt trội về tiêu chuẩn an toàn và tính thông minh, tạo sự khác biệt rõ rệt so với các dòng lõi lọc truyền thống.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-6</div></figure>
-
-      <h2 class="section-title">KAROFI TÁI ĐỊNH NGHĨA VIỆC THAY LÕI THÀNH TRẢI NGHIỆM 1 CHẠM</h2>
-      <p class="copy">Với công nghệ One Touch Filter, Karofi thiết lập chuẩn mực mới cho trải nghiệm thay lõi: gọn gàng, chuẩn xác và thuận tiện. Chỉ một thao tác nhấn, cơ chế trợ lực chủ động kích hoạt để lõi lọc tự bật ra nhẹ nhàng, không cần thao tác kỹ thuật phức tạp. Thời gian thay lõi được tối ưu xuống chỉ vài giây, loại bỏ hoàn toàn công đoạn lắp dây hay cút nối như trước đây. Kết hợp cùng Auto Valve chống rò rỉ tự động, Karofi mang đến trải nghiệm chăm sóc máy lọc nước nhanh gọn hơn, sạch hơn và an tâm hơn mỗi lần thay lõi.</p>
-      <p class="copy">Điểm nhấn nổi bật nằm ở tay nắm lõi bo tròn tinh tế được phủ Crom sáng bóng; kết hợp cùng phần đáy lõi thiết kế chuyên biệt. Sự cải tiến này đánh dấu bước tiến mới về tiêu chuẩn an toàn và tính thông minh, tạo nên khác biệt rõ ràng so với các dòng lõi lọc truyền thống trên thị trường.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-7</div></figure>
-      <figure class="image-block short"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-5</div></figure>
-
-      <h2 class="section-title">HỆ LÕI LỌC THÔ XMAX F1-2-3 - GẤP 2 HIỆU QUẢ LỌC - GẤP 3 DIỆN TÍCH TIẾP XÚC</h2>
-      <p class="copy">Thiết kế lõi dạng rẻ quạt giúp mở rộng diện tích tiếp xúc với nước lên gấp 3 lần, từ đó tăng gấp 2 hiệu suất lọc. Nhờ vậy, cặn bẩn, tạp chất hữu cơ, màu, mùi lạ và clo dư… được kiểm soát hiệu quả, góp phần bảo vệ và duy trì sự vận hành bền bỉ của màng RO.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-8</div></figure>
-
-      <h2 class="section-title">MÀNG LỌC XMAX RO 100 GPD SẢN XUẤT TẠI MỸ</h2>
-      <p class="copy">Màng RO 100 GPD nhập khẩu từ Mỹ giữ vai trò trung tâm trong hệ thống lọc của Karofi, có khả năng loại bỏ đến 99,99% tạp chất gây hại, đem lại nguồn nước tinh khiết.</p>
-      <p class="copy">Với công suất lọc 20 lít/giờ cùng tỷ lệ thu hồi nước tinh khiết lên tới 60%, thiết bị vận hành bền bỉ, đảm bảo chất lượng nước đầu ra ổn định trong suốt vòng đời màng lọc.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-9</div></figure>
-
-      <h2 class="section-title">HỆ LÕI CHỨC NĂNG XMAX HP 6.2 - THIẾT KẾ ĐÚC NGUYÊN KHỐI</h2>
-      <p class="copy">Hệ lõi chức năng XMAX HP 6.2 được phát triển với cấu trúc thế hệ mới, đúc liền khối từ nhựa nguyên sinh PP cao cấp, tích hợp trọn vẹn 6 lõi chức năng trong một thiết kế đồng bộ. Toàn bộ dây dẫn, cút nối và kẹp lõi truyền thống được loại bỏ, thay bằng hệ thống dẫn nước ngầm khép kín, góp phần hạn chế rò rỉ và giảm thiểu nguy cơ tái nhiễm khuẩn.</p>
-      <p class="copy">Nhờ thiết kế tối ưu này, lưu lượng nước đầu ra được cải thiện đáng kể, đạt mức cao hơn 1,68 lần so với hệ lõi rời thông thường, mang lại nguồn nước tinh khiết, an toàn và tăng cường khoáng chất, Hydro-ion kiềm trong nước cho sức khỏe cả gia đình.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-10</div></figure>
-
-      <h2 class="section-title">BỔ SUNG 2 LÕI CHỨC NĂNG XMAX ALKALINE & XMAX BI-MINERAL</h2>
-      <p class="copy">Bên cạnh hệ lõi XMAX HP 6.2 nguyên khối, Karofi Diamond SA66 còn được trang bị thêm 2 lõi Xmax Alkaline & Xmax Bi-Mineral:<br>- Xmax Alkaline: Nâng cao pH, tăng cường Hydrogen hoạt hóa và dễ dàng lắp đặt, thay thế định kỳ.<br>- Xmax Bi-Mineral: Bổ sung khoáng chất, hỗ trợ tăng cường sức mạnh bộ điện phân Alkaline Direk</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-11</div></figure>
-
-      <h2 class="section-title">CÔNG NGHỆ AIOTEC - GIÁM SÁT CHẤT LƯỢNG NƯỚC TỪ XA QUA ĐIỆN THOẠI</h2>
-      <p class="copy">Karofi Diamond SA66 được trang bị công nghệ AioTec thông minh giúp người dùng có thể dễ dàng theo dõi chất lượng nước sau lọc, nhận cảnh báo thay lõi và kích hoạt bảo hành... an tâm từ xa mọi lúc, mọi nơi.<br>Đặc biệt, người dùng có thể quan sát phần hiển thị AioTec trên vòi thông minh của sản phẩm.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-12</div></figure>
-
-      <h2 class="section-title">TỦ ĐỰNG ĐỒ TIỆN LỢI - TAY NẮM MỞ TỦ LINH HOẠT</h2>
-      <p class="copy">Karofi Diamond SA66 được trang bị khoang chứa đồ đa năng, giúp bạn thuận tiện sắp xếp ly, trà, cafe hay rượu quý ngay bên trong thân máy. Thiết kế tinh gọn góp phần tiết kiệm không gian, đồng thời gia tăng sự tiện ích khi mọi vật dụng cần thiết luôn sẵn sàng trong tầm với cho từng phút giây thưởng thức.</p>
-      <p class="copy">Nổi bật hơn, tay nắm cửa tủ được chăm chút tỉ mỉ, cầm chắc tay và thao tác linh hoạt, hỗ trợ đóng - mở êm ái, dễ dàng trong quá trình sử dụng hằng ngày, đồng thời hoàn thiện vẻ sang trọng cho tổng thể một thiết bị lọc nước cao cấp.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-13</div></figure>
-
-      <h2 class="section-title">KAROFI ĐẠT CHỨNG NHẬN NSF/ANSI 58 CAO CẤP CỦA MỸ</h2>
-      <p class="copy">Chứng nhận NSF/ANSI 58 mang đến sự yên tâm cho người dùng khi nguồn nước uống được xử lý chặt chẽ, đáp ứng những tiêu chuẩn khắt khe của Hoa Kỳ.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-14</div></figure>
-
-      <h2 class="section-title">Nước sau lọc đạt Quy chuẩn Kỹ thuật Quốc gia đối với nước khoáng thiên nhiên và nước uống đóng chai QCVN 6-1:2010/BYT</h2>
-      <p class="copy">Khơi nguồn sống khỏe từ chuẩn mực nguồn nước tinh khiết giàu khoáng chất, Hydro-ion kiềm. Karofi Diamond SA66 đem lại sự an tâm và sức khỏe bền vững cho mỗi gia đình với chất lượng nước sau lọc tại vòi được xác thực theo Quy chuẩn kỹ thuật Quốc gia đối với nước khoáng thiên nhiên và nước uống đóng chai QCVN 6-1:2010/BYT.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-15</div></figure>
-
-      <h2 class="section-title">THIẾT KẾ SANG TRỌNG - ĐIỂM NHẤN KHÔNG GIAN</h2>
-      <p class="copy"><a href="#">Karofi Diamond SA66</a> thu hút mọi ánh nhìn nhờ sự giao thoa giữa đường nét tinh tế của công nghệ hiện đại và mặt kính cường lực cao cấp. Đặc biệt, họa tiết phân tử nước (H₂O) được cách điệu tinh xảo, kết hợp cùng tay nắm lõi lọc mạ Crom sáng bóng. Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi Diamond SA66 xứng đáng là tâm điểm tỏa sáng giữa ngôi nhà của bạn.</p>
-      <figure class="image-block"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-17</div></figure>
-
-      <h2 class="section-title">BẢO HÀNH 5 SAO - SẴN SÀNG LINH HOẠT - DẪN ĐẦU THỊ TRƯỜNG</h2>
-      <p class="copy">Karofi áp dụng chính sách bảo hành lên tới 36 tháng, linh hoạt tiên phong theo thị trường, đồng thời cam kết đem đến trải nghiệm trọn vẹn cho khách hàng, giúp bạn an tâm tận hưởng cuộc sống khỏe mạnh mỗi ngày.</p>
-      <figure class="image-block short"><div class="placeholder">may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66-16 / 19 / 18</div></figure>
-      <p class="notes">*Khuyến cáo: Nước Hydro-ion kiềm không phải là thuốc, chỉ giúp ngăn ngừa và hỗ trợ điều trị một số tình trạng sức khỏe nhất định.<br>** Theo báo cáo của Viện trưởng Viện Nước Nhật Bản - tiến sĩ Hayashi Hidemitsu và Nghiên cứu của các giáo sư trường đại học Kyushu - Nhật Bản về công dụng của nước uống kiềm</p>
-
-      <section id="related" class="comparison">
-        <h2>So Sánh Với Các Sản Phẩm Tương Tự</h2>
-        <div class="cards">
-          <article class="card">
-            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">thumb-kah-gb35</div></div>
-            <h3>Máy lọc nước nóng nguội Karofi KAH-GB35</h3>
-            <div class="card-price">14.300.000 VNĐ</div>
-            <div class="stars">★★★★★</div>
-            <ul>
-              <li>Ứng dụng Karofi 365 cùng công nghệ AioTec mang đến giải pháp giám sát nước thông minh</li>
-              <li>Tận hưởng cuộc sống tiện nghi với 2 chế độ nước Nóng - Nguội linh hoạt, kết hợp cùng bình nóng 2 lít</li>
-              <li>Hệ thống lõi Smax: Bước tiến mới giúp tăng cường khả năng lọc sạch và kéo dài thời gian sử dụng.</li>
-              <li>Tối ưu hóa quy trình lọc thô với công nghệ Smax Pro V</li>
-            </ul>
-            <a class="compare-btn" href="#">⊜ So sánh</a>
+        <div class="mt-12 grid grid-cols-2 grid-rows-[250px_480px_250px] gap-3 sm:grid-rows-[400px_650px_400px] sm:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)_minmax(0,1fr)] lg:grid-rows-2">
+          <article class="product-card group col-start-1 row-start-1 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-1 lg:row-start-1">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-sa9-premium.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
+              <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-sa9-premium.png" alt="Máy lọc nước Karofi SA9 Premium" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">SA9 PREMIUM</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">11 chế độ nước · 9 điện cực Titan phủ Bạch Kim</p></div>
+            </a>
           </article>
-          <article class="card">
-            <div class="card-image"><div class="placeholder">thumb-kad-gb65</div></div>
-            <h3>Máy lọc nước nóng lạnh Karofi KAD-GB65</h3>
-            <div class="card-price">18.300.000 VNĐ</div>
-            <div class="stars">★★★★★</div>
-            <ul>
-              <li>Quản lý chất lượng nước với công nghệ AioTec thông qua ứng dụng Karofi 365</li>
-              <li>Hệ thống 2 vòi 3 chế độ (Nóng/Lạnh/Nguội)</li>
-              <li>Tiết kiệm chi phí thay lõi với công nghệ Smax 11 lõi thế hệ mới</li>
-              <li>Bộ 3 lõi lọc thô Smax Pro V: Mở rộng diện tích tiếp xúc với nước, tối ưu hóa hiệu quả lọc.</li>
-              <li>Màng RO 100 GPD thay nhanh sản xuất tại Hàn Quốc.</li>
-            </ul>
-            <a class="compare-btn" href="#">⊜ So sánh</a>
+
+          <article class="product-card group col-span-2 row-start-2 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-span-1 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <a href="sa66.html" class="flex h-full min-h-0 flex-col p-4 sm:p-7">
+              <div class="flex items-center justify-between gap-3"><span class="text-xs font-black uppercase tracking-[.18em] text-aqua">Diamond Series</span><span class="rounded-full bg-ink px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#f9fcfe]">Sản phẩm độc quyền</span></div>
+              <div class="product-render flex min-h-0 flex-1 items-center justify-center py-3 transition-transform duration-300 sm:py-5"><img src="assets/karofi-diamond-sa66.png" alt="Máy lọc nước Karofi Diamond SA66" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="mt-auto text-center"><h3 class="text-2xl font-black text-ink sm:text-3xl">DIAMOND SA66</h3><p class="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600 sm:text-base">11 tấm điện cực · AioTec · One Touch Filter</p></div>
+            </a>
           </article>
-          <article class="card">
-            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">may-loc-nuoc-nong-nguoi-karofi-kah-gz36-1</div></div>
-            <h3>Máy lọc nước nóng nguội Karofi KAH-GZ36</h3>
-            <div class="card-price">15.600.000 VNĐ</div>
-            <div class="stars">★★★★★</div>
-            <ul>
-              <li>Công nghệ AioTec: An tâm với khả năng giám sát chất lượng nước qua ứng dụng Karofi 365</li>
-              <li>Hệ thống 2 vòi 2 chế độ Nóng - Nguội</li>
-              <li>12 lõi lọc công nghệ Smax: Đột phá hiệu suất lọc, gấp 2 tuổi thọ lõi</li>
-              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
-              <li>Hệ lõi chức năng HP 6.2 Alkaline kết hợp cùng Mineral Plus & Nano Hydro-ion kiềm</li>
-            </ul>
-            <a class="compare-btn" href="#">⊜ So sánh</a>
+
+          <article class="product-card group col-start-2 row-start-1 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-3 lg:row-start-1">
+            <a href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-kae-s688.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
+              <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s688.png" alt="Máy lọc nước Karofi KAE-S688" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S688</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">Nóng · lạnh · nguội Hydro-ion kiềm, pH tới 9.0</p></div>
+            </a>
           </article>
-          <article class="card">
-            <div class="card-image"><span class="label-new">MỚI NHẤT</span><div class="placeholder">may-loc-nuoc-nong-lanh-karofi-kad-gz68-1-1</div></div>
-            <h3>Máy lọc nước nóng lạnh Karofi KAD-GZ68</h3>
-            <div class="card-price">25.000.000 VNĐ</div>
-            <div class="stars">★★★★★</div>
-            <ul>
-              <li>Công nghệ AioTec: Chủ động kiểm soát chất lượng nước mọi nơi ngay trên ứng dụng Karofi 365.</li>
-              <li>Hệ thống 2 vòi - 3 chế độ Nóng - Lạnh - Nguội</li>
-              <li>12 lõi lọc Smax thế hệ mới</li>
-              <li>Màng RO 100 GPD thay nhanh sản xuất tại Mỹ</li>
-              <li>Hệ lõi chức năng HP 6.2 Alkaline cao cấp tích hợp cùng bộ đôi Mineral Plus & Nano Hydro-ion kiềm</li>
-            </ul>
-            <a class="compare-btn" href="#">⊜ So sánh</a>
+
+          <article class="product-card group col-start-1 row-start-3 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-1 lg:row-start-2">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s695.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
+              <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s695.png" alt="Máy lọc nước Karofi KAE-S695" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S695</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">Hydro-ion kiềm gấp 3 · nóng, lạnh và nguội</p></div>
+            </a>
+          </article>
+
+          <article class="product-card group col-start-2 row-start-3 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-3 lg:row-start-2">
+            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s88-pro-max.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+              <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Bán chạy nhất</span></div>
+              <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s88-promax.png" alt="Máy lọc nước Karofi KAE-S88 Promax" class="h-full w-full object-contain mix-blend-multiply"></div>
+              <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S88 PROMAX</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">7 điện cực Titan phủ Bạch Kim · AioTec</p></div>
+            </a>
           </article>
         </div>
-      </section>
-    </article>
+      </div>
+    </section>
+
+    <section id="technology" class="bg-[#f5f9fb] px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Công nghệ Karofi</p><h2 class="mt-3 text-4xl font-black tracking-[-.04em] text-ink sm:text-5xl">Thấu hiểu từng giọt nước</h2></div><p class="max-w-xl text-base leading-7 text-slate-600">Khám phá hệ thống lọc SMAX, công nghệ Hydro-ion Kiềm và những trải nghiệm nước thông minh dành cho gia đình Việt.</p></div>
+
+        <div class="poster-gallery -mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-5 sm:mx-0 sm:mt-12 sm:grid sm:grid-cols-2 sm:grid-rows-[280px_600px_280px] sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:h-[960px] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)_minmax(0,1fr)] lg:grid-rows-2 xl:h-[1040px]" role="region" aria-label="Bộ sưu tập poster Karofi">
+          <figure class="col-start-1 row-start-1 flex w-[82vw] max-w-[340px] shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-soft sm:w-auto sm:max-w-none sm:min-h-0 sm:rounded-2xl lg:col-start-1 lg:row-start-1"><img src="assets/poster-purity-innovation.jpg" alt="Vòi nước thông minh Karofi trong không gian thiên nhiên" loading="lazy" class="aspect-[2/3] w-full flex-none object-cover sm:aspect-auto sm:min-h-0 sm:flex-1"><figcaption class="px-4 py-4 text-sm font-bold leading-5 text-ink sm:px-5 sm:text-sm">Tinh khiết từ công nghệ</figcaption></figure>
+          <figure class="col-span-2 row-start-2 flex w-[82vw] max-w-[340px] shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-soft sm:w-auto sm:max-w-none sm:min-h-0 sm:rounded-2xl lg:col-span-1 lg:col-start-2 lg:row-span-2 lg:row-start-1"><img src="assets/poster-filtration-journey.jpg" alt="Hành trình lọc nước ba cấp Karofi" loading="lazy" class="aspect-[2/3] w-full flex-none object-cover sm:aspect-auto sm:min-h-0 sm:flex-1"><figcaption class="px-4 py-4 text-sm font-bold leading-5 text-ink sm:px-5">Hành trình lọc nước đa tầng</figcaption></figure>
+          <figure class="col-start-2 row-start-1 flex w-[82vw] max-w-[340px] shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-soft sm:w-auto sm:max-w-none sm:min-h-0 sm:rounded-2xl lg:col-start-3 lg:row-start-1"><img src="assets/poster-kae-s86-family.jpg" alt="Gia đình sử dụng máy lọc nước Karofi KAE-S86 Pro" loading="lazy" class="aspect-[2/3] w-full flex-none object-cover sm:aspect-auto sm:min-h-0 sm:flex-1"><figcaption class="px-4 py-4 text-sm font-bold leading-5 text-ink sm:px-5">Một chạm, sáu chế độ nước</figcaption></figure>
+          <figure class="col-start-1 row-start-3 flex w-[82vw] max-w-[340px] shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-soft sm:w-auto sm:max-w-none sm:min-h-0 sm:rounded-2xl lg:col-start-1 lg:row-start-2"><img src="assets/poster-pure-water-life.jpg" alt="Sử dụng vòi nước thông minh Karofi" loading="lazy" class="aspect-[2/3] w-full flex-none object-cover sm:aspect-auto sm:min-h-0 sm:flex-1"><figcaption class="px-4 py-4 text-sm font-bold leading-5 text-ink sm:px-5">Pure water, pure life</figcaption></figure>
+          <figure class="col-start-2 row-start-3 flex w-[82vw] max-w-[340px] shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-soft sm:w-auto sm:max-w-none sm:min-h-0 sm:rounded-2xl lg:col-start-3 lg:row-start-2"><img src="assets/poster-kae-s86-controls.jpg" alt="Hai vòi lấy nước và màn hình cảm ứng Karofi KAE-S86 Pro" loading="lazy" class="aspect-[2/3] w-full flex-none object-cover sm:aspect-auto sm:min-h-0 sm:flex-1"><figcaption class="px-4 py-4 text-sm font-bold leading-5 text-ink sm:px-5">Điều khiển trực quan, lấy nước tiện dụng</figcaption></figure>
+        </div>
+
+        <div class="mt-4 border-t border-slate-200 pt-6 sm:mt-10 sm:pt-10">
+          <div class="text-center">
+            <p class="text-xs font-black uppercase tracking-[.18em] text-slate-400">Tiêu chuẩn chất lượng</p>
+            <p class="mt-2 text-2xl font-black text-ink">An tâm uống trực tiếp mỗi ngày</p>
+          </div>
+          <div class="mt-9 grid grid-cols-2 gap-x-5 gap-y-9 lg:grid-cols-4">
+            <a href="https://karofi.com/chung-nhan-uy-tin-ve-nuoc-uong-truc-tiep-qcvn-6-1-2010-byt-cua-bo-y-te-do-vien-suc-khoe-nghe-nghiep-va-moi-truong-cap-la-gi-bv3295.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+              <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/qcvn-official.png" alt="Huy hiệu QCVN 6-1:2010/BYT của Karofi" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
+              <strong class="mt-4 text-sm font-black text-ink">QCVN 6-1:2010/BYT</strong>
+              <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Nước sau lọc đạt quy chuẩn quốc gia về nước uống trực tiếp.</span>
+            </a>
+            <a href="https://karofi.com/mang-loc-ro-sp29.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+              <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/made-in-usa.png" alt="Con dấu Made in USA" loading="lazy" class="max-h-full w-auto max-w-[12rem] object-contain"></span>
+              <strong class="mt-4 text-sm font-black text-ink">Made in USA</strong>
+              <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Màng RO Purifim được sản xuất tại Mỹ.</span>
+            </a>
+            <a href="https://karofi.com/linh-phu-kien-18/mang-ro/mang-ro-purifim--usa" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+              <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/usa-flag.png" alt="Biểu tượng cờ Hoa Kỳ" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
+              <strong class="mt-4 text-sm font-black text-ink">Màng RO chuẩn Mỹ</strong>
+              <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Màng Purifim 100 GPD, loại bỏ tới 99,99% tạp chất.</span>
+            </a>
+            <a href="https://shop.karofi.com/page/chinh-sach-bao-hanh-fin.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+              <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/warranty-36.png" alt="Huy hiệu bảo hành 36 tháng Karofi" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
+              <strong class="mt-4 text-sm font-black text-ink">Bảo hành 36 tháng</strong>
+              <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Chính sách bảo hành sản phẩm lên đến 36 tháng.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="consultation" class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-7xl overflow-hidden rounded-3xl bg-aqua lg:grid-cols-[1.2fr_.8fr]">
+        <div class="p-8 sm:p-12 lg:p-16"><p class="text-xs font-black uppercase tracking-[.2em] text-ink/70">Tư vấn miễn phí</p><h2 class="mt-4 max-w-xl text-3xl font-black tracking-[-.04em] text-ink sm:text-5xl">Chưa biết máy nào phù hợp với gia đình?</h2><p class="mt-5 max-w-xl text-base font-medium leading-7 text-ink/75">Cho Karofi biết số người sử dụng, không gian lắp đặt và nguồn nước. Chuyên gia sẽ tư vấn cấu hình phù hợp.</p><a href="tel:19006418" class="mt-8 inline-flex rounded-full bg-ink px-7 py-4 text-sm font-black text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy">Gọi 1900 6418</a></div>
+        <div class="relative m-5 min-h-[300px] overflow-hidden rounded-2xl bg-[#fbfdfe] p-7">
+          <div class="relative z-10 max-w-[55%]"><p class="text-xs font-black uppercase tracking-[.15em] text-aqua">Vì sao chọn Karofi</p><ul class="mt-5 space-y-4 text-sm font-bold leading-5 text-ink"><li class="flex gap-3"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-aqua"></span>Bảo hành sản phẩm 36 tháng</li><li class="flex gap-3"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-aqua"></span>Hỗ trợ lắp đặt toàn quốc</li><li class="flex gap-3"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-aqua"></span>Nước uống trực tiếp đạt chuẩn</li></ul></div>
+          <img src="assets/karofi-kaq-u99.png" alt="Karofi KAQ-U99 purifier" class="absolute -bottom-12 -right-10 h-[115%] w-[62%] object-contain object-bottom mix-blend-multiply">
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <img class="logo" src="assets/karofi-logo.png" alt="KAROFI">
-        <p>CÔNG TY CỔ PHẦN TẬP ĐOÀN KAROFI</p>
-        <p>Trụ sở chính: Tầng 8, Tòa nhà HUDLAND, Số 6 Nguyễn Hữu Thọ, Phường Định Công, Thành phố Hà Nội, Việt Nam</p>
+  <footer id="about" class="bg-[#041e30] px-4 pb-8 pt-20 text-slate-300 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-10 border-b border-white/10 pb-14 sm:grid-cols-2 lg:grid-cols-5">
+        <div class="sm:col-span-2 lg:col-span-1"><a href="#" class="inline-flex" aria-label="Trang chủ Karofi"><img src="assets/karofi-logo.png" alt="Karofi" class="h-auto w-[155px]"></a><p class="mt-5 text-sm leading-6 text-slate-400">Chuyên gia lọc nước cho cuộc sống khỏe mạnh hơn của gia đình Việt.</p><p class="mt-5 text-sm font-bold text-white">Hotline: 1900 6418</p></div>
+        <div><h3 class="text-sm font-black text-white">Về Karofi</h3><ul class="mt-5 space-y-3 text-sm"><li><a href="#" class="hover:text-white">Giới thiệu Karofi</a></li><li><a href="#" class="hover:text-white">Công nghệ</a></li><li><a href="#" class="hover:text-white">Phát triển bền vững</a></li><li><a href="#" class="hover:text-white">Tuyển dụng</a></li><li><a id="news" href="#" class="hover:text-white">Tin tức</a></li></ul></div>
+        <div id="service"><h3 class="text-sm font-black text-white">Hỗ trợ khách hàng</h3><ul class="mt-5 space-y-3 text-sm"><li><a href="#" class="hover:text-white">Đặt lịch lắp đặt</a></li><li><a href="#" class="hover:text-white">Tra cứu bảo hành</a></li><li><a href="#" class="hover:text-white">Thay lõi lọc</a></li><li><a href="#" class="hover:text-white">Hướng dẫn sử dụng</a></li><li><a href="#" class="hover:text-white">Câu hỏi thường gặp</a></li></ul></div>
+        <div id="dealers"><h3 class="text-sm font-black text-white">Head Office · Hanoi</h3><address class="mt-5 text-sm not-italic leading-6 text-slate-400">8th Floor, HUDLAND Building<br>6 Nguyen Huu Tho, Dinh Cong<br>Hanoi, Vietnam<br><a href="tel:19006418" class="mt-2 inline-block text-white">1900 6418</a></address></div>
+        <div><h3 class="text-sm font-black text-white">Southern Branch · HCMC</h3><address class="mt-5 text-sm not-italic leading-6 text-slate-400">14th Floor, LIM 2 Building<br>62A Cach Mang Thang Tam<br>HCMC, Vietnam<br><a href="tel:19006418" class="mt-2 inline-block text-white">1900 6418</a></address></div>
       </div>
-      <div>
-        <h3>Giới thiệu về Karofi</h3>
-        <ul><li>Về KAROFI</li><li>Trách nhiệm xã hội (CSR)</li><li>Thư viện Video</li></ul>
-      </div>
-      <div>
-        <h3>Chính sách mua hàng</h3>
-        <ul><li>Chính sách giao hàng</li><li>Chính sách thanh toán</li><li>Chính sách đổi trả</li><li>Chính sách điều kiện giao dịch chung</li></ul>
-      </div>
-      <div>
-        <h3>CN Miền Nam</h3>
-        <p>Tầng 14, Tòa nhà Lim 2, Số 62A Cách Mạng Tháng Tám, Phường Xuân Hòa, Thành phố Hồ Chí Minh, Việt Nam</p>
-      </div>
+      <div class="flex flex-col justify-between gap-6 py-7 text-xs text-slate-500 lg:flex-row lg:items-center"><p>© 2026 Karofi Group Joint Stock Company. All rights reserved.</p><div class="flex flex-wrap gap-5"><a href="#" class="hover:text-white">Privacy Policy</a><a href="#" class="hover:text-white">Terms of Use</a><a href="#" class="hover:text-white">Cookie Settings</a></div><div class="flex flex-wrap gap-2"><span class="rounded border border-white/15 px-3 py-2 font-bold text-slate-400">SECURE CHECKOUT</span><span class="rounded border border-white/15 px-3 py-2 font-bold text-slate-400">GOV CERTIFIED</span><span class="rounded border border-white/15 px-3 py-2 font-bold text-slate-400">SSL</span></div></div>
     </div>
   </footer>
+
+  <div class="fixed bottom-5 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7" aria-label="Quick contact actions">
+    <button id="openWheel" class="grid h-12 w-12 place-items-center rounded-full bg-navy text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:rotate-6 hover:bg-aqua" aria-label="Mở vòng quay may mắn">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7H7.5a2.5 2.5 0 1 1 0-5C10.5 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0 0-5C13.5 2 12 7 12 7Z"/></svg>
+    </button>
+    <a href="tel:19006418" class="pulse-ring grid h-12 w-12 place-items-center rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Call Karofi hotline"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.3 1.73.5 2.63.62A2 2 0 0 1 22 16.9Z"/></svg></a>
+    <button class="grid h-12 w-12 place-items-center rounded-full bg-blue-600 text-[11px] font-black text-white shadow-lg transition-transform duration-300 hover:-translate-y-1" aria-label="Open Zalo chat">ZALO</button>
+    <button id="openAiAssistant" class="group flex h-14 items-center overflow-hidden rounded-full bg-aqua text-white shadow-lg transition-transform duration-300 hover:-translate-y-1 disabled:cursor-wait disabled:opacity-70" aria-label="Mở trợ lý khách hàng KaroKaro">
+      <span class="pl-5 pr-2 text-sm font-black tracking-[.01em]">AI Chatbot</span>
+      <span class="grid h-14 w-14 shrink-0 place-items-center" aria-hidden="true"><img src="assets/karokaro-avatar.jpg" alt="" class="h-12 w-12 rounded-full object-cover object-center ring-2 ring-white/70"></span>
+    </button>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchPanel = document.getElementById('searchPanel');
+    const siteSearch = document.getElementById('siteSearch');
+    const heroCarousel = document.getElementById('heroCarousel');
+    const heroSlides = Array.from(document.querySelectorAll('[data-hero-slide]'));
+    const heroDots = Array.from(document.querySelectorAll('[data-hero-dot]'));
+    const heroPrevious = document.getElementById('heroPrevious');
+    const heroNext = document.getElementById('heroNext');
+    const spinButton = document.getElementById('spinButton');
+    const spinButtonLabel = document.getElementById('spinButtonLabel');
+    const prizeWheel = document.getElementById('prizeWheel');
+    const prizePopup = document.getElementById('prizePopup');
+    const prizeTitle = document.getElementById('prizeTitle');
+    const prizeCode = document.getElementById('prizeCode');
+    const copyPrizeCode = document.getElementById('copyPrizeCode');
+    const closePrize = document.getElementById('closePrize');
+    const prizeBackdrop = document.getElementById('prizeBackdrop');
+    const reopenPrize = document.getElementById('reopenPrize');
+    const prizeConfettiOrigin = document.getElementById('prizeConfettiOrigin');
+    const wheelPopup = document.getElementById('wheelPopup');
+    const wheelBackdrop = document.getElementById('wheelBackdrop');
+    const closeWheel = document.getElementById('closeWheel');
+    const openWheel = document.getElementById('openWheel');
+    const openAiAssistant = document.getElementById('openAiAssistant');
+    const elevenLabsConfig = {
+      agentId: 'agent_9801kvvvkz3se3srpzvbrepzrk3q',
+      widgetScript: 'https://unpkg.com/@elevenlabs/convai-widget-embed'
+    };
+    const wheelStorageKey = 'karofi-lucky-wheel-2026';
+    let activeHeroSlide = 0;
+    let heroAutoplayTimer;
+    let wheelAudioContext;
+    const wheelPrizes = [
+      { name: 'Máy lọc nước Karofi miễn phí', codePrefix: 'PURE', segment: 0 },
+      { name: 'Voucher 1.000.000₫', codePrefix: 'KRF1M', segment: 1 },
+      { name: 'Voucher 500.000₫', codePrefix: 'KRF500', segment: 2 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 3 },
+      { name: 'Voucher 500.000₫', codePrefix: 'KRF500', segment: 4 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 5 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 6 },
+      { name: 'Voucher 200.000₫', codePrefix: 'KRF200', segment: 7 }
+    ];
+
+    function showHeroSlide(index) {
+      activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, slideIndex) => {
+        const active = slideIndex === activeHeroSlide;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      heroDots.forEach((dot, dotIndex) => {
+        const active = dotIndex === activeHeroSlide;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-current', String(active));
+      });
+    }
+
+    function stopHeroAutoplay() {
+      window.clearInterval(heroAutoplayTimer);
+    }
+
+    function startHeroAutoplay() {
+      stopHeroAutoplay();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      heroAutoplayTimer = window.setInterval(() => showHeroSlide(activeHeroSlide + 1), 6500);
+    }
+
+    heroPrevious.addEventListener('click', () => {
+      showHeroSlide(activeHeroSlide - 1);
+      startHeroAutoplay();
+    });
+
+    heroNext.addEventListener('click', () => {
+      showHeroSlide(activeHeroSlide + 1);
+      startHeroAutoplay();
+    });
+
+    heroDots.forEach((dot, index) => dot.addEventListener('click', () => {
+      showHeroSlide(index);
+      startHeroAutoplay();
+    }));
+
+    heroCarousel.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showHeroSlide(activeHeroSlide - 1);
+        startHeroAutoplay();
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showHeroSlide(activeHeroSlide + 1);
+        startHeroAutoplay();
+      }
+    });
+
+    heroCarousel.addEventListener('mouseenter', stopHeroAutoplay);
+    heroCarousel.addEventListener('mouseleave', startHeroAutoplay);
+    heroCarousel.addEventListener('focusin', stopHeroAutoplay);
+    heroCarousel.addEventListener('focusout', event => {
+      if (!heroCarousel.contains(event.relatedTarget)) startHeroAutoplay();
+    });
+    startHeroAutoplay();
+
+    function setPanel(panel, button, open) {
+      panel.classList.toggle('grid-rows-[1fr]', open);
+      panel.classList.toggle('grid-rows-[0fr]', !open);
+      panel.classList.toggle('border-slate-200', open);
+      panel.classList.toggle('border-transparent', !open);
+      button.setAttribute('aria-expanded', String(open));
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+      setPanel(mobileMenu, menuToggle, open);
+      menuIcon.innerHTML = open ? '<path d="M6 6l12 12M18 6 6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    });
+
+    searchToggle.addEventListener('click', () => {
+      const open = searchToggle.getAttribute('aria-expanded') !== 'true';
+      setPanel(searchPanel, searchToggle, open);
+      if (open) setTimeout(() => siteSearch.focus(), 200);
+    });
+
+    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => {
+      setPanel(mobileMenu, menuToggle, false);
+      menuIcon.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }));
+
+    function loadElevenLabsWidget() {
+      if (customElements.get('elevenlabs-convai')) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        let script = document.querySelector('script[data-elevenlabs-widget]');
+        if (!script) {
+          script = document.createElement('script');
+          script.src = elevenLabsConfig.widgetScript;
+          script.async = true;
+          script.type = 'text/javascript';
+          script.dataset.elevenlabsWidget = 'true';
+          document.body.appendChild(script);
+        }
+        script.addEventListener('load', () => customElements.whenDefined('elevenlabs-convai').then(resolve), { once: true });
+        script.addEventListener('error', reject, { once: true });
+      });
+    }
+
+    let elevenLabsWidgetPromise;
+
+    function customizeElevenLabsWidget(widget) {
+      const minimizeChat = () => {
+        document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
+          detail: { action: 'collapse' }
+        }));
+      };
+
+      const customizeWidget = () => {
+        const messageButton = widget.shadowRoot?.querySelector('button[aria-label="Message"]');
+        const launcher = messageButton?.closest('.rounded-compact-sheet');
+        if (launcher && launcher.style.display !== 'none') {
+          launcher.style.setProperty('display', 'none', 'important');
+        }
+
+        const expandButton = widget.shadowRoot?.querySelector('button[aria-label="Expand widget"], button[aria-label="Collapse widget"]');
+        if (!expandButton || expandButton.dataset.karofiMinimize === 'true') return;
+
+        expandButton.dataset.karofiMinimize = 'true';
+        expandButton.setAttribute('aria-label', 'Đóng cửa sổ trò chuyện');
+        expandButton.setAttribute('title', 'Đóng');
+        expandButton.style.setProperty('width', '44px');
+        expandButton.style.setProperty('height', '44px');
+        expandButton.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+        expandButton.addEventListener('click', event => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          minimizeChat();
+        }, true);
+      };
+
+      const observeWidget = () => {
+        if (!widget.shadowRoot) {
+          window.setTimeout(observeWidget, 50);
+          return;
+        }
+
+        customizeWidget();
+        const observer = new MutationObserver(customizeWidget);
+        observer.observe(widget.shadowRoot, { childList: true, subtree: true });
+      };
+
+      observeWidget();
+    }
+
+    function waitForElevenLabsMessageButton(widget) {
+      return new Promise((resolve, reject) => {
+        const startedAt = Date.now();
+        const findButton = () => {
+          const button = widget.shadowRoot?.querySelector('button[aria-label="Message"]');
+          if (button) {
+            resolve(button);
+            return;
+          }
+          if (Date.now() - startedAt > 5000) {
+            reject(new Error('ElevenLabs message button did not load'));
+            return;
+          }
+          window.setTimeout(findButton, 50);
+        };
+        findButton();
+      });
+    }
+
+    function getElevenLabsWidget() {
+      if (elevenLabsWidgetPromise) return elevenLabsWidgetPromise;
+      elevenLabsWidgetPromise = (async () => {
+        await loadElevenLabsWidget();
+        await customElements.whenDefined('elevenlabs-convai');
+        const existingWidget = document.querySelector('elevenlabs-convai');
+        if (existingWidget) return existingWidget;
+        if (!elevenLabsConfig.agentId) throw new Error('Missing ElevenLabs agent ID');
+      const widget = document.createElement('elevenlabs-convai');
+      widget.setAttribute('agent-id', elevenLabsConfig.agentId);
+      widget.setAttribute('variant', 'expanded');
+      widget.setAttribute('dismissible', 'false');
+      widget.setAttribute('action-text', 'Trò chuyện với KaroKaro');
+      widget.setAttribute('start-call-text', 'Bắt đầu trò chuyện');
+      widget.setAttribute('end-call-text', 'Kết thúc');
+        widget.setAttribute('expand-text', 'Mở trợ lý');
+        document.body.appendChild(widget);
+        await waitForElevenLabsMessageButton(widget);
+        customizeElevenLabsWidget(widget);
+        return widget;
+      })();
+      return elevenLabsWidgetPromise;
+    }
+
+    async function openElevenLabsAssistant() {
+      openAiAssistant.disabled = true;
+      try {
+        const widget = await getElevenLabsWidget();
+        const messageButton = widget.shadowRoot?.querySelector('button[aria-label="Message"]');
+        if (messageButton) {
+          messageButton.click();
+        } else {
+          document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
+            detail: { action: 'expand' }
+          }));
+        }
+      } finally {
+        openAiAssistant.disabled = false;
+      }
+    }
+
+    openAiAssistant.addEventListener('click', openElevenLabsAssistant);
+
+    function playWheelSpinSound(duration = 5.15) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      if (!wheelAudioContext) wheelAudioContext = new AudioContext();
+
+      const scheduleSound = () => {
+        const context = wheelAudioContext;
+        const startAt = context.currentTime + .02;
+        const output = context.createGain();
+        output.gain.setValueAtTime(.64, startAt);
+        output.gain.setValueAtTime(.64, startAt + duration - .35);
+        output.gain.exponentialRampToValueAtTime(.0001, startAt + duration);
+        output.connect(context.destination);
+
+        const hum = context.createOscillator();
+        const humGain = context.createGain();
+        hum.type = 'triangle';
+        hum.frequency.setValueAtTime(92, startAt);
+        hum.frequency.exponentialRampToValueAtTime(42, startAt + duration);
+        humGain.gain.setValueAtTime(.035, startAt);
+        humGain.gain.exponentialRampToValueAtTime(.0001, startAt + duration);
+        hum.connect(humGain).connect(output);
+        hum.start(startAt);
+        hum.stop(startAt + duration);
+
+        const tickCount = 58;
+        for (let index = 0; index < tickCount; index += 1) {
+          const progress = index / (tickCount - 1);
+          const tickAt = startAt + duration * Math.pow(progress, 1.65);
+          const tick = context.createOscillator();
+          const tickGain = context.createGain();
+          tick.type = index % 3 === 0 ? 'square' : 'triangle';
+          tick.frequency.setValueAtTime(760 - progress * 470 + Math.random() * 55, tickAt);
+          tickGain.gain.setValueAtTime(.09 - progress * .025, tickAt);
+          tickGain.gain.exponentialRampToValueAtTime(.0001, tickAt + .035);
+          tick.connect(tickGain).connect(output);
+          tick.start(tickAt);
+          tick.stop(tickAt + .04);
+        }
+
+        window.setTimeout(() => output.disconnect(), (duration + .2) * 1000);
+      };
+
+      if (wheelAudioContext.state === 'suspended') wheelAudioContext.resume().then(scheduleSound).catch(() => {});
+      else scheduleSound();
+    }
+
+    function setPrizePopup(open, celebrate = false) {
+      prizePopup.classList.toggle('hidden', !open);
+      prizePopup.classList.toggle('flex', open);
+      prizePopup.setAttribute('aria-hidden', String(!open));
+      wheelPopup.toggleAttribute('inert', open);
+      if (open) {
+        window.setTimeout(() => closePrize.focus(), 50);
+        if (celebrate) {
+          window.setTimeout(() => burstConfetti(prizeConfettiOrigin, 160, 260), 80);
+          window.setTimeout(() => burstConfetti(prizeConfettiOrigin, 100, 210), 420);
+          window.setTimeout(() => burstConfetti(prizeConfettiOrigin, 72, 170), 760);
+        }
+      } else {
+        reopenPrize.focus();
+      }
+    }
+
+    function showPrize(prize, openResult = true) {
+      prizeTitle.textContent = prize.name;
+      prizeCode.textContent = prize.code;
+      reopenPrize.classList.remove('hidden');
+      spinButton.disabled = true;
+      spinButtonLabel.textContent = 'Đã quay';
+      if (openResult) setPrizePopup(true, true);
+    }
+
+    function burstConfetti(origin, count, spread = 220) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const rect = origin.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const colors = ['#ff3d68', '#ff8a1f', '#ffd21c', '#74d62c', '#12c9c3', '#00aef0', '#7656ff', '#e84ad8'];
+
+      for (let index = 0; index < count; index += 1) {
+        const piece = document.createElement('span');
+        const angle = Math.random() * Math.PI * 2;
+        const distance = spread * (.45 + Math.random() * .55);
+        const lift = Math.random() * 46;
+        piece.className = 'confetti-piece';
+        piece.style.left = `${centerX}px`;
+        piece.style.top = `${centerY}px`;
+        piece.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+        piece.style.setProperty('--y', `${Math.sin(angle) * distance + 48 - lift}px`);
+        piece.style.setProperty('--rotation', `${Math.round(Math.random() * 900 - 450)}deg`);
+        piece.style.setProperty('--size', `${5 + Math.random() * 7}px`);
+        piece.style.setProperty('--height-ratio', index % 4 === 0 ? '1' : `${.35 + Math.random() * .35}`);
+        piece.style.setProperty('--radius', index % 4 === 0 ? '999px' : `${1 + Math.random() * 2}px`);
+        piece.style.setProperty('--duration', `${900 + Math.random() * 550}ms`);
+        piece.style.setProperty('--delay', `${Math.random() * 90}ms`);
+        piece.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+        document.body.appendChild(piece);
+        window.setTimeout(() => piece.remove(), 1650);
+      }
+    }
+
+    function setWheelPopup(open) {
+      const wasOpen = wheelPopup.getAttribute('aria-hidden') === 'false';
+      wheelPopup.classList.toggle('hidden', !open);
+      wheelPopup.classList.toggle('flex', open);
+      wheelPopup.setAttribute('aria-hidden', String(!open));
+      document.body.classList.toggle('overflow-hidden', open);
+      if (open) {
+        stopHeroAutoplay();
+        window.setTimeout(() => closeWheel.focus(), 50);
+      }
+      else {
+        openWheel.focus();
+        if (wasOpen) window.requestAnimationFrame(() => {
+          burstConfetti(openWheel, 36, 112);
+          window.setTimeout(() => burstConfetti(openWheel, 22, 84), 360);
+        });
+      }
+    }
+
+    closeWheel.addEventListener('click', () => {
+      setWheelPopup(false);
+      startHeroAutoplay();
+    });
+    wheelBackdrop.addEventListener('click', () => {
+      setWheelPopup(false);
+      startHeroAutoplay();
+    });
+    openWheel.addEventListener('click', () => setWheelPopup(true));
+    closePrize.addEventListener('click', () => setPrizePopup(false));
+    prizeBackdrop.addEventListener('click', () => setPrizePopup(false));
+    reopenPrize.addEventListener('click', () => setPrizePopup(true, false));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && prizePopup.getAttribute('aria-hidden') === 'false') {
+        setPrizePopup(false);
+        return;
+      }
+      if (event.key === 'Escape' && wheelPopup.getAttribute('aria-hidden') === 'false') {
+        setWheelPopup(false);
+        startHeroAutoplay();
+      }
+    });
+
+    const savedPrize = localStorage.getItem(wheelStorageKey);
+    if (savedPrize) {
+      try { showPrize(JSON.parse(savedPrize), false); } catch (_) { localStorage.removeItem(wheelStorageKey); }
+    }
+    setWheelPopup(true);
+
+    spinButton.addEventListener('click', () => {
+      if (spinButton.disabled) return;
+      spinButton.disabled = true;
+      spinButtonLabel.textContent = 'Đang xoay...';
+      playWheelSpinSound();
+      burstConfetti(spinButton, 48, 150);
+
+      const prize = wheelPrizes[Math.floor(Math.random() * wheelPrizes.length)];
+      const code = `${prize.codePrefix}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+      const result = { name: prize.name, code, segment: prize.segment };
+      const segmentCenter = prize.segment * 45;
+      const finalRotation = 1800 - segmentCenter;
+      prizeWheel.style.transform = `rotate(${finalRotation}deg)`;
+
+      const finishSpin = () => {
+        localStorage.setItem(wheelStorageKey, JSON.stringify(result));
+        showPrize(result);
+        burstConfetti(prizeWheel, 112, 300);
+        window.setTimeout(() => burstConfetti(spinButton, 54, 190), 280);
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.setTimeout(finishSpin, 50);
+      } else {
+        window.setTimeout(finishSpin, 5300);
+      }
+    });
+
+    copyPrizeCode.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(prizeCode.textContent);
+        copyPrizeCode.textContent = 'Đã sao chép';
+      } catch (_) {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(prizeCode);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyPrizeCode.textContent = 'Mã đã được chọn';
+      }
+    });
+  </script>
 </body>
 </html>
