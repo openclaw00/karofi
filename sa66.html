@@ -1121,6 +1121,7 @@
     const tabPages = Array.from(document.querySelectorAll('.tab-page'));
     const tabs = document.querySelector('.tabs');
     let activeCarouselSlide = 0;
+    let carouselTimer;
 
     searchToggle.addEventListener('click', () => {
       const open = searchToggle.getAttribute('aria-expanded') !== 'true';
@@ -1143,11 +1144,26 @@
       });
     }
 
-    carouselPrev.addEventListener('click', () => showCarouselSlide(activeCarouselSlide - 1));
-    carouselNext.addEventListener('click', () => showCarouselSlide(activeCarouselSlide + 1));
-    carouselDots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showCarouselSlide(index));
+    function restartCarouselTimer() {
+      window.clearInterval(carouselTimer);
+      carouselTimer = window.setInterval(() => showCarouselSlide(activeCarouselSlide + 1), 8000);
+    }
+
+    carouselPrev.addEventListener('click', () => {
+      showCarouselSlide(activeCarouselSlide - 1);
+      restartCarouselTimer();
     });
+    carouselNext.addEventListener('click', () => {
+      showCarouselSlide(activeCarouselSlide + 1);
+      restartCarouselTimer();
+    });
+    carouselDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showCarouselSlide(index);
+        restartCarouselTimer();
+      });
+    });
+    restartCarouselTimer();
 
     function showTabPage(targetId) {
       tabPages.forEach((page) => {
