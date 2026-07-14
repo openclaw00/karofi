@@ -11,6 +11,7 @@
   <link rel="icon" href="favicon.ico">
   <link rel="manifest" href="site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/store.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -120,6 +121,22 @@
     .wheel-spin-button {
       box-shadow: 0 10px 24px rgba(7, 61, 86, .32), 0 0 0 8px #f9fcfe;
     }
+    .karofi-toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      transform: translateY(12px);
+      opacity: 0;
+      border-radius: 999px;
+      background: #073d56;
+      color: white;
+      padding: .8rem 1rem;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(7, 61, 86, .24);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karofi-toast.is-visible { opacity: 1; transform: translateY(0); }
     .confetti-piece {
       position: fixed;
       z-index: 120;
@@ -181,18 +198,20 @@
       </a>
 
       <nav class="hidden h-full items-center gap-8 text-sm font-bold text-slate-700 lg:flex" aria-label="Primary navigation">
-        <a href="https://karofi.com/may-loc-nuoc-28" class="flex h-full items-center transition-colors duration-300 hover:text-aqua">Máy lọc nước</a>
-        <a href="https://karofi.com/cay-nuoc-nong-lanh-13" class="transition-colors duration-300 hover:text-aqua">Lọc nước nóng lạnh</a>
-        <a href="https://karofi.com/hydro-ion-kiem" class="transition-colors duration-300 hover:text-aqua">Hydro-ion Kiềm</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap" class="transition-colors duration-300 hover:text-aqua">Lọc tổng cao cấp</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="transition-colors duration-300 hover:text-aqua">Lọc tổng - Đầu nguồn</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="transition-colors duration-300 hover:text-aqua">Dịch vụ và hỗ trợ</a>
+        <a href="#products" class="flex h-full items-center transition-colors duration-300 hover:text-aqua">Sản phẩm</a>
+        <a href="cart.html" class="transition-colors duration-300 hover:text-aqua">Giỏ hàng</a>
+        <a href="#technology" class="transition-colors duration-300 hover:text-aqua">Công nghệ</a>
+        <a href="#consultation" class="transition-colors duration-300 hover:text-aqua">Tư vấn</a>
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3">
         <button id="searchToggle" class="grid h-11 w-11 place-items-center rounded-full text-ink transition-colors duration-300 hover:bg-slate-100" aria-label="Open search" aria-expanded="false">
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
         </button>
+        <a href="cart.html" class="relative grid h-11 w-11 place-items-center rounded-full text-ink transition-colors duration-300 hover:bg-slate-100" aria-label="Giỏ hàng">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6h15l-1.5 8.5H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+          <span data-cart-count class="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-ember px-1 text-[10px] font-black text-ink">0</span>
+        </a>
         <a href="tel:19006418" class="hidden text-sm font-black text-navy transition-colors duration-300 hover:text-aqua xl:inline-flex">1900 6418</a>
         <button id="menuToggle" class="grid h-11 w-11 place-items-center rounded-full border border-slate-200 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
           <svg id="menuIcon" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -203,7 +222,7 @@
       <div class="overflow-hidden"><form class="mx-auto flex max-w-3xl gap-3 px-4 py-4" role="search"><label for="siteSearch" class="sr-only">Search products and services</label><input id="siteSearch" type="search" placeholder="Search products, filters, technology..." class="min-w-0 flex-1 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm outline-none focus:border-aqua"><button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">Search</button></form></div>
     </div>
     <nav id="mobileMenu" class="grid grid-rows-[0fr] border-t border-transparent bg-[#fbfdfe] transition-all duration-300 lg:hidden" aria-label="Mobile navigation">
-      <div class="overflow-hidden"><div class="space-y-1 px-4 py-4 text-base font-bold"><a href="https://karofi.com/may-loc-nuoc-28" class="block rounded-lg px-4 py-3 hover:bg-frost">Máy lọc nước</a><a href="https://karofi.com/cay-nuoc-nong-lanh-13" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc nước nóng lạnh</a><a href="https://karofi.com/hydro-ion-kiem" class="block rounded-lg px-4 py-3 hover:bg-frost">Hydro-ion Kiềm</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc tổng cao cấp</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="block rounded-lg px-4 py-3 hover:bg-frost">Lọc tổng - Đầu nguồn</a><a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep" class="block rounded-lg px-4 py-3 hover:bg-frost">Dịch vụ và hỗ trợ</a><a href="tel:19006418" class="mt-3 block rounded-lg bg-aqua px-4 py-3 text-center text-white">Hotline 1900 6418</a></div></div>
+      <div class="overflow-hidden"><div class="space-y-1 px-4 py-4 text-base font-bold"><a href="#products" class="block rounded-lg px-4 py-3 hover:bg-frost">Sản phẩm</a><a href="#technology" class="block rounded-lg px-4 py-3 hover:bg-frost">Công nghệ</a><a href="#consultation" class="block rounded-lg px-4 py-3 hover:bg-frost">Tư vấn</a><a href="cart.html" class="block rounded-lg px-4 py-3 hover:bg-frost">Giỏ hàng</a><a href="tel:19006418" class="mt-3 block rounded-lg bg-aqua px-4 py-3 text-center text-white">Hotline 1900 6418</a></div></div>
     </nav>
   </header>
 
@@ -325,12 +344,12 @@
       <div class="mx-auto max-w-7xl">
         <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div><p class="text-xs font-black uppercase tracking-[.2em] text-aqua">Sản phẩm nổi bật</p><h2 class="mt-3 text-4xl font-black tracking-[-.04em] text-ink sm:text-5xl">Công nghệ mới nhất</h2><p class="mt-4 max-w-xl text-base leading-7 text-slate-600">Khám phá năm dòng máy Hydro-ion kiềm mới với chế độ nóng, lạnh và công nghệ điện phân tiên tiến.</p></div>
-          <a href="https://karofi.com" class="inline-flex items-center gap-2 border-b-2 border-ink pb-1 text-sm font-black text-ink transition-colors duration-300 hover:border-aqua hover:text-aqua">Xem tất cả sản phẩm <span aria-hidden="true">→</span></a>
+          <a href="cart.html" class="inline-flex items-center gap-2 border-b-2 border-ink pb-1 text-sm font-black text-ink transition-colors duration-300 hover:border-aqua hover:text-aqua">Xem giỏ hàng <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="mt-12 grid grid-cols-2 grid-rows-[250px_480px_250px] gap-3 sm:grid-rows-[400px_650px_400px] sm:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)_minmax(0,1fr)] lg:grid-rows-2">
           <article class="product-card group col-start-1 row-start-1 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-1 lg:row-start-1">
-            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-sa9-premium.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+            <a href="product.html?id=sa9-premium" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
               <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
               <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-sa9-premium.png" alt="Máy lọc nước Karofi SA9 Premium" class="h-full w-full object-contain mix-blend-multiply"></div>
               <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">SA9 PREMIUM</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">11 chế độ nước · 9 điện cực Titan phủ Bạch Kim</p></div>
@@ -346,7 +365,7 @@
           </article>
 
           <article class="product-card group col-start-2 row-start-1 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-3 lg:row-start-1">
-            <a href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-kae-s688.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+            <a href="product.html?id=kae-s688" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
               <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
               <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s688.png" alt="Máy lọc nước Karofi KAE-S688" class="h-full w-full object-contain mix-blend-multiply"></div>
               <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S688</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">Nóng · lạnh · nguội Hydro-ion kiềm, pH tới 9.0</p></div>
@@ -354,7 +373,7 @@
           </article>
 
           <article class="product-card group col-start-1 row-start-3 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-1 lg:row-start-2">
-            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s695.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+            <a href="product.html?id=kae-s695" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
               <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black uppercase tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Mới nhất</span></div>
               <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s695.png" alt="Máy lọc nước Karofi KAE-S695" class="h-full w-full object-contain mix-blend-multiply"></div>
               <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S695</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">Hydro-ion kiềm gấp 3 · nóng, lạnh và nguội</p></div>
@@ -362,7 +381,7 @@
           </article>
 
           <article class="product-card group col-start-2 row-start-3 min-h-0 overflow-hidden rounded-xl bg-[#f3f5f6] transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-2xl lg:col-start-3 lg:row-start-2">
-            <a href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s88-pro-max.html" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
+            <a href="product.html?id=kae-s88-promax" class="flex h-full min-h-0 flex-col p-3 sm:p-4">
               <div class="flex justify-end"><span class="rounded-full bg-[#ff3f8e] px-2 py-1 text-[9px] font-black tracking-wider text-[#fffafd] sm:px-3 sm:text-[10px]">Bán chạy nhất</span></div>
               <div class="product-render flex min-h-0 flex-1 items-center justify-center p-1 transition-transform duration-300 sm:p-2"><img src="assets/karofi-kae-s88-promax.png" alt="Máy lọc nước Karofi KAE-S88 Promax" class="h-full w-full object-contain mix-blend-multiply"></div>
               <div class="text-center"><h3 class="text-base font-black text-ink sm:text-xl">KAE-S88 PROMAX</h3><p class="mx-auto mt-1 max-w-xs text-[11px] leading-4 text-slate-600 sm:mt-2 sm:text-sm sm:leading-5">7 điện cực Titan phủ Bạch Kim · AioTec</p></div>
@@ -390,22 +409,22 @@
             <p class="mt-2 text-2xl font-black text-ink">An tâm uống trực tiếp mỗi ngày</p>
           </div>
           <div class="mt-9 grid grid-cols-2 gap-x-5 gap-y-9 lg:grid-cols-4">
-            <a href="https://karofi.com/chung-nhan-uy-tin-ve-nuoc-uong-truc-tiep-qcvn-6-1-2010-byt-cua-bo-y-te-do-vien-suc-khoe-nghe-nghiep-va-moi-truong-cap-la-gi-bv3295.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+            <a href="#technology" class="group flex flex-col items-center text-center">
               <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/qcvn-official.png" alt="Huy hiệu QCVN 6-1:2010/BYT của Karofi" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
               <strong class="mt-4 text-sm font-black text-ink">QCVN 6-1:2010/BYT</strong>
               <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Nước sau lọc đạt quy chuẩn quốc gia về nước uống trực tiếp.</span>
             </a>
-            <a href="https://karofi.com/mang-loc-ro-sp29.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+            <a href="#technology" class="group flex flex-col items-center text-center">
               <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/made-in-usa.png" alt="Con dấu Made in USA" loading="lazy" class="max-h-full w-auto max-w-[12rem] object-contain"></span>
               <strong class="mt-4 text-sm font-black text-ink">Made in USA</strong>
               <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Màng RO Purifim được sản xuất tại Mỹ.</span>
             </a>
-            <a href="https://karofi.com/linh-phu-kien-18/mang-ro/mang-ro-purifim--usa" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+            <a href="#technology" class="group flex flex-col items-center text-center">
               <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/usa-flag.png" alt="Biểu tượng cờ Hoa Kỳ" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
               <strong class="mt-4 text-sm font-black text-ink">Màng RO chuẩn Mỹ</strong>
               <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Màng Purifim 100 GPD, loại bỏ tới 99,99% tạp chất.</span>
             </a>
-            <a href="https://shop.karofi.com/page/chinh-sach-bao-hanh-fin.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center">
+            <a href="#technology" class="group flex flex-col items-center text-center">
               <span class="flex h-32 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-36"><img src="assets/certificates/warranty-36.png" alt="Huy hiệu bảo hành 36 tháng Karofi" loading="lazy" class="max-h-full w-auto max-w-[10rem] object-contain"></span>
               <strong class="mt-4 text-sm font-black text-ink">Bảo hành 36 tháng</strong>
               <span class="mt-1 max-w-[15rem] text-xs leading-5 text-slate-500">Chính sách bảo hành sản phẩm lên đến 36 tháng.</span>
@@ -552,6 +571,18 @@
       const open = searchToggle.getAttribute('aria-expanded') !== 'true';
       setPanel(searchPanel, searchToggle, open);
       if (open) setTimeout(() => siteSearch.focus(), 200);
+    });
+
+    siteSearch.closest('form').addEventListener('submit', event => {
+      event.preventDefault();
+      const query = siteSearch.value.trim().toLowerCase();
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!query) return;
+      document.querySelectorAll('#products .product-card').forEach(card => {
+        const matches = card.textContent.toLowerCase().includes(query);
+        card.classList.toggle('ring-4', matches);
+        card.classList.toggle('ring-aqua/30', matches);
+      });
     });
 
     document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => {
@@ -828,8 +859,6 @@
     if (savedPrize) {
       try { showPrize(JSON.parse(savedPrize), false); } catch (_) { localStorage.removeItem(wheelStorageKey); }
     }
-    setWheelPopup(true);
-
     spinButton.addEventListener('click', () => {
       if (spinButton.disabled) return;
       spinButton.disabled = true;

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng | Karofi</title>
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #f7fbfd; color: #073d56; font-family: "Segoe UI", Arial, sans-serif; }
+    .karofi-toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 80;
+      transform: translateY(12px);
+      opacity: 0;
+      border-radius: 999px;
+      background: #073d56;
+      color: white;
+      padding: .8rem 1rem;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(7, 61, 86, .24);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karofi-toast.is-visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="flex items-center" aria-label="Trang chủ Karofi"><img src="assets/karofi-logo.png" alt="Karofi" class="w-40"></a>
+      <nav class="flex items-center gap-5 text-sm font-black">
+        <a href="index.html#products" class="hover:text-[#00adee]">Sản phẩm</a>
+        <a href="checkout.html" class="hover:text-[#00adee]">Thanh toán</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="flex flex-col justify-between gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-xs font-black uppercase tracking-[.2em] text-[#00adee]">Giỏ hàng</p>
+        <h1 class="mt-2 text-4xl font-black">Sản phẩm đã chọn</h1>
+      </div>
+      <a href="index.html#products" class="rounded-full border border-slate-300 px-5 py-3 text-sm font-black hover:bg-white">Tiếp tục mua</a>
+    </div>
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
+      <section id="cartItems" class="space-y-4"></section>
+
+      <aside class="h-max rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="text-xl font-black">Tóm tắt đơn hàng</h2>
+        <div class="mt-5 space-y-3 text-sm">
+          <div class="flex justify-between"><span>Số lượng</span><strong id="cartCount">0</strong></div>
+          <div class="flex justify-between border-t border-slate-200 pt-3 text-lg"><span>Tổng cộng</span><strong id="cartTotal">0 VNĐ</strong></div>
+        </div>
+        <a id="checkoutLink" href="checkout.html" class="mt-6 block rounded-full bg-[#073d56] px-6 py-4 text-center text-sm font-black text-white hover:bg-[#0b597a]">Điền thông tin giao hàng</a>
+        <button id="clearCart" type="button" class="mt-3 w-full rounded-full border border-slate-300 px-6 py-3 text-sm font-black hover:bg-slate-50">Xóa giỏ hàng</button>
+      </aside>
+    </div>
+  </main>
+
+  <script src="assets/store.js"></script>
+  <script>
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutLink = document.getElementById('checkoutLink');
+    const clearCart = document.getElementById('clearCart');
+
+    function renderCart() {
+      const lines = KarofiStore.getCartLines();
+      cartCount.textContent = KarofiStore.getCartCount();
+      cartTotal.textContent = KarofiStore.formatMoney(KarofiStore.getCartTotal());
+      checkoutLink.classList.toggle('pointer-events-none', lines.length === 0);
+      checkoutLink.classList.toggle('opacity-50', lines.length === 0);
+
+      if (!lines.length) {
+        cartItems.innerHTML = '<div class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center"><h2 class="text-2xl font-black">Giỏ hàng đang trống</h2><p class="mt-2 text-slate-600">Chọn sản phẩm để tạo đơn giao hàng.</p></div>';
+        return;
+      }
+
+      cartItems.innerHTML = lines.map((line) => `
+        <article class="grid gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-[128px_1fr_auto] sm:items-center">
+          <img src="${line.product.image}" alt="${line.product.name}" class="h-32 w-full rounded-lg bg-slate-50 object-contain">
+          <div>
+            <h2 class="text-xl font-black">${line.product.fullName}</h2>
+            <p class="mt-2 text-sm font-bold text-slate-500">${KarofiStore.formatMoney(line.product.price)}</p>
+          </div>
+          <div class="flex items-center gap-3 sm:justify-end">
+            <label class="sr-only" for="qty-${line.id}">Số lượng</label>
+            <input id="qty-${line.id}" data-qty="${line.id}" type="number" min="1" value="${line.quantity}" class="w-20 rounded-lg border border-slate-300 px-3 py-2 text-center font-black">
+            <button data-remove="${line.id}" type="button" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-black hover:bg-slate-50">Xóa</button>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-qty]').forEach((input) => {
+        input.addEventListener('change', () => {
+          KarofiStore.setQuantity(input.dataset.qty, input.value);
+          renderCart();
+        });
+      });
+      document.querySelectorAll('[data-remove]').forEach((button) => {
+        button.addEventListener('click', () => {
+          KarofiStore.setQuantity(button.dataset.remove, 0);
+          renderCart();
+        });
+      });
+    }
+
+    clearCart.addEventListener('click', () => {
+      KarofiStore.clearCart();
+      renderCart();
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

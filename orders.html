@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đơn hàng | Karofi</title>
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #f7fbfd; color: #073d56; font-family: "Segoe UI", Arial, sans-serif; }
+    .karofi-toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 80;
+      transform: translateY(12px);
+      opacity: 0;
+      border-radius: 999px;
+      background: #073d56;
+      color: white;
+      padding: .8rem 1rem;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(7, 61, 86, .24);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karofi-toast.is-visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="index.html" aria-label="Trang chủ Karofi"><img src="assets/karofi-logo.png" alt="Karofi" class="w-40"></a>
+      <nav class="flex items-center gap-5 text-sm font-black">
+        <a href="index.html#products" class="hover:text-[#00adee]">Sản phẩm</a>
+        <a href="cart.html" class="hover:text-[#00adee]">Giỏ hàng (<span data-cart-count>0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="flex flex-col justify-between gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-xs font-black uppercase tracking-[.2em] text-[#00adee]">Fulfillment</p>
+        <h1 class="mt-2 text-4xl font-black">Đơn hàng cần xử lý</h1>
+        <p class="mt-3 max-w-2xl text-slate-600">Trang quản trị đọc đơn hàng từ Supabase thông qua API của website.</p>
+      </div>
+      <button id="exportOrders" type="button" class="rounded-full bg-[#073d56] px-5 py-3 text-sm font-black text-white hover:bg-[#0b597a]">Xuất JSON</button>
+    </div>
+
+    <form id="tokenForm" class="mt-6 hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <label class="block text-sm font-black">Mã truy cập đơn hàng
+        <input id="ordersToken" autocomplete="off" class="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3 font-medium" placeholder="Nhập ADMIN_ORDERS_TOKEN">
+      </label>
+      <button type="submit" class="mt-4 rounded-full bg-[#073d56] px-5 py-3 text-sm font-black text-white hover:bg-[#0b597a]">Mở danh sách đơn</button>
+    </form>
+
+    <section id="ordersList" class="mt-8 space-y-5"></section>
+  </main>
+
+  <script src="assets/store.js"></script>
+  <script>
+    const ordersList = document.getElementById('ordersList');
+    const exportOrders = document.getElementById('exportOrders');
+    const tokenForm = document.getElementById('tokenForm');
+    const ordersToken = document.getElementById('ordersToken');
+    const adminTokenKey = 'karofi-orders-admin-token';
+    let adminToken = sessionStorage.getItem(adminTokenKey) || '';
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    async function loadOrders() {
+      return await KarofiStore.fetchServerOrders(adminToken);
+    }
+
+    async function renderOrders() {
+      const orders = await loadOrders();
+      if (!orders.length) {
+        ordersList.innerHTML = '<div class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center"><h2 class="text-2xl font-black">Chưa có đơn hàng</h2><p class="mt-2 text-slate-600">Khi khách checkout, thông tin sẽ xuất hiện ở đây.</p></div>';
+        return;
+      }
+
+      ordersList.innerHTML = orders.map((order) => {
+        const created = new Date(order.createdAt).toLocaleString('vi-VN');
+        const isNew = false;
+        const customer = order.customer || {};
+        const items = Array.isArray(order.items) ? order.items : [];
+        return `
+          <article class="rounded-xl border ${isNew ? 'border-[#00adee] ring-4 ring-[#00adee]/15' : 'border-slate-200'} bg-white p-5 shadow-sm">
+            <div class="flex flex-col justify-between gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-center">
+              <div>
+                <h2 class="text-2xl font-black">${escapeHtml(order.id)}</h2>
+                <p class="mt-1 text-sm font-bold text-slate-500">${escapeHtml(created)} · ${escapeHtml(order.status)}</p>
+              </div>
+              <strong class="text-xl">${KarofiStore.formatMoney(order.total)}</strong>
+            </div>
+            <div class="mt-5 grid gap-5 lg:grid-cols-[1fr_1fr]">
+              <div>
+                <h3 class="text-sm font-black uppercase tracking-[.12em] text-slate-400">Khách hàng</h3>
+                <dl class="mt-3 space-y-2 text-sm">
+                  <div><dt class="font-black">Tên</dt><dd>${escapeHtml(customer.name)}</dd></div>
+                  <div><dt class="font-black">Điện thoại</dt><dd><a href="tel:${escapeHtml(customer.phone)}" class="text-[#0b597a]">${escapeHtml(customer.phone)}</a></dd></div>
+                  <div><dt class="font-black">Email</dt><dd>${escapeHtml(customer.email || '-')}</dd></div>
+                  <div><dt class="font-black">Địa chỉ</dt><dd>${escapeHtml(customer.address)}</dd></div>
+                  <div><dt class="font-black">Thời gian giao</dt><dd>${escapeHtml(customer.deliveryTime || '-')}</dd></div>
+                  <div><dt class="font-black">Thanh toán</dt><dd>${escapeHtml(customer.payment)}</dd></div>
+                  <div><dt class="font-black">Ghi chú</dt><dd>${escapeHtml(customer.note || '-')}</dd></div>
+                </dl>
+              </div>
+              <div>
+                <h3 class="text-sm font-black uppercase tracking-[.12em] text-slate-400">Sản phẩm</h3>
+                <div class="mt-3 space-y-3">
+                  ${items.map((item) => `
+                    <div class="rounded-lg bg-slate-50 p-3">
+                      <p class="font-black">${escapeHtml(item.name)}</p>
+                      <p class="mt-1 text-sm text-slate-600">${escapeHtml(item.quantity)} x ${KarofiStore.formatMoney(item.price)}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    exportOrders.addEventListener('click', async () => {
+      const json = JSON.stringify(await loadOrders(), null, 2);
+      try {
+        await navigator.clipboard.writeText(json);
+        exportOrders.textContent = 'Đã sao chép JSON';
+      } catch (_) {
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'karofi-orders.json';
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+    });
+
+    tokenForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      adminToken = ordersToken.value.trim();
+      sessionStorage.setItem(adminTokenKey, adminToken);
+      tokenForm.classList.add('hidden');
+      renderOrders().catch(showOrdersError);
+    });
+
+    function showOrdersError(error) {
+      if (/token|required|unauthorized/i.test(error.message)) {
+        tokenForm.classList.remove('hidden');
+        ordersList.innerHTML = '<div class="rounded-xl border border-amber-200 bg-amber-50 p-8 text-center text-amber-900"><h2 class="text-2xl font-black">Cần mã truy cập</h2><p class="mt-2">Nhập mã quản trị để xem thông tin khách hàng.</p></div>';
+        return;
+      }
+      ordersList.innerHTML = `<div class="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-red-800"><h2 class="text-2xl font-black">Chưa kết nối được hệ thống đơn hàng</h2><p class="mt-2">${error.message}</p></div>`;
+    }
+
+    renderOrders().catch(showOrdersError);
+  </script>
+</body>
+</html>

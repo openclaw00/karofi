@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết sản phẩm | Karofi</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --blue: #0bb1eb;
+      --deep: #075a79;
+      --ink: #111315;
+      --muted: #666b70;
+      --line: #d7d7d7;
+      --soft: #f2f6f8;
+      --red: #ed1000;
+      --page: #fdfefe;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 1.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    img { max-width: 100%; display: block; }
+    :focus-visible { outline: 3px solid rgba(11, 177, 235, .45); outline-offset: 3px; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 76px;
+      border-bottom: 1px solid #cfcfcf;
+      background: rgba(253, 254, 254, .97);
+    }
+    .header-inner {
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .logo { width: 158px; flex: 0 0 auto; }
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 0 0 auto;
+    }
+    .icon-link {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--deep);
+    }
+    .icon-link svg { width: 28px; height: 28px; }
+    .icon-link span {
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      padding: 0 5px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .page {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 0 34px;
+    }
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 34px 0 42px;
+      font-size: clamp(16px, 2vw, 25px);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .breadcrumb a:last-child {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .product-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(460px, .98fr);
+      gap: 72px;
+      align-items: start;
+      padding-bottom: 74px;
+    }
+    .placeholder-carousel {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 22%, rgba(11,177,235,.18), transparent 34%),
+        linear-gradient(135deg, #f7fbfd, #e4f6fc);
+      border: 1px solid #dbe8ee;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--deep);
+      padding: 44px;
+    }
+    .placeholder-machine {
+      width: min(58%, 330px);
+      aspect-ratio: 8 / 15;
+      border-radius: 28px;
+      background: linear-gradient(160deg, #ffffff, #dcecf3);
+      border: 1px solid rgba(7,90,121,.16);
+      box-shadow: 0 30px 70px rgba(7,90,121,.18);
+      display: grid;
+      align-items: end;
+      padding: 24px;
+    }
+    .placeholder-machine::before {
+      content: "";
+      display: block;
+      width: 52%;
+      height: 46%;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 2px solid rgba(11,177,235,.35);
+      background: rgba(255,255,255,.7);
+    }
+    .placeholder-label {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 22px 0 32px;
+    }
+    .gallery-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #c7d5db;
+    }
+    .gallery-dots span:first-child { background: var(--blue); }
+    .benefit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .benefit-row div {
+      min-height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+    .benefit-row div + div { border-left: 1px solid var(--line); }
+    .product-title {
+      margin: 3px 0 22px;
+      color: var(--blue);
+      font-size: clamp(31px, 3.1vw, 42px);
+      line-height: 1.25;
+      font-weight: 900;
+    }
+    .feature-line, .water-row {
+      display: flex;
+      gap: 17px;
+      align-items: flex-start;
+      color: #777;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 12px;
+    }
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      flex: 0 0 auto;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .water-title {
+      margin: 18px 0 12px;
+      font-size: 25px;
+      font-weight: 900;
+    }
+    .water-list { display: grid; gap: 13px; }
+    .price {
+      margin: 35px 0 20px;
+      text-align: center;
+      color: var(--red);
+      font-size: clamp(36px, 4vw, 55px);
+      line-height: 1;
+      font-weight: 900;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .btn, .btn-outline {
+      min-height: 50px;
+      border-radius: 6px;
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.15;
+      padding: 0 18px;
+    }
+    .btn { border: 0; color: #fff; }
+    .btn-red { background: var(--red); }
+    .btn-blue { background: var(--blue); }
+    .btn-outline {
+      width: 100%;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+    }
+    .summary {
+      margin-top: 26px;
+      padding: 22px 26px;
+      border-radius: 10px;
+      background: #f1f1f1;
+      color: #1f1f1f;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .summary ul { margin: 0; padding-left: 22px; }
+    .summary li { margin: 0 0 7px; }
+    .summary li::marker { color: var(--blue); }
+    .tabs {
+      position: sticky;
+      top: 76px;
+      z-index: 45;
+      background: rgba(253,254,254,.97);
+      border-bottom: 2px solid #8c8c8c;
+    }
+    .tabs-inner {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 0 34px;
+      display: flex;
+      justify-content: center;
+      gap: 38px;
+      overflow-x: auto;
+    }
+    .tabs button {
+      min-width: 220px;
+      border: 0;
+      background: transparent;
+      padding: 24px 12px 20px;
+      color: #141414;
+      font-size: 21px;
+      font-weight: 900;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .tabs button.is-active { color: var(--blue); }
+    .tab-page { display: none; }
+    .tab-page.is-active { display: block; }
+    .content, .details-panel {
+      max-width: 1230px;
+      margin: 0 auto;
+      padding: 54px 34px 72px;
+    }
+    .intro-heading {
+      margin: 0 auto 26px;
+      max-width: 980px;
+      text-align: center;
+      color: var(--blue);
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.2;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .copy {
+      margin: 0 auto 28px;
+      max-width: 1010px;
+      color: #333;
+      font-size: 22px;
+      line-height: 1.65;
+      text-align: justify;
+    }
+    .section-title {
+      margin: 62px auto 22px;
+      max-width: 1000px;
+      color: var(--blue);
+      font-size: clamp(24px, 2.6vw, 38px);
+      line-height: 1.22;
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .image-block {
+      margin: 34px auto 44px;
+      max-width: 1120px;
+    }
+    .image-placeholder {
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, rgba(11,177,235,.12), rgba(7,90,121,.06)),
+        repeating-linear-gradient(45deg, #f8fbfc 0 16px, #eef7fa 16px 32px);
+      border: 1px dashed #aac8d5;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      color: var(--deep);
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .details-panel h2 {
+      margin: 0 0 22px;
+      color: var(--blue);
+      font-size: 34px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+    .details-panel h3 {
+      margin: 30px 0 10px;
+      color: #111;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+    .details-panel p, .details-panel li {
+      color: #333;
+      font-size: 19px;
+      line-height: 1.65;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .spec-group { margin-bottom: 26px; }
+    .spec-group h3 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 22px;
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr);
+      gap: 16px;
+      padding: 13px 14px;
+      background: #f4fbfe;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .spec-row:nth-child(even) { background: #eaf9fd; }
+    .spec-row strong { color: #111; }
+    footer {
+      background: #f3f7f9;
+      border-top: 1px solid #d7e2e7;
+      padding: 46px 34px;
+      color: #263238;
+      font-size: 15px;
+    }
+    .footer-inner {
+      max-width: 1580px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr .9fr;
+      gap: 34px;
+    }
+    .karofi-toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      transform: translateY(12px);
+      opacity: 0;
+      border-radius: 999px;
+      background: #073d56;
+      color: white;
+      padding: .8rem 1rem;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(7, 61, 86, .24);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karofi-toast.is-visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 980px) {
+      .primary-nav { display: none; }
+      .product-hero { grid-template-columns: 1fr; gap: 44px; }
+      .spec-grid, .footer-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .page, .content, .details-panel, .tabs-inner { padding-left: 18px; padding-right: 18px; }
+      .site-header { height: auto; }
+      .header-inner { min-height: 72px; padding: 0 16px; gap: 12px; }
+      .logo { width: 132px; }
+      .product-hero { padding-bottom: 44px; }
+      .actions, .benefit-row, .spec-row { grid-template-columns: 1fr; }
+      .benefit-row div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .copy { font-size: 18px; text-align: left; }
+      .tabs button { min-width: 180px; font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
+      <nav class="primary-nav" aria-label="Danh mục chính">
+        <a href="index.html#products">Sản phẩm</a>
+        <a href="cart.html">Giỏ hàng</a>
+        <a href="index.html#technology">Công nghệ</a>
+        <a href="index.html#consultation">Tư vấn</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-link" href="cart.html" aria-label="Giỏ hàng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span data-cart-count>0</span></a>
+        <a href="tel:19006418" style="color:var(--deep);font-size:14px;font-weight:900;white-space:nowrap;">1900 6418</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page">
+      <nav class="breadcrumb" aria-label="Đường dẫn">
+        <a href="index.html">Trang chủ</a><span>»</span>
+        <a href="index.html#products">Máy lọc nước Nóng Lạnh</a><span>»</span>
+        <a id="breadcrumbTitle" href="#">Sản phẩm</a>
+      </nav>
+
+      <section class="product-hero" aria-labelledby="product-title">
+        <div>
+          <div class="placeholder-carousel" aria-label="Ảnh sản phẩm dạng placeholder">
+            <div class="placeholder-machine"></div>
+            <div id="placeholderLabel" class="placeholder-label">Product placeholder</div>
+          </div>
+          <div class="gallery-dots" aria-label="Placeholder gallery indicators">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="benefit-row">
+            <div>Miễn phí vận chuyển toàn quốc</div>
+            <div>Miễn phí lắp đặt toàn quốc</div>
+          </div>
+        </div>
+
+        <div>
+          <h1 id="product-title" class="product-title"></h1>
+          <p class="feature-line"><span class="feature-icon">▱</span><span id="featureLine"></span></p>
+          <h2 class="water-title">Chế độ nước</h2>
+          <div id="waterList" class="water-list"></div>
+          <div id="price" class="price"></div>
+          <div class="actions">
+            <button id="buyNow" class="btn btn-red" type="button">Mua ngay</button>
+            <button id="addToCart" class="btn btn-blue" type="button">Thêm vào giỏ hàng</button>
+          </div>
+          <a class="btn-outline" href="index.html#consultation">Tư vấn ngay</a>
+          <div class="summary"><ul id="summaryList"></ul></div>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabs" aria-label="Thông tin sản phẩm">
+      <div class="tabs-inner">
+        <button class="is-active" type="button" data-tab-target="highlights">Đặc Điểm Nổi Bật⌄</button>
+        <button type="button" data-tab-target="detailsPanel">Chi Tiết Sản Phẩm⌄</button>
+        <button type="button" data-tab-target="specsPanel">Thông Số⌄</button>
+      </div>
+    </nav>
+
+    <article id="highlights" class="content tab-page is-active">
+      <h2 id="introHeading" class="intro-heading"></h2>
+      <p id="introCopy" class="copy"></p>
+      <figure class="image-block"><div class="image-placeholder">Hero image placeholder</div></figure>
+      <div id="highlightSections"></div>
+    </article>
+
+    <section id="detailsPanel" class="details-panel tab-page" aria-label="Chi Tiết Sản Phẩm">
+      <h2 id="detailsTitle"></h2>
+      <div id="detailsCopy"></div>
+    </section>
+
+    <section id="specsPanel" class="details-panel tab-page" aria-label="Thông Số">
+      <div id="specGrid" class="spec-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img class="logo" src="assets/karofi-logo.png" alt="KAROFI">
+        <p>Website bán hàng nội bộ với giỏ hàng, checkout và trang xử lý đơn hàng riêng.</p>
+      </div>
+      <div><h3>Sản phẩm</h3><p>Máy lọc nước nóng lạnh, Hydro-ion kiềm, lõi lọc và dịch vụ lắp đặt.</p></div>
+      <div><h3>Chính sách mua hàng</h3><p>Giao hàng, lắp đặt và xác nhận đơn sau khi khách gửi thông tin.</p></div>
+      <div><h3>Liên hệ</h3><p>Hotline: 1900 6418</p></div>
+    </div>
+  </footer>
+
+  <script src="assets/store.js"></script>
+  <script>
+    const products = {
+      'sa9-premium': {
+        id: 'sa9-premium',
+        title: 'Máy lọc nước nóng lạnh Hydro-ion Kiềm Karofi SA9 PREMIUM',
+        shortName: 'SA9 PREMIUM',
+        price: 49900000,
+        feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, đồng thời hỗ trợ cảnh báo lõi và kích hoạt bảo hành.',
+        waters: ['Nước nóng pha sữa, pha trà, pha mì', 'Nước nguội uống trực tiếp, nấu ăn hằng ngày', 'Nước lạnh sâu', 'Nước làm dịu da pH ~5.5', 'Hydro-ion kiềm với tùy chọn 4 mức kiềm'],
+        summary: ['11 chế độ nước cho sức khỏe và chăm sóc da.', 'Đạt chứng nhận NSF/ANSI 58 cho nước ăn-uống theo thông tin Karofi công bố.', 'Alkaline Direk sau màng RO, tùy chọn 5 mức pH cho uống và dưỡng da.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân Hydrogen.', '9 tấm điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Nước sau lọc tại vòi đạt QCVN 6-1:2010/BYT.', 'Bảo hành 36 tháng, giá đã bao gồm VAT theo trang sản phẩm.'],
+        intro: 'SA9 PREMIUM là mẫu cao nhất trong nhóm Hydro-ion kiềm nóng lạnh, tập trung vào cả uống khỏe lẫn chăm sóc da. Điểm chính của máy là tổ hợp Alkaline Direk sau màng RO, chế độ pH ~5.5, 4 mức kiềm, hệ 12+1 lõi Smax và AioTec để theo dõi chất lượng nước.',
+        sections: [
+          ['1 mức pH chăm da và 4 mức kiềm', 'Trang Karofi mô tả SA9 PREMIUM có một mức pH ~5.5 dành cho chăm sóc da, các mức kiềm pH ~8.5 - 9.5 để uống, và pH ~10.5 cho rửa rau củ quả. Đây là điểm khác biệt rõ nhất của SA9 so với các mẫu còn lại.'],
+          ['Alkaline Direk sau màng RO', 'Máy dùng màng RO kết hợp lõi muối điện phân BI-Mineral Plus để tạo nhiều mức pH. Cách bố trí này giúp SA9 vừa lọc tinh khiết vừa phục vụ các chế độ kiềm khác nhau.'],
+          ['Hydro-ion quan sát trực tiếp', 'Karofi nhấn mạnh công nghệ Hydro-ion trên SA9 cho phép người dùng nhìn thấy quá trình điện phân tạo Hydrogen, kết hợp với cụm điện cực Titan phủ Bạch Kim.'],
+          ['2 điện cực Hydro-ion tuổi thọ cao', 'Trang Karofi nêu công nghệ Hydro-ion dùng 2 tấm điện cực Titan phủ Bạch Kim, chống ăn mòn và được thiết kế cho độ bền lên đến 10 năm. Màng ngăn thế hệ mới giúp tăng hiệu suất điện phân và tăng hàm lượng Hydro-ion kiềm so với lõi thông thường.'],
+          ['7 điện cực Alkaline Direk', 'Phần Alkaline Direk của SA9 dùng 7 tấm điện cực Titan phủ Bạch Kim dạng phẳng, mở rộng diện tích tiếp xúc với nước để tăng hiệu suất điện phân. Karofi công bố hàm lượng Hydrogen lên đến 1.300 ppb và ORP tối ưu hơn -200mV cho cụm này.'],
+          ['11 chế độ nước cho gia đình cao cấp', 'SA9 chia trải nghiệm nước theo mục đích sử dụng: uống hằng ngày, chăm da, rửa rau, pha sữa, pha trà và nấu ăn. Đây là lý do trang chính thức định vị sản phẩm như một giải pháp toàn diện hơn các mẫu cơ bản.'],
+          ['Nước nóng nhanh cho trà và pha chế', 'Trang sản phẩm nhấn mạnh chế độ nóng nhanh, phù hợp pha sữa, pha mì, pha trà và các nhu cầu cần nước nóng tức thì. Đây là điểm khách thường so sánh khi chọn máy nóng-lạnh.'],
+          ['12+1 lõi Smax và RO Purifim', 'Hệ lõi Smax 12+1 được công bố là tăng hiệu quả lọc, tăng tuổi thọ và tăng cường Hydrogen, ion kiềm. Màng RO Purifim 100 GPD sản xuất tại Mỹ, công suất lọc đến 20 lít/giờ và tỷ lệ thu hồi đến 60%.'],
+          ['Smart Connect và thay lõi nhanh', 'SA9 có bộ lõi thô Smax Pro V với Smart Connect, được Karofi mô tả là hỗ trợ chống hàng giả hàng nhái và giúp thao tác thay lõi đơn giản hơn. Đây là lợi ích thực tế cho chi phí bảo trì dài hạn.'],
+          ['NSF/ANSI 58 và QCVN', 'Trang sản phẩm nêu chứng nhận NSF/ANSI 58 cho nước ăn-uống và nước sau lọc tại vòi đạt QCVN 6-1:2010/BYT. Đây là các điểm nên giữ nổi bật ở khu vực bán hàng.']
+        ],
+        details: ['Hệ lọc gồm lõi thô Smax Pro V, màng RO Purifim 100 GPD, lõi chức năng HP 6.2, lõi T33 Nano Plus và cụm hỗ trợ điện phân BI-Mineral Plus.', 'Bộ lõi thô Smax Pro V dùng cấu trúc rẻ quạt để tăng diện tích tiếp xúc, tăng hiệu quả lọc và hỗ trợ tuổi thọ lõi đến 12 tháng theo công bố Karofi.', 'Công nghệ Smart Connect được Karofi mô tả là hỗ trợ chống hàng giả hàng nhái, đồng thời việc thay lõi được thiết kế theo thao tác nhanh.'],
+        specs: {
+          'Tổng quan': [['Loại', 'Máy lọc nước nóng lạnh Hydro-ion kiềm'], ['Giá niêm yết', '49.900.000 VNĐ'], ['Số chế độ nước', '11 chế độ']],
+          'Công nghệ': [['Điện cực', '9 tấm Titan phủ Bạch Kim'], ['Công nghệ nước', 'Alkaline Direk, Hydro-ion, AioTec'], ['Hệ lõi', '12+1 lõi Smax'], ['Màng lọc', 'RO Purifim 100 GPD sản xuất tại Mỹ']],
+          'Mức nước': [['pH chăm da', '~5.5'], ['Mức kiềm uống', '~8.5 - 9.5'], ['Mức rửa rau củ', '~10.5']],
+          'Chứng nhận và dịch vụ': [['NSF/ANSI 58', 'Có theo trang sản phẩm'], ['QCVN 6-1:2010/BYT', 'Nước sau lọc tại vòi'], ['Bảo hành', '36 tháng']]
+        }
+      },
+      'kae-s688': {
+        id: 'kae-s688',
+        title: 'Máy lọc nước Hydro-ion kiềm nóng lạnh Karofi KAE-S688',
+        shortName: 'KAE-S688',
+        price: 21990000,
+        feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo thay lõi và kích hoạt bảo hành.',
+        waters: ['Nước nóng 85 - 95°C', 'Nước lạnh Hydro-ion kiềm 8 - 10°C', 'Nước Hydro-ion kiềm nguội'],
+        summary: ['3 chế độ nước: Hydro-ion kiềm trong nước lạnh và nước nguội, cộng thêm nước nóng nhanh.', 'Công nghệ điện phân Hydro-ion với 2 điện cực Titan phủ Bạch Kim.', '12 lõi lọc Smax, định vị là tăng hiệu suất và tuổi thọ.', 'Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ.', 'Lõi thô Smax Pro V tăng diện tích tiếp xúc và hiệu quả lọc.', 'Hệ lõi chức năng HP 6.2 tích hợp Hydrogen, ion kiềm và khoáng chất.', 'Sản phẩm độc quyền theo trang Karofi.'],
+        intro: 'KAE-S688 là mẫu nóng-lạnh-ngụội Hydro-ion kiềm có 3 chế độ nước, tập trung vào nước nóng nhanh, lạnh sâu và nước Hydro-ion kiềm. Trang Karofi đặt trọng tâm vào công nghệ điện phân nhìn thấy được, 12 lõi Smax, RO Purifim 100 GPD và AioTec.',
+        sections: [
+          ['Hydro-ion với 2 điện cực Titan phủ Bạch Kim', 'Trang Karofi mô tả KAE-S688 dùng 2 tấm điện cực Titan phủ Bạch Kim, kết hợp màng ngăn hiện đại để tăng hiệu suất điện phân và tăng hàm lượng Hydro-ion kiềm trong nước.'],
+          ['3 chế độ nước', 'S688 có nước nóng 85 - 95°C, nước lạnh Hydro-ion kiềm 8 - 10°C và nước Hydro-ion kiềm nguội. Karofi cũng nêu bình nóng và bình lạnh đều đến 2 lít.'],
+          ['12 lõi Smax', 'Hệ lõi Smax trên S688 được định vị là tăng công suất, tuổi thọ và bổ sung Hydro-ion kiềm, khoáng chất. Máy có thêm lõi Hydro-ion kiềm thay nhanh.'],
+          ['Smax Pro V và RO Purifim', 'Bộ lõi thô Smax Pro V dùng cấu trúc rẻ quạt để tăng diện tích tiếp xúc. Màng RO Purifim 100 GPD sản xuất tại Mỹ là lõi trung tâm của hệ lọc.'],
+          ['AioTec hằng ngày', 'AioTec được Karofi dùng để kiểm soát chất lượng nước sau lọc, cảnh báo thay lõi và kích hoạt bảo hành từ xa.'],
+          ['Nước Hydro-ion kiềm đến 1300 ppb', 'Trang Karofi nêu nước Hydro-ion kiềm trên S688 có hàm lượng Hydrogen lên tới 1300 ppb, ORP tới -150mV và pH tới khoảng 9. Đây là thông số giúp S688 khác máy nóng-lạnh thông thường.'],
+          ['2 vòi 3 khóa tiện thao tác', 'Ở phần chế độ nước, Karofi mô tả thao tác lấy nước bằng thiết kế 2 vòi 3 khóa. Chi tiết này giúp khách hình dung cách dùng thực tế thay vì chỉ đọc thông số lọc.'],
+          ['Lõi Hydro-ion kiềm thay nhanh', 'Ngoài 12 lõi Smax, S688 có thêm lõi Hydro-ion kiềm thay nhanh để bổ sung Hydrogen hoạt hóa, khoáng chất và nâng pH. Đây là phần chính thức trong mô tả hệ lõi của sản phẩm.'],
+          ['Màng RO loại bỏ tạp chất', 'Màng RO Purifim 100 GPD sản xuất tại Mỹ được Karofi mô tả là loại bỏ đến 99,99% chất độc hại gồm vi khuẩn, virus, kim loại nặng, asen và chất hữu cơ, với công suất đến 20 lít/giờ và tỷ lệ thu hồi đến 60%.'],
+          ['QCVN 6-1:2010/BYT', 'Trang S688 nêu nước sau lọc tại vòi đạt QCVN 6-1:2010/BYT do Viện sức khỏe Nghề nghiệp và Môi trường kiểm nghiệm, có thể uống trực tiếp không cần đun sôi trong điều kiện sử dụng phù hợp.'],
+          ['Smart Connect thay lõi nhanh', 'Karofi mô tả cải tiến màng và cổng kết nối giúp tháo lắp lõi cũ nhanh hơn, giảm các bước lắp dây và cút nối. Đây là lợi ích rất thực dụng nên cần xuất hiện trong trang bán hàng.']
+        ],
+        details: ['Hệ thống lọc gồm lõi thô Smax Pro V, màng RO Purifim, lõi chức năng HP 6.2 và lõi Hydro-ion kiềm thay nhanh.', 'Công nghệ Hydro-ion trên mẫu này được Karofi thiết kế dạng lõi trong suốt để người dùng quan sát quá trình điện phân.', 'Các lõi chức năng HP 6.2 được mô tả là tích hợp Hydrogen, ion kiềm và khoáng chất, phục vụ nguồn nước uống hằng ngày.'],
+        specs: {
+          'Tổng quan': [['Loại', 'Máy lọc nước Hydro-ion kiềm nóng lạnh'], ['Giá niêm yết', '21.990.000 VNĐ'], ['Chế độ nước', '3 chế độ']],
+          'Công nghệ': [['Điện cực', '2 tấm Titan phủ Bạch Kim'], ['Hệ lõi', '12 lõi Smax'], ['Màng lọc', 'RO Purifim 100 GPD sản xuất tại Mỹ'], ['AioTec', 'Có']],
+          'Vận hành': [['Nước nóng', '85 - 95°C, bình nóng đến 2 lít'], ['Nước lạnh', '8 - 10°C, bình lạnh đến 2 lít'], ['pH', 'Lên đến khoảng 9.0']],
+          'Lõi lọc': [['Lõi thô', 'Smax Pro V'], ['Lõi chức năng', 'HP 6.2'], ['Lõi bổ sung', 'Hydro-ion kiềm thay nhanh']]
+        }
+      },
+      'kae-s695': {
+        id: 'kae-s695',
+        title: 'Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S695',
+        shortName: 'KAE-S695',
+        price: 31890000,
+        feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo lõi và kích hoạt bảo hành.',
+        waters: ['Kiềm nhẹ pH ~8.5', 'Kiềm vừa pH ~9.0', 'Kiềm mạnh pH ~9.5', 'Nước nóng 85 - 95°C', 'Nước lạnh Hydro-ion 8 - 10°C', 'Nước Hydro-ion bổ sung Hydrogen, ion kiềm và khoáng chất'],
+        summary: ['Đạt NSF/ANSI 58 theo công bố Karofi cho máy lọc nước RO.', '6 chế độ nước tốt, gồm 3 mức kiềm, nước nóng, nước lạnh Hydro-ion và nước Hydro-ion.', 'Alkaline Direk tùy chọn 3 mức kiềm.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân.', '5 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Nước sau lọc đạt QCVN 6-1:2010/BYT theo trang sản phẩm.', 'Sản phẩm độc quyền theo trang Karofi.'],
+        intro: 'KAE-S695 là mẫu Hydro-ion kiềm nóng lạnh có 6 chế độ nước và thiết kế 2 vòi. Theo trang Karofi, điểm chính của máy là 5 điện cực Titan phủ Bạch Kim, Alkaline Direk 3 mức kiềm, Hydro-ion quan sát trực tiếp, 12+1 lõi Smax và màng RO Purifim 100 GPD.',
+        sections: [
+          ['6 chế độ nước', 'KAE-S695 cung cấp kiềm nhẹ pH ~8.5, kiềm vừa pH ~9.0, kiềm mạnh pH ~9.5, nước nóng 85 - 95°C, nước lạnh Hydro-ion 8 - 10°C và nước Hydro-ion bổ sung khoáng. Đây là bộ chế độ nước Karofi nêu trực tiếp trên trang sản phẩm.'],
+          ['Alkaline Direk 3 mức kiềm', 'Bộ điện phân Alkaline Direk trên S695 được dùng để tạo 3 mức nước kiềm. Máy có 5 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm và bảo hành điện cực 5 năm theo trang Karofi.'],
+          ['Hydro-ion nhìn thấy được', 'Công nghệ Hydro-ion dùng 2 tấm điện cực Titan phủ Bạch Kim, thiết kế dạng lõi trong suốt để người dùng quan sát quá trình điện phân tạo Hydro-ion kiềm.'],
+          ['1 chạm cảm ứng', 'Karofi mô tả màn hình LED cảm ứng với chế độ ECO: tự tắt khi không dùng và tự sáng khi có người đến gần.'],
+          ['12+1 lõi Smax và QCVN', 'Hệ lõi 12+1 Smax, lõi thô Smax Pro V, màng RO Purifim 100 GPD và nước sau lọc đạt QCVN 6-1:2010/BYT là các điểm nổi bật chính của S695.'],
+          ['Gấp 3 Hydro-ion kiềm', 'Karofi mô tả nước Hydro-ion kiềm của S695 là nhóm nước có Hydrogen và ion kiềm, hướng đến sử dụng hằng ngày. Trang sản phẩm nhấn mạnh khả năng tạo hàm lượng Hydro-ion kiềm cao hơn thông thường.'],
+          ['Hệ lõi 12+1 tăng hiệu suất và tuổi thọ', 'S695 dùng hệ 12+1 lõi Smax, được định vị là gấp 2 hiệu suất và gấp 2 tuổi thọ. Đây là phần mô tả quan trọng vì nó giải thích vì sao máy không chỉ là máy nóng-lạnh mà còn là hệ lọc nhiều cấp.'],
+          ['T33 Nano Plus và HP 6.2', 'Hệ lõi chức năng HP 6.2 tích hợp Hydrogen, ion kiềm và khoáng chất, đồng thời bổ sung T33 Nano Plus để ổn định chất lượng nước đầu ra. Đây là chi tiết chính thức trong danh sách điểm nổi bật của S695.'],
+          ['Thay lõi 1 thao tác', 'Trang Karofi nêu việc thay thế lõi lọc dễ dàng chỉ với một thao tác. Nội dung này nên nằm trong trang sản phẩm vì khách mua máy lọc nước thường cân nhắc chi phí và độ phiền khi bảo trì.']
+        ],
+        details: ['Hệ lọc gồm nhóm lõi thô Smax Pro V, màng RO Purifim 100 GPD, lõi điện phân Hydro-ion, bộ điện phân Alkaline Direk và hệ lõi chức năng HP 6.2.', 'Hệ lõi chức năng HP 6.2 được Karofi mô tả là tích hợp Hydrogen, ion kiềm và khoáng chất, bổ sung thêm T33 Nano Plus.', 'Thiết kế 2 vòi và màn hình cảm ứng giúp tách bạch thao tác lấy nước nóng, lạnh, nguội và kiềm.'],
+        specs: {
+          'Tổng quan': [['Loại', 'Máy lọc nước nóng lạnh Hydro-ion kiềm'], ['Giá niêm yết', '31.890.000 VNĐ'], ['Thiết kế vòi', '2 vòi'], ['Số chế độ nước', '6 chế độ']],
+          'Chế độ nước': [['Mức kiềm', 'pH ~8.5 - 9.0 - 9.5'], ['Nước nóng', '85 - 95°C, bình nóng đến 2 lít'], ['Nước lạnh Hydro-ion', '8 - 10°C, bình lạnh đến 2 lít']],
+          'Công nghệ': [['Điện cực Alkaline Direk', '5 tấm Titan phủ Bạch Kim'], ['Hydro-ion', '2 tấm điện cực Titan phủ Bạch Kim'], ['Hệ lõi', '12+1 lõi Smax'], ['Màng lọc', 'RO Purifim 100 GPD sản xuất tại Mỹ']],
+          'Chứng nhận và tiện ích': [['NSF/ANSI 58', 'Có theo trang sản phẩm'], ['QCVN 6-1:2010/BYT', 'Có theo trang sản phẩm'], ['AioTec', 'Có'], ['Điều khiển', 'Màn hình LED cảm ứng, ECO']]
+        }
+      },
+      'kae-s88-promax': {
+        id: 'kae-s88-promax',
+        title: 'Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S88 PROMAX',
+        shortName: 'KAE-S88 PROMAX',
+        price: 39490000,
+        feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo lõi và kích hoạt bảo hành.',
+        waters: ['3 mức kiềm pH ~8.5 - 9.0 - 9.5', 'Nước nóng ~45°C', 'Nước nóng ~75°C', 'Nước nóng ~99°C', 'Nước Hydro-ion kiềm lạnh', 'Nước Hydro-ion kiềm nguội'],
+        summary: ['8 chế độ nước tốt theo trang sản phẩm.', 'Alkaline Direk tùy chọn 3 mức kiềm.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân.', '7 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Hệ lõi thô Smax Pro V tăng diện tích tiếp xúc và hiệu quả lọc.', 'Hệ lõi chức năng HP 6.2 bổ sung Hydrogen, ion kiềm và khoáng chất.', 'Cập nhật tháng 7/2025: đổi từ màng UF sang lõi Bi-mineral theo trang Karofi.'],
+        intro: 'KAE-S88 PROMAX là mẫu nóng-lạnh-ngụội Hydro-ion kiềm có 8 chế độ nước, Alkaline Direk 3 mức kiềm, Hydro-ion quan sát trực tiếp và hệ lõi 12+1 Smax. Trang Karofi nhấn mạnh bộ 7 điện cực Titan phủ Bạch Kim, màng RO Purifim 100 GPD và AioTec.',
+        sections: [
+          ['Hydro-ion quan sát trực tiếp', 'Karofi mô tả công nghệ Hydro-ion trên S88 Promax bằng lõi trong suốt, cho phép người dùng quan sát quá trình tạo Hydro-ion kiềm. Hệ này dùng điện cực Titan phủ Bạch Kim và màng ngăn để tăng hiệu suất điện phân.'],
+          ['Alkaline Direk 3 mức kiềm', 'Alkaline Direk dùng 5 tấm điện cực Titan phủ Bạch Kim để tạo các mức pH ~8.5, ~9.0 và ~9.5. Trang Karofi cũng nêu hàm lượng Hydrogen lên đến 1300 ppb cho hệ nước kiềm.'],
+          ['8 chế độ nước và 5 mức nhiệt', 'S88 Promax có nước nóng ~45°C, ~75°C và ~99°C, nước Hydro-ion kiềm lạnh, nước Hydro-ion kiềm nguội và 3 mức kiềm. Cách chia này phục vụ pha sữa, pha trà, nấu ăn, uống trực tiếp và giải khát.'],
+          ['7 điện cực Titan phủ Bạch Kim', 'Điểm bán hàng lớn của S88 Promax là 7 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm, bảo hành điện cực 5 năm và bảo dưỡng định kỳ trong thời gian bảo hành cho khách đăng ký.'],
+          ['Hệ lọc 12+1 Smax', 'Trang sản phẩm nêu lõi thô Smax Pro V, màng RO Purifim 100 GPD, lõi Hydro-ion và cụm lõi chức năng HP 6.2. Cập nhật tháng 7/2025 thay UF bằng lõi Bi-mineral cũng được giữ trong trang này.'],
+          ['Gấp 3 Hydro-ion kiềm', 'S88 Promax được Karofi mô tả là tạo nước chứa Hydrogen và ion kiềm, hướng đến sử dụng hằng ngày. Trang chính thức nhấn mạnh khả năng tạo hàm lượng Hydro-ion kiềm cao gấp 3 thông thường.'],
+          ['pH cá nhân hóa theo thói quen', 'Ba mức pH ~8.5, ~9.0 và ~9.5 được mô tả cho các nhu cầu khác nhau: người mới bắt đầu, người đã uống quen và các nhu cầu uống, nấu ăn, pha trà. Phần này giúp trang bán hàng giải thích rõ hơn vì sao cần nhiều mức kiềm.'],
+          ['Nóng nhanh và lạnh sâu', 'S88 Promax kết hợp nóng nhanh nhiều mức nhiệt với làm lạnh sâu Block. Trang chính thức nêu nước lạnh Hydro-ion kiềm xuống khoảng 8°C và nước nóng có các mốc ~45°C, ~75°C, ~99°C.'],
+          ['AioTec kiểm soát qua điện thoại', 'Công nghệ AioTec trên S88 Promax được mô tả là giám sát chất lượng nước từ xa qua điện thoại. Đây là phần nên đặt cạnh thông tin bảo trì vì nó hỗ trợ việc kiểm tra lõi và trạng thái máy.'],
+          ['Smax Pro V tiết kiệm chi phí lõi', 'Hệ lõi thô Smax Pro V được Karofi nêu là tăng hiệu suất, tuổi thọ và tiết kiệm chi phí thay lõi trong vòng đời sử dụng. Đây là điểm giúp giải thích giá trị vận hành dài hạn.'],
+          ['Lõi Bi-mineral sau cập nhật 7/2025', 'Trang chính thức ghi chú bản cập nhật tháng 7/2025 đổi từ màng UF sang lõi Bi-mineral. Giữ chi tiết này trên trang giúp nội dung không bị lỗi thời so với thông tin sản phẩm hiện tại.']
+        ],
+        details: ['Hệ thống lọc gồm nhóm lọc thô Smax Pro V, màng RO Purifim, lõi điện phân Hydro-ion, bộ điện phân Alkaline Direk và nhóm lõi chức năng HP 6.2.', 'Công nghệ Hydro-ion trên trang Karofi nêu 7 tấm điện cực Titanium mạ Bạch Kim dạng mắt lưới, giúp chia nhỏ phân tử nước và tăng hiệu suất điện phân.', 'Alkaline Direk dùng 5 tấm điện cực Titanium mạ Bạch Kim, tùy chọn pH 8.5 - 9.0 - 9.5 và chỉ số ORP tối ưu được Karofi công bố đến khoảng -600mV.', 'Hệ lõi chức năng HP 6.2 bổ sung Hydrogen, ion kiềm và khoáng chất; bản cập nhật tháng 7/2025 đổi từ màng UF sang lõi Bi-mineral.'],
+        specs: {
+          'Tổng quan': [['Loại', 'Máy lọc nước nóng lạnh Hydro-ion kiềm'], ['Giá niêm yết', '39.490.000 VNĐ'], ['Số chế độ nước', '8 chế độ']],
+          'Công nghệ': [['Điện cực Hydro-ion', '7 điện cực Titan phủ Bạch Kim'], ['Điện cực Alkaline Direk', '5 tấm Titan phủ Bạch Kim'], ['Alkaline Direk', '3 mức kiềm pH ~8.5 - 9.5'], ['Hydrogen', 'Đến khoảng 1300 ppb theo trang sản phẩm']],
+          'Nhiệt độ': [['Nước nóng', '~45°C, ~75°C, ~99°C'], ['Nước lạnh', 'Hydro-ion kiềm lạnh sâu'], ['Màng lọc', 'RO Purifim 100 GPD sản xuất tại Mỹ']],
+          'Lõi lọc và cập nhật': [['Hệ lõi', '12+1 lõi Smax'], ['Lõi thô', 'Smax Pro V'], ['Lõi chức năng', 'HP 6.2'], ['Cập nhật 7/2025', 'Đổi từ màng UF sang lõi Bi-mineral']]
+        }
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const product = products[params.get('id')] || products['sa9-premium'];
+    document.title = `${product.shortName} | Karofi`;
+    document.getElementById('breadcrumbTitle').textContent = product.title;
+    document.getElementById('product-title').textContent = product.title;
+    document.getElementById('placeholderLabel').textContent = product.shortName;
+    document.getElementById('featureLine').textContent = product.feature;
+    document.getElementById('price').textContent = KarofiStore.formatMoney(product.price);
+    document.getElementById('introHeading').textContent = product.title;
+    document.getElementById('introCopy').textContent = product.intro;
+    document.getElementById('detailsTitle').textContent = `Tác dụng của các lõi lọc trong ${product.shortName}`;
+
+    document.getElementById('waterList').innerHTML = product.waters.map((item) => `<div class="water-row"><span class="feature-icon">•</span><span>${item}</span></div>`).join('');
+    document.getElementById('summaryList').innerHTML = product.summary.map((item) => `<li>${item}</li>`).join('');
+    document.getElementById('highlightSections').innerHTML = product.sections.map((section, index) => `
+      <h2 class="section-title">${section[0]}</h2>
+      <p class="copy">${section[1]}</p>
+      <figure class="image-block"><div class="image-placeholder">${product.shortName} image placeholder ${index + 1}</div></figure>
+    `).join('');
+    document.getElementById('detailsCopy').innerHTML = product.details.map((item, index) => `
+      <h3>${index + 1}. ${item.split('.')[0]}</h3>
+      <p>${item}</p>
+    `).join('');
+    document.getElementById('specGrid').innerHTML = Object.entries(product.specs).map(([group, rows]) => `
+      <section class="spec-group">
+        <h3>${group}</h3>
+        ${rows.map(([label, value]) => `<div class="spec-row"><strong>${label}</strong><span>${value}</span></div>`).join('')}
+      </section>
+    `).join('');
+    document.getElementById('buyNow').dataset.buyNow = product.id;
+    document.getElementById('addToCart').dataset.addToCart = product.id;
+
+    document.querySelectorAll('[data-tab-target]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-page').forEach((page) => page.classList.toggle('is-active', page.id === button.dataset.tabTarget));
+        document.querySelectorAll('[data-tab-target]').forEach((tab) => tab.classList.toggle('is-active', tab === button));
+        document.querySelector('.tabs').scrollIntoView({ block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

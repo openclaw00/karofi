@@ -430,6 +430,47 @@
     .summary li { margin: 0 0 7px; }
     .summary li::marker { color: var(--blue); }
     .summary a { color: var(--blue); font-style: italic; }
+    .cart-link {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--deep);
+    }
+    .cart-link svg { width: 28px; height: 28px; }
+    .cart-link span {
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      padding: 0 5px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .karofi-toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 130;
+      transform: translateY(12px);
+      opacity: 0;
+      border-radius: 999px;
+      background: #073d56;
+      color: white;
+      padding: .8rem 1rem;
+      font-weight: 800;
+      box-shadow: 0 18px 45px rgba(7, 61, 86, .24);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karofi-toast.is-visible { opacity: 1; transform: translateY(0); }
 
     .tabs {
       position: sticky;
@@ -675,9 +716,11 @@
       height: 31px;
       border: 1px solid var(--blue);
       border-radius: 16px;
+      background: transparent;
       color: var(--blue);
       font-size: 14px;
       font-weight: 900;
+      cursor: pointer;
     }
 
     footer {
@@ -742,23 +785,22 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a href="https://karofi.xyz" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
+      <a href="index.html" aria-label="Karofi"><img class="logo" src="assets/karofi-logo.png" alt="KAROFI"></a>
       <nav class="primary-nav" aria-label="Danh mục chính">
-        <a href="https://karofi.com/may-loc-nuoc-28">Máy lọc nước</a>
-        <a href="https://karofi.com/cay-nuoc-nong-lanh-13">Lọc nước nóng lạnh</a>
-        <a href="https://karofi.com/hydro-ion-kiem">Hydro-ion Kiềm</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep/may-loc-nuoc-tong-cao-cap">Lọc tổng cao cấp</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep">Lọc tổng - Đầu nguồn</a>
-        <a href="https://karofi.com/he-thong-loc-nuoc-cong-nghiep">Dịch vụ và hỗ trợ</a>
+        <a href="index.html#products">Sản phẩm</a>
+        <a href="cart.html">Giỏ hàng</a>
+        <a href="index.html#technology">Công nghệ</a>
+        <a href="index.html#consultation">Tư vấn</a>
       </nav>
       <div class="header-actions" aria-label="Thao tác nhanh">
         <button id="searchToggle" class="icon-button" type="button" aria-label="Mở tìm kiếm" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></button>
+        <a class="cart-link" href="cart.html" aria-label="Giỏ hàng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span data-cart-count>0</span></a>
         <a class="phone-link" href="tel:19006418">1900 6418</a>
       </div>
     </div>
     <div id="searchPanel" class="search-panel">
       <div class="search-panel-inner">
-        <form class="search-form" action="https://karofi.com/tim-kiem" method="get" role="search">
+        <form class="search-form" role="search">
           <label class="sr-only" for="siteSearch">Tìm kiếm sản phẩm</label>
           <input id="siteSearch" name="keyword" type="search" placeholder="Tìm kiếm sản phẩm..." autocomplete="off">
           <button type="submit">Search</button>
@@ -811,11 +853,11 @@
           <h1 id="product-title" class="product-title">Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi DIAMOND SA66</h1>
           <div class="share">
             <span>Chia sẻ sản phẩm:</span>
-            <a class="social" href="https://www.facebook.com/sharer/sharer.php?u=https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ trên Facebook"><img src="assets/social-facebook.png" alt=""></a>
-            <a class="social" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ trên LinkedIn"><img src="assets/social-linkedin.png" alt=""></a>
-            <a class="social" href="https://www.instagram.com/stories/share/?url=https%3A%2F%2Fkarofi.com%2Fmay-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ trên Instagram"><img src="assets/social-instagram.png" alt=""></a>
-            <a class="social" href="https://wa.me/?text=https%3A%2F%2Fkarofi.com%2Fmay-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ trên WhatsApp"><img src="assets/social-whatsapp.png" alt=""></a>
-            <a class="social" href="https://www.tiktok.com/share?url=https%3A%2F%2Fkarofi.com%2Fmay-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ trên TikTok"><img src="assets/social-tiktok.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên Facebook"><img src="assets/social-facebook.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên LinkedIn"><img src="assets/social-linkedin.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên Instagram"><img src="assets/social-instagram.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên WhatsApp"><img src="assets/social-whatsapp.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên TikTok"><img src="assets/social-tiktok.png" alt=""></a>
           </div>
           <p class="feature-line"><span class="feature-icon">▱</span><span>Công nghệ AioTec: Kiểm soát chất lượng nước hàng ngày trên điện thoại di động</span></p>
           <h2 class="water-title">Chế độ nước</h2>
@@ -827,10 +869,10 @@
           </div>
           <div class="price">59.000.000 VNĐ</div>
           <div class="actions">
-            <a class="btn btn-red" href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html">Mua ngay</a>
-            <a class="btn btn-blue" href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html">Thêm vào giỏ hàng</a>
+            <button class="btn btn-red" type="button" data-buy-now="diamond-sa66">Mua ngay</button>
+            <button class="btn btn-blue" type="button" data-add-to-cart="diamond-sa66">Thêm vào giỏ hàng</button>
           </div>
-          <a class="btn-outline" href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-diamond-sa66.html">Tư vấn ngay</a>
+          <a class="btn-outline" href="index.html#consultation">Tư vấn ngay</a>
           <div class="summary">
             <ul>
               <li>Hệ 12 lõi Xmax tích hợp hiệu suất cao - đúc nguyên khối: gấp 3 diện tích tiếp xúc, gấp 2 hiệu quả lọc</li>
@@ -1050,7 +1092,7 @@
               <li>Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ</li>
               <li>Công nghệ AioTec giúp kiểm soát chất lượng nước hàng ngày</li>
             </ul>
-            <a class="compare-btn" href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-sa9-premium.html">⊜ So sánh</a>
+            <button class="compare-btn" type="button" data-add-to-cart="sa9-premium">Thêm vào giỏ</button>
           </article>
           <article class="card">
             <div class="card-image"><img src="assets/karofi-kae-s695.png" alt="Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S695"></div>
@@ -1064,7 +1106,7 @@
               <li>Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ</li>
               <li>AioTec giám sát chất lượng nước từ xa qua màn hình LED hoặc điện thoại</li>
             </ul>
-            <a class="compare-btn" href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s695.html">⊜ So sánh</a>
+            <button class="compare-btn" type="button" data-add-to-cart="kae-s695">Thêm vào giỏ</button>
           </article>
           <article class="card">
             <div class="card-image"><img src="assets/karofi-kae-s688.png" alt="Máy lọc nước Hydro-ion kiềm nóng lạnh Karofi KAE-S688"></div>
@@ -1078,7 +1120,7 @@
               <li>Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ</li>
               <li>AioTec kiểm soát chất lượng nước, cảnh báo thay lõi và kích hoạt bảo hành</li>
             </ul>
-            <a class="compare-btn" href="https://karofi.com/may-loc-nuoc-hydro-ion-kiem-nong-lanh-karofi-kae-s688.html">⊜ So sánh</a>
+            <button class="compare-btn" type="button" data-add-to-cart="kae-s688">Thêm vào giỏ</button>
           </article>
           <article class="card">
             <div class="card-image"><span class="label-new">MỚI NHẤT</span><img src="assets/karofi-kae-s88-promax.png" alt="Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S88 PROMAX"></div>
@@ -1092,7 +1134,7 @@
               <li>Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ</li>
               <li>3 mức kiềm pH 8.5 - 9.0 - 9.5 cùng nước nóng nhanh và lạnh sâu</li>
             </ul>
-            <a class="compare-btn" href="https://karofi.com/may-loc-nuoc-nong-lanh-hydro-ion-kiem-karofi-kae-s88-pro-max.html">⊜ So sánh</a>
+            <button class="compare-btn" type="button" data-add-to-cart="kae-s88-promax">Thêm vào giỏ</button>
           </article>
         </div>
       </section>
@@ -1120,6 +1162,7 @@
       </div>
     </div>
   </footer>
+  <script src="assets/store.js"></script>
   <script>
     const searchToggle = document.getElementById('searchToggle');
     const searchPanel = document.getElementById('searchPanel');
@@ -1139,6 +1182,20 @@
       searchToggle.setAttribute('aria-expanded', String(open));
       searchPanel.classList.toggle('is-open', open);
       if (open) setTimeout(() => siteSearch.focus(), 120);
+    });
+
+    siteSearch.closest('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      window.location.href = `index.html#products`;
+    });
+
+    document.querySelectorAll('.social[href="#"]').forEach((link) => {
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+        if (navigator.share) {
+          await navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+        }
+      });
     });
 
     function showCarouselSlide(index) {
