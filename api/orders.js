@@ -381,14 +381,43 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
-async function sendOrderEmail(order) {
-  if (!resendApiKey || !orderEmailTo) {
-    throw new Error('Email is not configured. Set RESEND_API_KEY and ORDER_EMAIL_TO in Vercel.');
-  }
-
-  const itemsHtml = order.items.map((item) => (
+function orderItemsHtml(order) {
+  return order.items.map((item) => (
     `<li>${escapeHtml(item.quantity)} x ${escapeHtml(item.name)} - ${escapeHtml(formatMoney(item.price * item.quantity))}</li>`
   )).join('');
+}
+
+async function sendEmail({ to, subject, html }) {
+  if (!resendApiKey) {
+    throw new Error('Email is not configured. Set RESEND_API_KEY in Vercel.');
+  }
+  if (!to || !to.length) {
+    throw new Error('Email recipient is not configured.');
+  }
+
+  const recipients = Array.isArray(to) ? to : String(to).split(',').map((email) => email.trim()).filter(Boolean);
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${resendApiKey}`,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      from: orderEmailFrom,
+      to: recipients,
+      subject,
+      html
+    })
+  });
+
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.message || `Email send failed (${response.status})`);
+}
+
+async function sendInternalOrderEmail(order) {
+  if (!orderEmailTo) {
+    throw new Error('ORDER_EMAIL_TO is not configured in Vercel.');
+  }
 
   const html = `
     <h1>New Karofi order: ${escapeHtml(order.id)}</h1>
@@ -404,25 +433,70 @@ async function sendOrderEmail(order) {
       <strong>Note:</strong> ${escapeHtml(order.customer.note || '-')}
     </p>
     <h2>Items</h2>
-    <ul>${itemsHtml}</ul>
+    <ul>${orderItemsHtml(order)}</ul>
   `;
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${resendApiKey}`,
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: orderEmailFrom,
-      to: orderEmailTo.split(',').map((email) => email.trim()).filter(Boolean),
-      subject: `New Karofi COD order ${order.id}`,
-      html
-    })
+  await sendEmail({
+    to: orderEmailTo,
+    subject: `New Karofi COD order ${order.id}`,
+    html
   });
+}
 
-  const result = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(result.message || `Email send failed (${response.status})`);
+async function sendCustomerOrderEmail(order) {
+  if (!order.customer.email) {
+    return false;
+  }
+
+  const html = `
+    <h1>Karofi đã nhận đơn hàng ${escapeHtml(order.id)}</h1>
+    <p>Cảm ơn ${escapeHtml(order.customer.name)}. Nhân viên Karofi sẽ liên hệ xác nhận thông tin giao hàng và lắp đặt trong thời gian sớm nhất.</p>
+    <p><strong>Tổng cộng:</strong> ${escapeHtml(formatMoney(order.total))}</p>
+    <h2>Thông tin giao hàng</h2>
+    <p>
+      <strong>Điện thoại:</strong> ${escapeHtml(order.customer.phone)}<br>
+      <strong>Địa chỉ:</strong> ${escapeHtml(order.customer.address)}<br>
+      <strong>Thời gian mong muốn:</strong> ${escapeHtml(order.customer.deliveryTime || '-')}<br>
+      <strong>Thanh toán:</strong> ${escapeHtml(order.customer.payment)}<br>
+      <strong>Ghi chú:</strong> ${escapeHtml(order.customer.note || '-')}
+    </p>
+    <h2>Sản phẩm</h2>
+    <ul>${orderItemsHtml(order)}</ul>
+    <p>Nếu cần hỗ trợ nhanh, vui lòng gọi hotline 1900 6418.</p>
+  `;
+
+  await sendEmail({
+    to: order.customer.email,
+    subject: `Karofi xác nhận đơn hàng ${order.id}`,
+    html
+  });
+  return true;
+}
+
+async function sendOrderEmails(order) {
+  const result = {
+    internalEmailSent: false,
+    internalEmailError: '',
+    customerEmailSent: false,
+    customerEmailError: ''
+  };
+
+  try {
+    await sendInternalOrderEmail(order);
+    result.internalEmailSent = true;
+  } catch (error) {
+    result.internalEmailError = error.message;
+    console.error(`Order ${order.id} was saved, but internal email notification failed: ${error.message}`);
+  }
+
+  try {
+    result.customerEmailSent = await sendCustomerOrderEmail(order);
+  } catch (error) {
+    result.customerEmailError = error.message;
+    console.error(`Order ${order.id} was saved, but customer confirmation email failed: ${error.message}`);
+  }
+
+  return result;
 }
 
 module.exports = async function handler(request, response) {
@@ -452,16 +526,13 @@ module.exports = async function handler(request, response) {
       }
 
       const order = await saveOrder(createOrder(validated.order));
-      let emailSent = false;
-      let emailError = '';
-      try {
-        await sendOrderEmail(order);
-        emailSent = true;
-      } catch (error) {
-        emailError = error.message;
-        console.error(`Order ${order.id} was saved, but email notification failed: ${emailError}`);
-      }
-      response.status(201).json({ order, emailSent, emailError });
+      const emailResult = await sendOrderEmails(order);
+      response.status(201).json({
+        order,
+        emailSent: emailResult.internalEmailSent,
+        emailError: emailResult.internalEmailError,
+        ...emailResult
+      });
     } catch (error) {
       const status = error.message === 'Invalid JSON body' || error.message === 'Request body too large' ? 400 : 500;
       response.status(status).json({ error: error.message });

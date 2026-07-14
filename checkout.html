@@ -126,8 +126,8 @@
         const order = result.order;
         KarofiStore.clearCart();
         sessionStorage.setItem('karofi-last-order-id', order.id);
-        const emailWarning = result.emailSent === false ? '&emailWarning=1' : '';
-        window.location.href = `thank-you.html?order=${encodeURIComponent(order.id)}${emailWarning}`;
+        const customerEmailSent = result.customerEmailSent ? '&email=sent' : '';
+        window.location.href = `thank-you.html?order=${encodeURIComponent(order.id)}${customerEmailSent}`;
       } catch (error) {
         alert(`Không gửi được đơn hàng. Vui lòng thử lại hoặc gọi hotline. Chi tiết: ${error.message}`);
       } finally {

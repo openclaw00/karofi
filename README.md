@@ -16,12 +16,13 @@ Open `http://localhost:4173`.
 
 Checkout posts orders to `POST /api/orders`.
 
-On Vercel, `api/orders.js` does two things:
+On Vercel, `api/orders.js` does three things:
 
 - Saves the order to Supabase.
-- Sends an email notification through Resend.
+- Sends an internal order notification through Resend.
+- Sends a customer order-summary email when the customer enters an email address.
 
-Supabase is the source of truth. If the email notification fails, checkout still succeeds and the confirmation page warns that the saved order should be checked in the database.
+Supabase is the source of truth. If email fails, checkout still succeeds and the order remains saved in the database.
 
 ## Supabase setup
 
@@ -59,7 +60,7 @@ Do not put `SUPABASE_SERVICE_ROLE_KEY` in browser code. It belongs only in Verce
 ## Email setup
 
 1. Create a Resend account.
-2. Verify your sending domain, or use Resend's test sender while developing.
+2. Verify your sending domain. Customer confirmation emails require a verified sender domain.
 3. Add these environment variables in Vercel:
 
 ```sh
