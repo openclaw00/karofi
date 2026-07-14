@@ -12,12 +12,15 @@
       --ink: #111315;
       --muted: #666b70;
       --line: #d7d7d7;
-      --soft: #f2f6f8;
+      --soft: #f2f2f2;
       --red: #ed1000;
       --page: #fdfefe;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      zoom: 80%;
+    }
     body {
       margin: 0;
       background: var(--page);
@@ -71,10 +74,21 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       flex: 0 0 auto;
     }
-    .icon-link {
+    .icon-button {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      background: transparent;
+      color: #0d0d0d;
+      padding: 0;
+      cursor: pointer;
+    }
+    .icon-button svg { width: 100%; height: 100%; stroke-width: 2.1; }
+    .cart-link {
       position: relative;
       width: 38px;
       height: 38px;
@@ -82,8 +96,8 @@
       place-items: center;
       color: var(--deep);
     }
-    .icon-link svg { width: 28px; height: 28px; }
-    .icon-link span {
+    .cart-link svg { width: 28px; height: 28px; }
+    .cart-link span {
       position: absolute;
       right: -7px;
       top: -7px;
@@ -98,6 +112,51 @@
       font-size: 11px;
       font-weight: 900;
       line-height: 1;
+    }
+    .phone-link {
+      color: var(--deep);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .search-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      border-top: 1px solid transparent;
+      background: #fdfefe;
+      transition: grid-template-rows .25s ease, border-color .25s ease;
+    }
+    .search-panel.is-open {
+      grid-template-rows: 1fr;
+      border-color: #d7d7d7;
+    }
+    .search-panel-inner { overflow: hidden; }
+    .search-form {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      gap: 10px;
+    }
+    .search-form input {
+      min-width: 0;
+      flex: 1;
+      border: 1px solid #cfd8dd;
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .search-form button {
+      border: 0;
+      border-radius: 999px;
+      background: var(--deep);
+      color: #fff;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
     }
     .page {
       max-width: 1580px;
@@ -126,85 +185,114 @@
       align-items: start;
       padding-bottom: 74px;
     }
-    .placeholder-carousel {
+    .gallery-main {
       position: relative;
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
+      padding: 0;
+      aspect-ratio: 1 / 1;
+      display: block;
+    }
+    .product-carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
       aspect-ratio: 1 / 1;
       border-radius: 18px;
       overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 22%, rgba(11,177,235,.18), transparent 34%),
-        linear-gradient(135deg, #f7fbfd, #e4f6fc);
-      border: 1px solid #dbe8ee;
+      background: transparent;
+    }
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .carousel-slide.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #f6f8f9;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(7,90,121,.16);
+      border-radius: 50%;
+      background: rgba(253,254,254,.92);
+      color: var(--deep);
       display: grid;
       place-items: center;
-      text-align: center;
-      color: var(--deep);
-      padding: 44px;
+      cursor: pointer;
+      transform: translateY(-50%);
+      box-shadow: 0 10px 24px rgba(7,90,121,.16);
     }
-    .placeholder-machine {
-      width: min(58%, 330px);
-      aspect-ratio: 8 / 15;
-      border-radius: 28px;
-      background: linear-gradient(160deg, #ffffff, #dcecf3);
-      border: 1px solid rgba(7,90,121,.16);
-      box-shadow: 0 30px 70px rgba(7,90,121,.18);
-      display: grid;
-      align-items: end;
-      padding: 24px;
+    .carousel-button:hover { background: #fdfefe; }
+    .carousel-button svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2.4;
     }
-    .placeholder-machine::before {
-      content: "";
-      display: block;
-      width: 52%;
-      height: 46%;
-      margin: 0 auto;
-      border-radius: 18px;
-      border: 2px solid rgba(11,177,235,.35);
-      background: rgba(255,255,255,.7);
-    }
-    .placeholder-label {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      bottom: 28px;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
+    .carousel-button.prev { left: 18px; }
+    .carousel-button.next { right: 18px; }
     .gallery-dots {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      padding: 22px 0 32px;
+      align-items: center;
+      gap: 18px;
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
     }
-    .gallery-dots span {
-      width: 12px;
-      height: 12px;
+    .gallery-dots button {
+      width: 11px;
+      height: 11px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
-      background: #c7d5db;
+      background: rgba(17,19,21,.36);
+      cursor: pointer;
+      transition: background-color .2s ease, transform .2s ease;
     }
-    .gallery-dots span:first-child { background: var(--blue); }
+    .gallery-dots button.is-active {
+      background: var(--blue);
+      transform: scale(1.08);
+    }
     .benefit-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
+      gap: 40px;
+      margin-top: 44px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+    .benefit-icon {
+      margin: 0 auto 4px;
+      width: 112px;
+      height: 74px;
+      display: grid;
+      place-items: center;
       color: var(--blue);
-      font-size: 18px;
+      font-size: 48px;
       font-weight: 900;
     }
-    .benefit-row div {
-      min-height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 18px;
-      text-align: center;
+    .benefit-icon svg {
+      width: 54px;
+      height: 54px;
+      display: block;
+      fill: currentColor;
     }
-    .benefit-row div + div { border-left: 1px solid var(--line); }
     .product-title {
       margin: 3px 0 22px;
       color: var(--blue);
@@ -221,6 +309,28 @@
       font-weight: 700;
       line-height: 1.35;
       margin: 0 0 12px;
+    }
+    .share {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 34px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .social {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .social img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
     }
     .feature-icon {
       width: 34px;
@@ -298,29 +408,35 @@
       max-width: 1580px;
       margin: 0 auto;
       padding: 0 34px;
-      display: flex;
-      justify-content: center;
-      gap: 38px;
-      overflow-x: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
     .tabs button {
-      min-width: 220px;
+      appearance: none;
       border: 0;
       background: transparent;
-      padding: 24px 12px 20px;
+      padding: 24px 0 16px;
       color: #141414;
-      font-size: 21px;
+      font-size: 18px;
       font-weight: 900;
+      text-align: center;
       white-space: nowrap;
       cursor: pointer;
     }
     .tabs button.is-active { color: var(--blue); }
     .tab-page { display: none; }
     .tab-page.is-active { display: block; }
-    .content, .details-panel {
-      max-width: 1230px;
+    .content {
+      max-width: 1180px;
       margin: 0 auto;
       padding: 54px 34px 72px;
+    }
+    .details-panel {
+      max-width: 1580px;
+      margin: 0 auto;
+      padding: 52px 34px 70px;
+      background: #fdfefe;
     }
     .intro-heading {
       margin: 0 auto 26px;
@@ -372,46 +488,54 @@
       letter-spacing: .08em;
     }
     .details-panel h2 {
-      margin: 0 0 22px;
-      color: var(--blue);
-      font-size: 34px;
-      line-height: 1.2;
-      font-weight: 900;
-    }
-    .details-panel h3 {
-      margin: 30px 0 10px;
-      color: #111;
-      font-size: 22px;
+      margin: 0 0 18px;
+      color: var(--deep);
+      font-size: 28px;
       line-height: 1.3;
       font-weight: 900;
     }
+    .details-panel h3 {
+      margin: 24px 0 10px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
     .details-panel p, .details-panel li {
-      color: #333;
-      font-size: 19px;
-      line-height: 1.65;
+      color: #111;
+      font-size: 18px;
+      line-height: 1.7;
     }
     .spec-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 34px 42px;
     }
     .spec-group { margin-bottom: 26px; }
     .spec-group h3 {
-      margin: 0 0 8px;
-      color: var(--blue);
-      font-size: 22px;
+      margin: 0 0 20px;
+      color: #999;
+      font-size: 20px;
+      text-transform: uppercase;
     }
     .spec-row {
       display: grid;
-      grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr);
-      gap: 16px;
-      padding: 13px 14px;
-      background: #f4fbfe;
-      font-size: 15px;
-      line-height: 1.45;
+      grid-template-columns: minmax(190px, .95fr) minmax(0, 1fr);
+      gap: 28px;
+      padding: 14px 16px;
+      align-items: center;
     }
     .spec-row:nth-child(even) { background: #eaf9fd; }
-    .spec-row strong { color: #111; }
+    .spec-row strong {
+      color: #111;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .spec-row span {
+      color: #666;
+      font-size: 18px;
+      line-height: 1.4;
+    }
     footer {
       background: #f3f7f9;
       border-top: 1px solid #d7e2e7;
@@ -446,6 +570,7 @@
       .primary-nav { display: none; }
       .product-hero { grid-template-columns: 1fr; gap: 44px; }
       .spec-grid, .footer-inner { grid-template-columns: 1fr; }
+      .phone-link { display: none; }
     }
     @media (max-width: 640px) {
       body { font-size: 16px; }
@@ -455,9 +580,11 @@
       .logo { width: 132px; }
       .product-hero { padding-bottom: 44px; }
       .actions, .benefit-row, .spec-row { grid-template-columns: 1fr; }
-      .benefit-row div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .benefit-row { gap: 18px; font-size: 15px; }
       .copy { font-size: 18px; text-align: left; }
-      .tabs button { min-width: 180px; font-size: 17px; }
+      .tabs button { min-width: 0; font-size: 15px; white-space: normal; }
+      .share { font-size: 18px; flex-wrap: wrap; }
+      .spec-row { gap: 6px; }
     }
   </style>
 </head>
@@ -471,9 +598,19 @@
         <a href="index.html#technology">Công nghệ</a>
         <a href="index.html#consultation">Tư vấn</a>
       </nav>
-      <div class="header-actions">
-        <a class="icon-link" href="cart.html" aria-label="Giỏ hàng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span data-cart-count>0</span></a>
-        <a href="tel:19006418" style="color:var(--deep);font-size:14px;font-weight:900;white-space:nowrap;">1900 6418</a>
+      <div class="header-actions" aria-label="Thao tác nhanh">
+        <button id="searchToggle" class="icon-button" type="button" aria-label="Mở tìm kiếm" aria-expanded="false" aria-controls="searchPanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></button>
+        <a class="cart-link" href="cart.html" aria-label="Giỏ hàng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8.5H8L6 3H3"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span data-cart-count>0</span></a>
+        <a class="phone-link" href="tel:19006418">1900 6418</a>
+      </div>
+    </div>
+    <div id="searchPanel" class="search-panel">
+      <div class="search-panel-inner">
+        <form class="search-form" role="search" action="https://karofi.com/tim-kiem" method="get">
+          <label class="sr-only" for="siteSearch">Tìm kiếm sản phẩm</label>
+          <input id="siteSearch" name="keyword" type="search" placeholder="Tìm kiếm sản phẩm..." autocomplete="off">
+          <button type="submit">Search</button>
+        </form>
       </div>
     </div>
   </header>
@@ -488,21 +625,34 @@
 
       <section class="product-hero" aria-labelledby="product-title">
         <div>
-          <div class="placeholder-carousel" aria-label="Ảnh sản phẩm dạng placeholder">
-            <div class="placeholder-machine"></div>
-            <div id="placeholderLabel" class="placeholder-label">Product placeholder</div>
+          <div class="gallery-main">
+            <div class="product-carousel" id="productCarousel" aria-label="Hình ảnh sản phẩm">
+              <figure class="carousel-slide is-active" data-carousel-slide aria-hidden="false">
+                <img id="productImage" src="" alt="">
+              </figure>
+              <button class="carousel-button prev" type="button" data-carousel-prev aria-label="Ảnh trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"></path></svg></button>
+              <button class="carousel-button next" type="button" data-carousel-next aria-label="Ảnh tiếp theo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 18 6-6-6-6"></path></svg></button>
+            </div>
           </div>
-          <div class="gallery-dots" aria-label="Placeholder gallery indicators">
-            <span></span><span></span><span></span><span></span>
+          <div class="gallery-dots" aria-label="Chọn ảnh sản phẩm">
+            <button class="is-active" type="button" data-carousel-dot aria-label="Hiển thị ảnh 1" aria-current="true"></button>
           </div>
           <div class="benefit-row">
-            <div>Miễn phí vận chuyển toàn quốc</div>
-            <div>Miễn phí lắp đặt toàn quốc</div>
+            <div><div class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 16h31v29H8V16Zm4 4v21h23V20H12Zm30 7h8l8 9v9H42V27Zm4 4v10h8v-4.5L48.2 31H46ZM17 48a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm34 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM23 40h23v4H23v-4Z"/></svg></div>Miễn phí vận chuyển toàn quốc</div>
+            <div><div class="benefit-icon">⚙</div>Miễn phí lắp đặt toàn quốc</div>
           </div>
         </div>
 
         <div>
           <h1 id="product-title" class="product-title"></h1>
+          <div class="share">
+            <span>Chia sẻ sản phẩm:</span>
+            <a class="social" href="#" aria-label="Chia sẻ trên Facebook"><img src="assets/social-facebook.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên LinkedIn"><img src="assets/social-linkedin.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên Instagram"><img src="assets/social-instagram.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên WhatsApp"><img src="assets/social-whatsapp.png" alt=""></a>
+            <a class="social" href="#" aria-label="Chia sẻ trên TikTok"><img src="assets/social-tiktok.png" alt=""></a>
+          </div>
           <p class="feature-line"><span class="feature-icon">▱</span><span id="featureLine"></span></p>
           <h2 class="water-title">Chế độ nước</h2>
           <div id="waterList" class="water-list"></div>
@@ -562,6 +712,7 @@
         title: 'Máy lọc nước nóng lạnh Hydro-ion Kiềm Karofi SA9 PREMIUM',
         shortName: 'SA9 PREMIUM',
         price: 49900000,
+        image: 'assets/karofi-sa9-premium.png',
         feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, đồng thời hỗ trợ cảnh báo lõi và kích hoạt bảo hành.',
         waters: ['Nước nóng pha sữa, pha trà, pha mì', 'Nước nguội uống trực tiếp, nấu ăn hằng ngày', 'Nước lạnh sâu', 'Nước làm dịu da pH ~5.5', 'Hydro-ion kiềm với tùy chọn 4 mức kiềm'],
         summary: ['11 chế độ nước cho sức khỏe và chăm sóc da.', 'Đạt chứng nhận NSF/ANSI 58 cho nước ăn-uống theo thông tin Karofi công bố.', 'Alkaline Direk sau màng RO, tùy chọn 5 mức pH cho uống và dưỡng da.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân Hydrogen.', '9 tấm điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Nước sau lọc tại vòi đạt QCVN 6-1:2010/BYT.', 'Bảo hành 36 tháng, giá đã bao gồm VAT theo trang sản phẩm.'],
@@ -591,6 +742,7 @@
         title: 'Máy lọc nước Hydro-ion kiềm nóng lạnh Karofi KAE-S688',
         shortName: 'KAE-S688',
         price: 21990000,
+        image: 'assets/karofi-kae-s688.png',
         feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo thay lõi và kích hoạt bảo hành.',
         waters: ['Nước nóng 85 - 95°C', 'Nước lạnh Hydro-ion kiềm 8 - 10°C', 'Nước Hydro-ion kiềm nguội'],
         summary: ['3 chế độ nước: Hydro-ion kiềm trong nước lạnh và nước nguội, cộng thêm nước nóng nhanh.', 'Công nghệ điện phân Hydro-ion với 2 điện cực Titan phủ Bạch Kim.', '12 lõi lọc Smax, định vị là tăng hiệu suất và tuổi thọ.', 'Màng RO Purifim 100 GPD thay nhanh sản xuất tại Mỹ.', 'Lõi thô Smax Pro V tăng diện tích tiếp xúc và hiệu quả lọc.', 'Hệ lõi chức năng HP 6.2 tích hợp Hydrogen, ion kiềm và khoáng chất.', 'Sản phẩm độc quyền theo trang Karofi.'],
@@ -621,6 +773,7 @@
         title: 'Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S695',
         shortName: 'KAE-S695',
         price: 31890000,
+        image: 'assets/karofi-kae-s695.png',
         feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo lõi và kích hoạt bảo hành.',
         waters: ['Kiềm nhẹ pH ~8.5', 'Kiềm vừa pH ~9.0', 'Kiềm mạnh pH ~9.5', 'Nước nóng 85 - 95°C', 'Nước lạnh Hydro-ion 8 - 10°C', 'Nước Hydro-ion bổ sung Hydrogen, ion kiềm và khoáng chất'],
         summary: ['Đạt NSF/ANSI 58 theo công bố Karofi cho máy lọc nước RO.', '6 chế độ nước tốt, gồm 3 mức kiềm, nước nóng, nước lạnh Hydro-ion và nước Hydro-ion.', 'Alkaline Direk tùy chọn 3 mức kiềm.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân.', '5 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Nước sau lọc đạt QCVN 6-1:2010/BYT theo trang sản phẩm.', 'Sản phẩm độc quyền theo trang Karofi.'],
@@ -649,6 +802,7 @@
         title: 'Máy lọc nước nóng lạnh Hydro-ion kiềm Karofi KAE-S88 PROMAX',
         shortName: 'KAE-S88 PROMAX',
         price: 39490000,
+        image: 'assets/karofi-kae-s88-promax.png',
         feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, kèm cảnh báo lõi và kích hoạt bảo hành.',
         waters: ['3 mức kiềm pH ~8.5 - 9.0 - 9.5', 'Nước nóng ~45°C', 'Nước nóng ~75°C', 'Nước nóng ~99°C', 'Nước Hydro-ion kiềm lạnh', 'Nước Hydro-ion kiềm nguội'],
         summary: ['8 chế độ nước tốt theo trang sản phẩm.', 'Alkaline Direk tùy chọn 3 mức kiềm.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân.', '7 điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Hệ lõi thô Smax Pro V tăng diện tích tiếp xúc và hiệu quả lọc.', 'Hệ lõi chức năng HP 6.2 bổ sung Hydrogen, ion kiềm và khoáng chất.', 'Cập nhật tháng 7/2025: đổi từ màng UF sang lõi Bi-mineral theo trang Karofi.'],
@@ -681,7 +835,10 @@
     document.title = `${product.shortName} | Karofi`;
     document.getElementById('breadcrumbTitle').textContent = product.title;
     document.getElementById('product-title').textContent = product.title;
-    document.getElementById('placeholderLabel').textContent = product.shortName;
+    const productImage = document.getElementById('productImage');
+    productImage.src = product.image;
+    productImage.alt = product.title;
+    document.getElementById('productCarousel').setAttribute('aria-label', `Hình ảnh ${product.title}`);
     document.getElementById('featureLine').textContent = product.feature;
     document.getElementById('price').textContent = KarofiStore.formatMoney(product.price);
     document.getElementById('introHeading').textContent = product.title;
@@ -707,6 +864,20 @@
     `).join('');
     document.getElementById('buyNow').dataset.buyNow = product.id;
     document.getElementById('addToCart').dataset.addToCart = product.id;
+
+    const searchToggle = document.getElementById('searchToggle');
+    const searchPanel = document.getElementById('searchPanel');
+    searchToggle.addEventListener('click', () => {
+      const isOpen = searchPanel.classList.toggle('is-open');
+      searchToggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) document.getElementById('siteSearch').focus();
+    });
+
+    document.querySelectorAll('[data-carousel-prev], [data-carousel-next], [data-carousel-dot]').forEach((control) => {
+      control.addEventListener('click', () => {
+        document.querySelector('[data-carousel-dot]')?.classList.add('is-active');
+      });
+    });
 
     document.querySelectorAll('[data-tab-target]').forEach((button) => {
       button.addEventListener('click', () => {
