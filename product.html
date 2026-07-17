@@ -217,9 +217,8 @@
     .carousel-slide img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 18px;
-      background: #f6f8f9;
     }
     .carousel-button {
       position: absolute;
@@ -470,6 +469,15 @@
       margin: 34px auto 44px;
       max-width: 1120px;
     }
+    .image-block img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #f6f8f9;
+      box-shadow: 0 18px 50px rgba(7, 61, 86, .12);
+    }
     .image-placeholder {
       aspect-ratio: 16 / 9;
       border-radius: 12px;
@@ -486,6 +494,16 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .08em;
+    }
+    .campaign-gallery {
+      margin: 70px auto 0;
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .campaign-gallery .image-block {
+      margin: 0;
     }
     .details-panel h2 {
       margin: 0 0 18px;
@@ -569,7 +587,7 @@
     @media (max-width: 980px) {
       .primary-nav { display: none; }
       .product-hero { grid-template-columns: 1fr; gap: 44px; }
-      .spec-grid, .footer-inner { grid-template-columns: 1fr; }
+      .spec-grid, .footer-inner, .campaign-gallery { grid-template-columns: 1fr; }
       .phone-link { display: none; }
     }
     @media (max-width: 640px) {
@@ -627,15 +645,11 @@
         <div>
           <div class="gallery-main">
             <div class="product-carousel" id="productCarousel" aria-label="Hình ảnh sản phẩm">
-              <figure class="carousel-slide is-active" data-carousel-slide aria-hidden="false">
-                <img id="productImage" src="" alt="">
-              </figure>
               <button class="carousel-button prev" type="button" data-carousel-prev aria-label="Ảnh trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"></path></svg></button>
               <button class="carousel-button next" type="button" data-carousel-next aria-label="Ảnh tiếp theo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
           </div>
           <div class="gallery-dots" aria-label="Chọn ảnh sản phẩm">
-            <button class="is-active" type="button" data-carousel-dot aria-label="Hiển thị ảnh 1" aria-current="true"></button>
           </div>
           <div class="benefit-row">
             <div><div class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 16h31v29H8V16Zm4 4v21h23V20H12Zm30 7h8l8 9v9H42V27Zm4 4v10h8v-4.5L48.2 31H46ZM17 48a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm34 4a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM23 40h23v4H23v-4Z"/></svg></div>Miễn phí vận chuyển toàn quốc</div>
@@ -678,8 +692,9 @@
     <article id="highlights" class="content tab-page is-active">
       <h2 id="introHeading" class="intro-heading"></h2>
       <p id="introCopy" class="copy"></p>
-      <figure class="image-block"><div class="image-placeholder">Hero image placeholder</div></figure>
+      <figure id="introImage" class="image-block"></figure>
       <div id="highlightSections"></div>
+      <div id="campaignGallery" class="campaign-gallery" aria-label="Bộ hình ảnh chiến dịch"></div>
     </article>
 
     <section id="detailsPanel" class="details-panel tab-page" aria-label="Chi Tiết Sản Phẩm">
@@ -713,6 +728,35 @@
         shortName: 'SA9 PREMIUM',
         price: 49900000,
         image: 'assets/karofi-sa9-premium.png',
+        images: [
+          'generated/karofi-premium-rebrand/karofi-premium-01.png',
+          'generated/karofi-premium-rebrand/karofi-premium-02.png',
+          'generated/karofi-premium-rebrand/karofi-premium-03.png',
+          'generated/karofi-premium-rebrand/karofi-premium-04.png',
+          'generated/karofi-premium-rebrand/karofi-premium-05.png'
+        ],
+        introImage: 'generated/karofi-premium-rebrand/karofi-premium-06.png',
+        sectionImages: [
+          'generated/karofi-premium-rebrand/karofi-premium-07.png',
+          'generated/karofi-premium-rebrand/karofi-premium-08.png',
+          'generated/karofi-premium-rebrand/karofi-premium-09.png',
+          'generated/karofi-premium-rebrand/karofi-premium-10.png',
+          'generated/karofi-premium-rebrand/karofi-premium-11.png',
+          'generated/karofi-premium-rebrand/karofi-premium-12.png',
+          'generated/karofi-premium-rebrand/karofi-premium-13.png',
+          'generated/karofi-premium-rebrand/karofi-premium-14.png',
+          'generated/karofi-premium-rebrand/karofi-premium-15.png',
+          'generated/karofi-premium-rebrand/karofi-premium-16.png'
+        ],
+        campaignImages: [
+          'generated/karofi-premium-rebrand/karofi-premium-17.png',
+          'generated/karofi-premium-rebrand/karofi-premium-18.png',
+          'generated/karofi-premium-rebrand/karofi-premium-19.png',
+          'generated/karofi-premium-rebrand/karofi-premium-20.png',
+          'generated/karofi-premium-rebrand/karofi-premium-21.png',
+          'generated/karofi-premium-rebrand/karofi-premium-22.png',
+          'generated/karofi-premium-rebrand/karofi-premium-23.png'
+        ],
         feature: 'AioTec kiểm soát chất lượng nước hằng ngày trên điện thoại, đồng thời hỗ trợ cảnh báo lõi và kích hoạt bảo hành.',
         waters: ['Nước nóng pha sữa, pha trà, pha mì', 'Nước nguội uống trực tiếp, nấu ăn hằng ngày', 'Nước lạnh sâu', 'Nước làm dịu da pH ~5.5', 'Hydro-ion kiềm với tùy chọn 4 mức kiềm'],
         summary: ['11 chế độ nước cho sức khỏe và chăm sóc da.', 'Đạt chứng nhận NSF/ANSI 58 cho nước ăn-uống theo thông tin Karofi công bố.', 'Alkaline Direk sau màng RO, tùy chọn 5 mức pH cho uống và dưỡng da.', 'Hydro-ion cho phép quan sát trực tiếp quá trình điện phân Hydrogen.', '9 tấm điện cực Titan phủ Bạch Kim, tuổi thọ thiết kế đến 10 năm.', '12+1 lõi Smax, màng RO Purifim 100 GPD sản xuất tại Mỹ.', 'Nước sau lọc tại vòi đạt QCVN 6-1:2010/BYT.', 'Bảo hành 36 tháng, giá đã bao gồm VAT theo trang sản phẩm.'],
@@ -835,14 +879,34 @@
     document.title = `${product.shortName} | Karofi`;
     document.getElementById('breadcrumbTitle').textContent = product.title;
     document.getElementById('product-title').textContent = product.title;
-    const productImage = document.getElementById('productImage');
-    productImage.src = product.image;
-    productImage.alt = product.title;
-    document.getElementById('productCarousel').setAttribute('aria-label', `Hình ảnh ${product.title}`);
+    const productCarousel = document.getElementById('productCarousel');
+    const galleryDots = document.querySelector('.gallery-dots');
+    const carouselImages = product.images || [product.image];
+    let activeCarouselSlide = 0;
+
+    productCarousel.setAttribute('aria-label', `Hình ảnh ${product.title}`);
+    carouselImages.forEach((image, index) => {
+      const figure = document.createElement('figure');
+      figure.className = `carousel-slide${index === 0 ? ' is-active' : ''}`;
+      figure.dataset.carouselSlide = '';
+      figure.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+
+      const img = document.createElement('img');
+      img.src = image;
+      img.alt = `${product.title} - ảnh ${index + 1}`;
+      figure.appendChild(img);
+      productCarousel.insertBefore(figure, productCarousel.querySelector('[data-carousel-prev]'));
+    });
+    galleryDots.innerHTML = carouselImages.map((_, index) => `
+      <button class="${index === 0 ? 'is-active' : ''}" type="button" data-carousel-dot aria-label="Hiển thị ảnh ${index + 1}" aria-current="${index === 0 ? 'true' : 'false'}"></button>
+    `).join('');
     document.getElementById('featureLine').textContent = product.feature;
     document.getElementById('price').textContent = KarofiStore.formatMoney(product.price);
     document.getElementById('introHeading').textContent = product.title;
     document.getElementById('introCopy').textContent = product.intro;
+    document.getElementById('introImage').innerHTML = product.introImage
+      ? `<img src="${product.introImage}" alt="${product.shortName} - tổng quan chiến dịch">`
+      : '<div class="image-placeholder">Hero image placeholder</div>';
     document.getElementById('detailsTitle').textContent = `Tác dụng của các lõi lọc trong ${product.shortName}`;
 
     document.getElementById('waterList').innerHTML = product.waters.map((item) => `<div class="water-row"><span class="feature-icon">•</span><span>${item}</span></div>`).join('');
@@ -850,7 +914,14 @@
     document.getElementById('highlightSections').innerHTML = product.sections.map((section, index) => `
       <h2 class="section-title">${section[0]}</h2>
       <p class="copy">${section[1]}</p>
-      <figure class="image-block"><div class="image-placeholder">${product.shortName} image placeholder ${index + 1}</div></figure>
+      <figure class="image-block">${
+        product.sectionImages?.[index]
+          ? `<img src="${product.sectionImages[index]}" alt="${product.shortName} - ${section[0]}">`
+          : `<div class="image-placeholder">${product.shortName} image placeholder ${index + 1}</div>`
+      }</figure>
+    `).join('');
+    document.getElementById('campaignGallery').innerHTML = (product.campaignImages || []).map((image, index) => `
+      <figure class="image-block"><img src="${image}" alt="${product.shortName} - hình ảnh chiến dịch ${index + 1}"></figure>
     `).join('');
     document.getElementById('detailsCopy').innerHTML = product.details.map((item, index) => `
       <h3>${index + 1}. ${item.split('.')[0]}</h3>
@@ -873,9 +944,29 @@
       if (isOpen) document.getElementById('siteSearch').focus();
     });
 
-    document.querySelectorAll('[data-carousel-prev], [data-carousel-next], [data-carousel-dot]').forEach((control) => {
+    function showCarouselSlide(index) {
+      activeCarouselSlide = (index + carouselImages.length) % carouselImages.length;
+      document.querySelectorAll('[data-carousel-slide]').forEach((slide, slideIndex) => {
+        const active = slideIndex === activeCarouselSlide;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      document.querySelectorAll('[data-carousel-dot]').forEach((dot, dotIndex) => {
+        const active = dotIndex === activeCarouselSlide;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+    }
+
+    document.querySelector('[data-carousel-prev]').addEventListener('click', () => {
+      showCarouselSlide(activeCarouselSlide - 1);
+    });
+    document.querySelector('[data-carousel-next]').addEventListener('click', () => {
+      showCarouselSlide(activeCarouselSlide + 1);
+    });
+    document.querySelectorAll('[data-carousel-dot]').forEach((control, index) => {
       control.addEventListener('click', () => {
-        document.querySelector('[data-carousel-dot]')?.classList.add('is-active');
+        showCarouselSlide(index);
       });
     });
 
